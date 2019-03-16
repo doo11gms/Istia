@@ -13,8 +13,54 @@ namespace EllGames.Istia.UI.Slot
     /// <summary>
     /// アイテムを格納するためのスロットです。
     /// </summary>
-    public class ItemSlot : SlotBase, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler
+    public class ItemSlot : SlotBase, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler, Save.ISavable
     {
+        void Save.ISavable.Save()
+        {
+            var instanceID = GetInstanceID().ToString();
+
+            ES2.Save(Count, instanceID + "Count");
+
+            if (ContentInfo == null)
+            {
+                if (ES2.Exists(instanceID + "ContentInfo"))
+                {
+                    ES2.Delete(instanceID + "ContentInfo");
+                }
+            }
+            else
+            {
+                ES2.Save(ContentInfo.Identifier, instanceID + "ContentInfo");
+            }
+        }
+
+        void Save.ISavable.Load()
+        {
+            Initialize();
+
+            try
+            {
+                var instanceID = GetInstanceID().ToString();
+
+                Count = ES2.Load<int>(instanceID + "Count");
+
+                if (ES2.Exists(instanceID + "ContentInfo"))
+                {
+                    Assign(m_ItemInfoProvider.Search(ES2.Load<string>(instanceID + "ContentInfo")));
+                }
+                else
+                {
+                    Assign(null);
+                }
+            }
+            catch
+            {
+                throw new System.Exception("セーブデータの復元に失敗しました。");
+            }
+
+            UpdateCountText();
+        }
+
         void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
         {
             if (IsEmpty()) return;
@@ -33,7 +79,7 @@ namespace EllGames.Istia.UI.Slot
 
             if (Input.GetMouseButton(m_KeyConfig.OpenItemMenuMouseButton))
             {
-                // TODO: アイテムメニューを開く
+                // TODO: 装備する
             }
             else
             {
@@ -94,10 +140,20 @@ namespace EllGames.Istia.UI.Slot
 
         void Assign(DB.ItemInfo itemInfo)
         {
-            if (itemInfo.UsingCoolTime) m_CoolTimeOverlay.gameObject.SetActive(true);
+            if (itemInfo != null)
+            {
+                if (itemInfo.UsingCoolTime) m_CoolTimeOverlay.gameObject.SetActive(true);
+                m_IconImage.sprite = itemInfo.IconSprite;
+                m_IconImage.gameObject.SetActive(true);
+            }
+            else
+            {
+                m_CoolTimeOverlay.gameObject.SetActive(false);
+                m_IconImage.sprite = null;
+                m_IconImage.gameObject.SetActive(false);
+            }
+
             ContentInfo = itemInfo;
-            m_IconImage.sprite = itemInfo.IconSprite;
-            m_IconImage.gameObject.SetActive(true);
         }
 
         void Unassign()
@@ -134,43 +190,6 @@ namespace EllGames.Istia.UI.Slot
 
         [Title("Buttons")]
 
-        // TODO: Save and Load system
-        [Button("Save")]
-        public void Save()
-        {
-            ES2.Save(Count, "testCount");
-            var filename = "testIdentifier";
-            if (ContentInfo == null)
-            {
-                ES2.Save("ArienaiID", filename);
-            }
-            else
-            {
-                ES2.Save(ContentInfo.Identifier, filename);
-            }
-        }
-
-        [Button("Load")]
-        public void Load()
-        {
-            Initialize();
-            try
-            {
-                Count = ES2.Load<int>("testCount");
-
-                var content = m_ItemInfoProvider.Search(ES2.Load<string>("testIdentifier"));
-                if (content != null)
-                {
-                    Assign(content);
-                }
-            }
-            catch
-            {
-                throw new System.Exception("セーブデータの復元に失敗しました。");
-            }
-            UpdateCountText();
-        }
-
         /// <summary>
         /// スロットを初期化します。
         /// </summary>
@@ -183,6 +202,7 @@ namespace EllGames.Istia.UI.Slot
             m_PressOverlay.gameObject.SetActive(false);
             m_CountText.gameObject.SetActive(false);
             m_CoolTimeOverlay.gameObject.SetActive(false);
+            UpdateCountText();
         }
 
         /// <summary>
@@ -228,7 +248,7 @@ namespace EllGames.Istia.UI.Slot
 
             Count--;
             var popped = ContentInfo;
-            if (Count == 0) Unassign();
+            if (Count == 0) Initialize();
             UpdateCountText();
             return popped;
         }
@@ -244,7 +264,7 @@ namespace EllGames.Istia.UI.Slot
             if (Count <= 0) throw new System.Exception("スロットにアイテムが1つも格納されていないため、破棄することができません。");
 
             Count--;
-            if (Count == 0) Unassign();
+            if (Count == 0) Initialize();
             UpdateCountText();
         }
 
@@ -259,8 +279,7 @@ namespace EllGames.Istia.UI.Slot
             if (Count < 0) throw new System.Exception("アイテムの格納数が負であるため、アイテムを破棄できません。");
 
             Count = 0;
-            Unassign();
-            UpdateCountText();
+            Initialize();
         }
     }
 }
