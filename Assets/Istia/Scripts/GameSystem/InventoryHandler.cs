@@ -87,13 +87,13 @@ namespace EllGames.Istia.GameSystem
         [Button("Save")]
         public void Save()
         {
-            m_InventoryWindow.ConsumableItemTab.Contents.ForEach(slot => slot.Save());
+            m_InventoryWindow.ConsumableItemTab.Contents.ForEach(slot => (slot as Save.ISavable).Save());
         }
 
         [Button("Load")]
         public void Load()
         {
-            m_InventoryWindow.ConsumableItemTab.Contents.ForEach(slot => slot.Load());
+            m_InventoryWindow.ConsumableItemTab.Contents.ForEach(slot => (slot as Save.ISavable).Load());
         }
     }
 }

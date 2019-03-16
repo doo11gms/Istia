@@ -13,8 +13,44 @@ namespace EllGames.Istia.UI.Slot
     /// <summary>
     /// アイテムを格納するためのスロットです。
     /// </summary>
-    public class ItemSlot : SlotBase, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler
+    public class ItemSlot : SlotBase, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler, Save.ISavable
     {
+        void Save.ISavable.Save()
+        {
+            ES2.Save(Count, "testCount");
+            var filename = "testIdentifier";
+            if (ContentInfo == null)
+            {
+                ES2.Save("ArienaiID", filename);
+            }
+            else
+            {
+                ES2.Save(ContentInfo.Identifier, filename);
+            }
+        }
+
+        void Save.ISavable.Load()
+        {
+            Initialize();
+
+            try
+            {
+                Count = ES2.Load<int>("testCount");
+
+                var content = m_ItemInfoProvider.Search(ES2.Load<string>("testIdentifier"));
+                if (content != null)
+                {
+                    Assign(content);
+                }
+            }
+            catch
+            {
+                throw new System.Exception("セーブデータの復元に失敗しました。");
+            }
+
+            UpdateCountText();
+        }
+
         void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
         {
             if (IsEmpty()) return;
@@ -133,43 +169,6 @@ namespace EllGames.Istia.UI.Slot
         }
 
         [Title("Buttons")]
-
-        // TODO: Save and Load system
-        [Button("Save")]
-        public void Save()
-        {
-            ES2.Save(Count, "testCount");
-            var filename = "testIdentifier";
-            if (ContentInfo == null)
-            {
-                ES2.Save("ArienaiID", filename);
-            }
-            else
-            {
-                ES2.Save(ContentInfo.Identifier, filename);
-            }
-        }
-
-        [Button("Load")]
-        public void Load()
-        {
-            Initialize();
-            try
-            {
-                Count = ES2.Load<int>("testCount");
-
-                var content = m_ItemInfoProvider.Search(ES2.Load<string>("testIdentifier"));
-                if (content != null)
-                {
-                    Assign(content);
-                }
-            }
-            catch
-            {
-                throw new System.Exception("セーブデータの復元に失敗しました。");
-            }
-            UpdateCountText();
-        }
 
         /// <summary>
         /// スロットを初期化します。
