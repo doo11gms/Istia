@@ -17,15 +17,20 @@ namespace EllGames.Istia.UI.Slot
     {
         void Save.ISavable.Save()
         {
-            ES2.Save(Count, "testCount");
-            var filename = "testIdentifier";
+            var instanceID = GetInstanceID().ToString();
+
+            ES2.Save(Count, instanceID + "Count");
+
             if (ContentInfo == null)
             {
-                ES2.Save("ArienaiID", filename);
+                if (ES2.Exists(instanceID + "ContentInfo"))
+                {
+                    ES2.Delete(instanceID + "ContentInfo");
+                }
             }
             else
             {
-                ES2.Save(ContentInfo.Identifier, filename);
+                ES2.Save(ContentInfo.Identifier, instanceID + "ContentInfo");
             }
         }
 
@@ -35,12 +40,17 @@ namespace EllGames.Istia.UI.Slot
 
             try
             {
-                Count = ES2.Load<int>("testCount");
+                var instanceID = GetInstanceID().ToString();
 
-                var content = m_ItemInfoProvider.Search(ES2.Load<string>("testIdentifier"));
-                if (content != null)
+                Count = ES2.Load<int>(instanceID + "Count");
+
+                if (ES2.Exists(instanceID + "ContentInfo"))
                 {
-                    Assign(content);
+                    Assign(m_ItemInfoProvider.Search(ES2.Load<string>(instanceID + "ContentInfo")));
+                }
+                else
+                {
+                    Assign(null);
                 }
             }
             catch
@@ -130,10 +140,20 @@ namespace EllGames.Istia.UI.Slot
 
         void Assign(DB.ItemInfo itemInfo)
         {
-            if (itemInfo.UsingCoolTime) m_CoolTimeOverlay.gameObject.SetActive(true);
+            if (itemInfo != null)
+            {
+                if (itemInfo.UsingCoolTime) m_CoolTimeOverlay.gameObject.SetActive(true);
+                m_IconImage.sprite = itemInfo.IconSprite;
+                m_IconImage.gameObject.SetActive(true);
+            }
+            else
+            {
+                m_CoolTimeOverlay.gameObject.SetActive(false);
+                m_IconImage.sprite = null;
+                m_IconImage.gameObject.SetActive(false);
+            }
+
             ContentInfo = itemInfo;
-            m_IconImage.sprite = itemInfo.IconSprite;
-            m_IconImage.gameObject.SetActive(true);
         }
 
         void Unassign()
@@ -182,6 +202,7 @@ namespace EllGames.Istia.UI.Slot
             m_PressOverlay.gameObject.SetActive(false);
             m_CountText.gameObject.SetActive(false);
             m_CoolTimeOverlay.gameObject.SetActive(false);
+            UpdateCountText();
         }
 
         /// <summary>
@@ -227,7 +248,7 @@ namespace EllGames.Istia.UI.Slot
 
             Count--;
             var popped = ContentInfo;
-            if (Count == 0) Unassign();
+            if (Count == 0) Initialize();
             UpdateCountText();
             return popped;
         }
@@ -243,7 +264,7 @@ namespace EllGames.Istia.UI.Slot
             if (Count <= 0) throw new System.Exception("スロットにアイテムが1つも格納されていないため、破棄することができません。");
 
             Count--;
-            if (Count == 0) Unassign();
+            if (Count == 0) Initialize();
             UpdateCountText();
         }
 
@@ -258,8 +279,7 @@ namespace EllGames.Istia.UI.Slot
             if (Count < 0) throw new System.Exception("アイテムの格納数が負であるため、アイテムを破棄できません。");
 
             Count = 0;
-            Unassign();
-            UpdateCountText();
+            Initialize();
         }
     }
 }

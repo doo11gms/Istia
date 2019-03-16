@@ -83,17 +83,5 @@ namespace EllGames.Istia.GameSystem
         {
             itemSlot.DisposeAll();
         }
-
-        [Button("Save")]
-        public void Save()
-        {
-            m_InventoryWindow.ConsumableItemTab.Contents.ForEach(slot => (slot as Save.ISavable).Save());
-        }
-
-        [Button("Load")]
-        public void Load()
-        {
-            m_InventoryWindow.ConsumableItemTab.Contents.ForEach(slot => (slot as Save.ISavable).Load());
-        }
     }
 }
