@@ -33,7 +33,7 @@ namespace EllGames.Istia.UI.Slot
 
             if (Input.GetMouseButton(m_KeyConfig.OpenItemMenuMouseButton))
             {
-                // TODO: アイテムメニューを開く
+                // TODO: 装備する
             }
             else
             {
