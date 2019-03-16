@@ -28,5 +28,11 @@ namespace EllGames.Istia.Save
             if (m_ISavables == null) return;
             m_ISavables.ForEach(savable => savable.Load());
         }
+
+        [Button("Delete")]
+        public void Delete()
+        {
+            ES2.DeleteDefaultFolder();
+        }
     }
 }
