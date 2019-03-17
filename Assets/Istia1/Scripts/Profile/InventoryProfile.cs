@@ -13,6 +13,9 @@ namespace EllGames.Istia1.Profile
     [CreateAssetMenu(menuName = "Istia1/Profile/InventoryProfile", fileName = "InventoryProfile")]
     public class InventoryProfile : SerializedScriptableObject, Save.ISavable
     {
+        /// <summary>
+        /// インベントリの中身が保存されるだけで、インベントリの形状は保存されません。
+        /// </summary>
         void Save.ISavable.Save()
         {
             foreach (var tab in Tabs)
@@ -40,7 +43,7 @@ namespace EllGames.Istia1.Profile
         }
 
         /// <summary>
-        /// ロード時、インベントリの中身が復元されるだけで、インベントリの形状は復元されません。
+        /// インベントリの中身が復元されるだけで、インベントリの形状は復元されません。
         /// </summary>
         void Save.ISavable.Load()
         {
@@ -129,6 +132,23 @@ namespace EllGames.Istia1.Profile
         }
 
         /// <summary>
+        /// 対象のタブを検索します。
+        /// </summary>
+        /// <param name="tabID"></param>
+        /// <returns></returns>
+        Tab SearchTab(int tabID)
+        {
+            if (Tabs == null) return null;
+
+            foreach (var tab in Tabs)
+            {
+                if (tab.tabID == tabID) return tab;
+            }
+
+            return null;
+        }
+
+        /// <summary>
         /// 対象のスロットが存在するか判定します。
         /// </summary>
         /// <param name="tabID"></param>
@@ -152,6 +172,21 @@ namespace EllGames.Istia1.Profile
             if (!Exists(tabID, slotID)) return false;
 
             SearchSlot(tabID, slotID).content = new Content(itemID, count);
+
+            return true;
+        }
+
+        /// <summary>
+        /// 新しくスロットを追加します。
+        /// </summary>
+        /// <param name="tabID"></param>
+        /// <param name="slotID"></param>
+        /// <returns>スロットの追加に成功した場合true、失敗した場合falseを返します。</returns>
+        public bool AddSlot(int tabID, int slotID)
+        {
+            if (Exists(tabID, slotID)) return false;
+
+            SearchTab(tabID).contents.Add(new Slot(slotID));
 
             return true;
         }
