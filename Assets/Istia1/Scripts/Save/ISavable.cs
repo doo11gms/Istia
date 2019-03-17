@@ -8,11 +8,11 @@ using UnityEngine.EventSystems;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 
-namespace EllGames.Istia.Config
+namespace EllGames.Istia1.Save
 {
-    [CreateAssetMenu(menuName = "Istia/Profile/SystemProfile")]
-    public class SystemProfile : SerializedScriptableObject
+    public interface ISavable
     {
-        [SerializeField] public bool AutoInventorySort { get; set; } = true;
+        void Save();
+        void Load();
     }
 }

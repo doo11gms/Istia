@@ -8,16 +8,16 @@ using UnityEngine.EventSystems;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 
-namespace EllGames.Istia.DB
+namespace EllGames.Istia1.DB
 {
-    [CreateAssetMenu(menuName = "Istia/DB/ItemInfo")]
+    [CreateAssetMenu(menuName = "Istia1/DB/ItemInfo")]
     public class ItemInfo : SerializedScriptableObject
     {
         [Title("Graphic")]
         [OdinSerialize, PreviewField] public Sprite IconSprite { get; set; }
 
         [Title("Meta")]
-        [OdinSerialize] public string Identifier { get; set; }
+        [OdinSerialize] public string ItemID { get; set; }
 
         [Title("Basic")]
         [OdinSerialize] public string ItemName { get; set; }
@@ -39,9 +39,6 @@ namespace EllGames.Istia.DB
 
         [Title("Disposal")]
         [OdinSerialize] public bool Disposable { get; set; } = true;
-
-        [Title("Using Effect")]
-        [OdinSerialize] public List<GameSystem.Item.ItemUsingEffectBase> ItemUsingEffects { get; private set; } = new List<GameSystem.Item.ItemUsingEffectBase>();
 
         [Title("Hot Key")]
         [OdinSerialize] public bool UsingHotKey { get; set; } = false;

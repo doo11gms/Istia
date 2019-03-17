@@ -10,7 +10,7 @@ using Sirenix.Serialization;
 
 namespace EllGames.Istia.DB
 {
-    [CreateAssetMenu(menuName = "DB/CurrencyInfo")]
+    [CreateAssetMenu(menuName = "Istia/DB/CurrencyInfo")]
     public class CurrencyInfo : SerializedScriptableObject
     {
         [Title("Usage")]

@@ -1,0 +1,137 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cc52de8903467440a97a10d7109195e, type: 3}
+  m_Name: InventoryProfile
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: Tabs
+      Entry: 7
+      Data: 0|System.Collections.Generic.List`1[[EllGames.Istia1.Profile.InventoryProfile+Tab,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 7
+      Data: 1|EllGames.Istia1.Profile.InventoryProfile+Tab, Assembly-CSharp
+    - Name: tabID
+      Entry: 3
+      Data: 0
+    - Name: contents
+      Entry: 7
+      Data: 2|System.Collections.Generic.List`1[[EllGames.Istia1.Profile.InventoryProfile+Slot,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 7
+      Data: 3|EllGames.Istia1.Profile.InventoryProfile+Slot, Assembly-CSharp
+    - Name: slotID
+      Entry: 3
+      Data: 0
+    - Name: content
+      Entry: 7
+      Data: 4|EllGames.Istia1.Profile.InventoryProfile+Content, Assembly-CSharp
+    - Name: itemID
+      Entry: 1
+      Data: "\u30C6\u30B9\u30C8\u6D88\u8CBB\u30A2\u30A4\u30C6\u30E01"
+    - Name: count
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 5|EllGames.Istia1.Profile.InventoryProfile+Slot, Assembly-CSharp
+    - Name: slotID
+      Entry: 3
+      Data: 1
+    - Name: content
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 6|EllGames.Istia1.Profile.InventoryProfile+Tab, Assembly-CSharp
+    - Name: tabID
+      Entry: 3
+      Data: 1
+    - Name: contents
+      Entry: 7
+      Data: 7|System.Collections.Generic.List`1[[EllGames.Istia1.Profile.InventoryProfile+Slot,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 7
+      Data: 8|EllGames.Istia1.Profile.InventoryProfile+Slot, Assembly-CSharp
+    - Name: slotID
+      Entry: 3
+      Data: 0
+    - Name: content
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 9|EllGames.Istia1.Profile.InventoryProfile+Slot, Assembly-CSharp
+    - Name: slotID
+      Entry: 3
+      Data: 1
+    - Name: content
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 

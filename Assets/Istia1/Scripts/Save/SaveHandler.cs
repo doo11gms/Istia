@@ -8,9 +8,9 @@ using UnityEngine.EventSystems;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 
-namespace EllGames.Istia.Save
+namespace EllGames.Istia1.Save
 {
-    [CreateAssetMenu(menuName = "Save/SaveHandler")]
+    [CreateAssetMenu(menuName = "Istia1/Save/SaveHandler", fileName = "SaveHandler")]
     public class SaveHandler : SerializedScriptableObject
     {
         [OdinSerialize] List<ISavable> m_ISavables = new List<ISavable>();
