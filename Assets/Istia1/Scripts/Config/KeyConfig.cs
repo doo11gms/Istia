@@ -10,12 +10,13 @@ using Sirenix.Serialization;
 
 namespace EllGames.Istia1.Config
 {
-    [CreateAssetMenu(menuName = "Istia/Config/KeyConfig", fileName = "KeyConfig")]
+    [CreateAssetMenu(menuName = "Istia1/Config/KeyConfig", fileName = "KeyConfig")]
     public class KeyConfig : SerializedScriptableObject
     {
         [SerializeField] public int UseItemMouseButton = 0;
         [SerializeField] public KeyCode DisposeAllItemKey = KeyCode.LeftAlt;
         [SerializeField] public int DisposeAllItemMouseButton = 0;
         [SerializeField] public int OpenItemMenuMouseButton = 1;
+        [SerializeField] public KeyCode InventoryWindowKey = KeyCode.I;
     }
 }

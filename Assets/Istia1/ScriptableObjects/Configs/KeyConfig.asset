@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6cc52de8903467440a97a10d7109195e, type: 3}
-  m_Name: InventoryProfile
+  m_Script: {fileID: 11500000, guid: 3e2479e755518d64f945ff5af0974ef3, type: 3}
+  m_Name: KeyConfig
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -20,17 +20,9 @@ MonoBehaviour:
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes:
-    - Name: Tabs
-      Entry: 7
-      Data: 0|System.Collections.Generic.List`1[[EllGames.Istia1.Profile.InventoryProfile+Tab,
-        Assembly-CSharp]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
+    SerializationNodes: []
+  UseItemMouseButton: 0
+  DisposeAllItemKey: 308
+  DisposeAllItemMouseButton: 0
+  OpenItemMenuMouseButton: 1
+  InventoryWindowKey: 105
