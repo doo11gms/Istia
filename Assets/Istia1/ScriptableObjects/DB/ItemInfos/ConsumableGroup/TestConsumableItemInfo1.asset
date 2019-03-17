@@ -67,3 +67,16 @@ MonoBehaviour:
     - Name: CoolTime
       Entry: 4
       Data: 1
+    - Name: ItemUsingEffects
+      Entry: 7
+      Data: 0|System.Collections.Generic.List`1[[EllGames.Istia1.GameSystem.Item.ItemUsingEffectBase,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 

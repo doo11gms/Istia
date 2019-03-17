@@ -47,5 +47,8 @@ namespace EllGames.Istia1.DB
         [Title("Cool Time")]
         [OdinSerialize] public bool UsingCoolTime { get; set; } = false;
         [OdinSerialize, EnableIf("UsingCoolTime")] public float CoolTime { get; set; }
+
+        [Title("Using Effect")]
+        [OdinSerialize] public List<GameSystem.Item.ItemUsingEffectBase> ItemUsingEffects { get; set; }
     }
 }

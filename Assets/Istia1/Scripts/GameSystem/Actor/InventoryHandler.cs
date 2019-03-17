@@ -15,6 +15,7 @@ namespace EllGames.Istia1.GameSystem.Actor
         [Title("Required")]
         [OdinSerialize, Required] Profile.InventoryProfile InventoryProfile { get; set; }
         [OdinSerialize, Required] DB.ItemInfoProvider ItemInfoProvider { get; set; }
+        [OdinSerialize, Required] Item.ItemCoolDownHandler ItemCoolDownHandler { get; set; }
 
         [Title("Settings")]
         [OdinSerialize] int ConsumableTabID { get; set; } = 0;
@@ -126,9 +127,26 @@ namespace EllGames.Istia1.GameSystem.Actor
         /// <param name="tabID"></param>
         /// <param name="slotID"></param>
         [Button("Use Item")]
-        public void UseItem(int tabID, int slotID)
+        public bool UseItem(int tabID, int slotID)
         {
+            var itemInfo = ItemInfoProvider.Provide(InventoryProfile.GetItemID(tabID, slotID));
 
+            if (!ItemCoolDownHandler.CoolTimeHasFinished(itemInfo))
+            {
+                Debug.Log("クールタイム中のため、アイテムを使用できません。");
+                return false;
+            }
+
+            ItemCoolDownHandler.Assign(itemInfo);
+
+            if (itemInfo.ItemUsingEffects != null)
+            {
+                itemInfo.ItemUsingEffects.ForEach(effect => Instantiate(effect));
+            }
+
+            Dispose(tabID, slotID);
+
+            return true;
         }
 
         /// <summary>
