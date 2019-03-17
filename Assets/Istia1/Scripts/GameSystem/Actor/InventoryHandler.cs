@@ -113,7 +113,11 @@ namespace EllGames.Istia1.GameSystem.Actor
         [Button("Pop Item")]
         public DB.ItemInfo PopItem(int tabID, int slotID)
         {
-            return null;
+            var buffer = ItemInfoProvider.Provide(InventoryProfile.GetItemID(tabID, slotID));
+
+            Dispose(tabID, slotID);
+
+            return buffer;
         }
 
         /// <summary>
@@ -135,7 +139,17 @@ namespace EllGames.Istia1.GameSystem.Actor
         [Button("Dispose")]
         public void Dispose(int tabID, int slotID)
         {
+            int itemCount = InventoryProfile.GetItemCount(tabID, slotID) - 1;
 
+            if (itemCount == 0)
+            {
+                InventoryProfile.Unassign(tabID, slotID);
+            }
+            else
+            {
+                var itemInfo = ItemInfoProvider.Provide(InventoryProfile.GetItemID(tabID, slotID));
+                InventoryProfile.Assign(tabID, slotID, itemInfo, itemCount);
+            }
         }
 
         /// <summary>
@@ -147,7 +161,7 @@ namespace EllGames.Istia1.GameSystem.Actor
         [Button("Dispose All")]
         public void DisposeAll(int tabID, int slotID)
         {
-
+            InventoryProfile.Unassign(tabID, slotID);
         }
 
         /// <summary>
