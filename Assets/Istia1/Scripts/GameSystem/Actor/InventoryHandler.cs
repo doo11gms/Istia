@@ -198,5 +198,11 @@ namespace EllGames.Istia1.GameSystem.Actor
         public void Refresh()
         {
         }
+
+        [Button("Inventory Initialize")]
+        public void InventoryInitialize()
+        {
+            InventoryProfile.Reset();
+        }
     }
 }
