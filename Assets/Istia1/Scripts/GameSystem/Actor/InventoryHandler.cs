@@ -91,12 +91,11 @@ namespace EllGames.Istia1.GameSystem.Actor
         }
 
         /// <summary>
-        /// UIを更新します。
+        /// インベントリの内容を最新の状態に更新します。
         /// </summary>
-        [Button("UI Update")]
-        public void UIUpdate()
+        [Button("Refresh")]
+        public void Refresh()
         {
-            
         }
     }
 }
