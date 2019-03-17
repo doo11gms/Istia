@@ -10,7 +10,7 @@ using Sirenix.Serialization;
 
 namespace EllGames.Istia.Provider
 {
-    [CreateAssetMenu(menuName = "Provider/ItemInfoProvider")]
+    [CreateAssetMenu(menuName = "Istia/Provider/ItemInfoProvider")]
     public class ItemInfoProvider : SerializedScriptableObject
     {
         [OdinSerialize] List<DB.ItemInfo> m_ItemInfos = new List<DB.ItemInfo>();

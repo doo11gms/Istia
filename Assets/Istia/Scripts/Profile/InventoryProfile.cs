@@ -10,7 +10,7 @@ using Sirenix.Serialization;
 
 namespace EllGames.Istia.Profile
 {
-    [CreateAssetMenu(menuName = "Profile/InventoryProfile")]
+    [CreateAssetMenu(menuName = "Istia/Profile/InventoryProfile")]
     public class InventoryProfile : SerializedScriptableObject, Save.ISavable
     {
         struct Content

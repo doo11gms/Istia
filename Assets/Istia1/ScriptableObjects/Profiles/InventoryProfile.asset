@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0115c33c8ece0724eb66c07df90ff217, type: 3}
+  m_Script: {fileID: 11500000, guid: 6cc52de8903467440a97a10d7109195e, type: 3}
   m_Name: InventoryProfile
   m_EditorClassIdentifier: 
   serializationData:
@@ -23,29 +23,11 @@ MonoBehaviour:
     SerializationNodes:
     - Name: m_Contents
       Entry: 7
-      Data: 0|System.Collections.Generic.List`1[[EllGames.Istia.Profile.InventoryProfile+Content,
+      Data: 0|System.Collections.Generic.List`1[[EllGames.Istia1.Profile.InventoryProfile+Content,
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: EllGames.Istia.Profile.InventoryProfile+Content, Assembly-CSharp
-    - Name: tabID
-      Entry: 3
       Data: 0
-    - Name: slotID
-      Entry: 3
-      Data: 0
-    - Name: count
-      Entry: 3
-      Data: 6
-    - Name: identifier
-      Entry: 1
-      Data: test
-    - Name: 
-      Entry: 8
-      Data: 
     - Name: 
       Entry: 13
       Data: 

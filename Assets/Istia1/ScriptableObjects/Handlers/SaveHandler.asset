@@ -9,43 +9,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0115c33c8ece0724eb66c07df90ff217, type: 3}
-  m_Name: InventoryProfile
+  m_Script: {fileID: 11500000, guid: 535b74feb67ff324594753a4e8f896b6, type: 3}
+  m_Name: SaveHandler
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects: []
+    ReferencedUnityObjects:
+    - {fileID: 11400000, guid: 88d402ae2c9de4241a349326a1185540, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes:
-    - Name: m_Contents
+    - Name: m_ISavables
       Entry: 7
-      Data: 0|System.Collections.Generic.List`1[[EllGames.Istia.Profile.InventoryProfile+Content,
-        Assembly-CSharp]], mscorlib
+      Data: 0|System.Collections.Generic.List`1[[EllGames.Istia1.Save.ISavable, Assembly-CSharp]],
+        mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
-      Entry: 7
-      Data: EllGames.Istia.Profile.InventoryProfile+Content, Assembly-CSharp
-    - Name: tabID
-      Entry: 3
+      Entry: 10
       Data: 0
-    - Name: slotID
-      Entry: 3
-      Data: 0
-    - Name: count
-      Entry: 3
-      Data: 6
-    - Name: identifier
-      Entry: 1
-      Data: test
-    - Name: 
-      Entry: 8
-      Data: 
     - Name: 
       Entry: 13
       Data: 
