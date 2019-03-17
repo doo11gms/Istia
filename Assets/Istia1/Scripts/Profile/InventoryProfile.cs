@@ -15,8 +15,6 @@ namespace EllGames.Istia1.Profile
     {
         void Save.ISavable.Save()
         {
-            Dictionary<int, List<int>> shape = new Dictionary<int, List<int>>();
-
             foreach (var tab in Tabs)
             {
                 var slotIDs = new List<int>();
@@ -38,15 +36,11 @@ namespace EllGames.Istia1.Profile
 
                     slotIDs.Add(slot.slotID);
                 }
-
-                shape.Add(tab.tabID, slotIDs);
             }
-
-            ES2.Save(shape, GetInstanceID() + "shape");
         }
 
         /// <summary>
-        /// ロード時のインベントリの形状は、セーブした時と同じ形状である必要があります。
+        /// ロード時、インベントリの中身が復元されるだけで、インベントリの形状は復元されません。
         /// </summary>
         void Save.ISavable.Load()
         {
