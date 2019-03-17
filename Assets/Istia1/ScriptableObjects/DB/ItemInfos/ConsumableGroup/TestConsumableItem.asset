@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4297875bcae94d2408fdb1711cb74f8e, type: 3}
-  m_Name: TestItem1
+  m_Name: TestConsumableItem
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -27,10 +27,10 @@ MonoBehaviour:
       Data: 0
     - Name: Identifier
       Entry: 1
-      Data: "\u30C6\u30B9\u30C8\u30A2\u30A4\u30C6\u30E01"
+      Data: "\u30C6\u30B9\u30C8\u6D88\u8CBB\u30A2\u30A4\u30C6\u30E01"
     - Name: ItemName
       Entry: 1
-      Data: "\u30C6\u30B9\u30C8\u30A2\u30A4\u30C6\u30E01"
+      Data: "\u30C6\u30B9\u30C8\u6D88\u8CBB\u30A2\u30A4\u30C6\u30E01"
     - Name: MaxStackCount
       Entry: 3
       Data: 5

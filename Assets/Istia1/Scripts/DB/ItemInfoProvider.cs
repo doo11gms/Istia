@@ -13,15 +13,15 @@ namespace EllGames.Istia1.DB
     [CreateAssetMenu(menuName = "Istia1/Provider/ItemInfoProvider", fileName = "ItemInfoProvider")]
     public class ItemInfoProvider : SerializedScriptableObject
     {
-        [OdinSerialize] List<DB.ItemInfo> ItemInfos { get; set; } = new List<DB.ItemInfo>();
+        [OdinSerialize] List<ItemInfo> ItemInfos { get; set; } = new List<DB.ItemInfo>();
 
-        public DB.ItemInfo Provide(string identifier)
+        public ItemInfo Provide(string itemID)
         {
             if (ItemInfos == null) return null;
 
             foreach (var info in ItemInfos)
             {
-                if (info.Identifier == identifier) return info;
+                if (info.ItemID == itemID) return info;
             }
 
             return null;

@@ -21,9 +21,9 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes:
-    - Name: Contents
+    - Name: Tabs
       Entry: 7
-      Data: 0|System.Collections.Generic.List`1[[EllGames.Istia1.Profile.InventoryProfile+Content,
+      Data: 0|System.Collections.Generic.List`1[[EllGames.Istia1.Profile.InventoryProfile+Tab,
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12

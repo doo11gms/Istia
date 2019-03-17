@@ -17,7 +17,7 @@ namespace EllGames.Istia1.DB
         [OdinSerialize, PreviewField] public Sprite IconSprite { get; set; }
 
         [Title("Meta")]
-        [OdinSerialize] public string Identifier { get; set; }
+        [OdinSerialize] public string ItemID { get; set; }
 
         [Title("Basic")]
         [OdinSerialize] public string ItemName { get; set; }

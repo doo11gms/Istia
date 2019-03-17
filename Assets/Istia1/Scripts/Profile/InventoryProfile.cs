@@ -64,6 +64,12 @@ namespace EllGames.Istia1.Profile
 
         [OdinSerialize] List<Tab> Tabs { get; set; } = new List<Tab>();
 
+        /// <summary>
+        /// 対象のスロットを探索します。
+        /// </summary>
+        /// <param name="tabID"></param>
+        /// <param name="slotID"></param>
+        /// <returns>見つかったスロットを返します。見つからなかった場合、nullを返します。</returns>
         Slot SearchSlot(int tabID, int slotID)
         {
             if (Tabs == null) return null;
@@ -82,11 +88,25 @@ namespace EllGames.Istia1.Profile
             return null;
         }
 
+        /// <summary>
+        /// 対象のスロットが存在するか判定します。
+        /// </summary>
+        /// <param name="tabID"></param>
+        /// <param name="slotID"></param>
+        /// <returns></returns>
         bool Exists(int tabID, int slotID)
         {
             return SearchSlot(tabID, slotID) != null;
         }
 
+        /// <summary>
+        /// プロファイルに情報を登録します。
+        /// </summary>
+        /// <param name="tabID"></param>
+        /// <param name="slotID"></param>
+        /// <param name="itemID"></param>
+        /// <param name="count"></param>
+        /// <returns></returns>
         public bool Assign(int tabID, int slotID, string itemID, int count = 1)
         {
             if (!Exists(tabID, slotID)) return false;
@@ -96,12 +116,26 @@ namespace EllGames.Istia1.Profile
             return true;
         }
 
+        /// <summary>
+        /// プロファイルに情報を登録します。
+        /// </summary>
+        /// <param name="tabID"></param>
+        /// <param name="slotID"></param>
+        /// <param name="itemInfo"></param>
+        /// <param name="count"></param>
+        /// <returns></returns>
         [Button("Assign")]
         public bool Assign(int tabID, int slotID, DB.ItemInfo itemInfo, int count = 1)
         {
-            return Assign(tabID, slotID, itemInfo.Identifier, count);
+            return Assign(tabID, slotID, itemInfo.ItemID, count);
         }
 
+        /// <summary>
+        /// プロファイルに登録されている情報を抹消します。
+        /// </summary>
+        /// <param name="tabID"></param>
+        /// <param name="slotID"></param>
+        /// <returns></returns>
         [Button("Unassign")]
         public bool Unassign(int tabID, int slotID)
         {
@@ -112,6 +146,11 @@ namespace EllGames.Istia1.Profile
             return true;
         }
 
+        /// <summary>
+        /// プロファイルを初期化します。
+        /// </summary>
+        /// <param name="tabsCount"></param>
+        /// <param name="slotsCount"></param>
         [Button("Initialize")]
         public void Initialize(int tabsCount = 0, int slotsCount = 0)
         {
@@ -135,6 +174,9 @@ namespace EllGames.Istia1.Profile
             }
         }
 
+        /// <summary>
+        /// プロファイルをリセットします。
+        /// </summary>
         [Button("Reset")]
         public void Reset()
         {
