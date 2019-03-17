@@ -24,32 +24,59 @@ namespace EllGames.Istia1.Profile
         }
 
         [System.Serializable]
-        struct Content
+        class Content
         {
-            public int tabID;
-            public int slotID;
-            public string identifier;
+            public string itemID;
             public int count;
 
-            public Content(int tabID, int slotID, string identifier, int count)
+            public Content(string itemID = null, int count = 0)
             {
-                this.tabID = tabID;
-                this.slotID = slotID;
-                this.identifier = identifier;
+                this.itemID = itemID;
                 this.count = count;
             }
         }
 
-        [Title("State")]
-        [OdinSerialize] List<Content> Contents { get; set; } = new List<Content>();
-
-        Content? Search(int tabID, int slotID)
+        [System.Serializable]
+        class Slot
         {
-            if (Contents == null) return null;
+            public int slotID;
+            public Content content;
 
-            foreach (var content in Contents)
+            public Slot(int slotID = -1, Content content = null)
             {
-                if (content.tabID == tabID && content.slotID == slotID) return content;
+                this.slotID = slotID;
+                this.content = content;
+            }
+        }
+
+        [System.Serializable]
+        class Tab
+        {
+            public int tabID;
+            public List<Slot> contents;
+
+            public Tab(int tabID = -1, List<Slot> contents = null)
+            {
+                this.tabID = tabID;
+                this.contents = contents;
+            }
+        }
+
+        [OdinSerialize] List<Tab> Tabs { get; set; } = new List<Tab>();
+
+        Slot SearchSlot(int tabID, int slotID)
+        {
+            if (Tabs == null) return null;
+
+            foreach (var tab in Tabs)
+            {
+                if (tab.tabID == tabID)
+                {
+                    foreach(var slot in tab.contents)
+                    {
+                        if (slot.slotID == slotID) return slot;
+                    }
+                }
             }
 
             return null;
@@ -57,106 +84,61 @@ namespace EllGames.Istia1.Profile
 
         bool Exists(int tabID, int slotID)
         {
-            if (Contents == null) return false;
-
-            return Search(tabID, slotID) != null;
+            return SearchSlot(tabID, slotID) != null;
         }
 
-        int? SearchIndex(Content content)
+        public bool Assign(int tabID, int slotID, string itemID, int count = 1)
         {
-            if (Contents == null) return null;
+            if (!Exists(tabID, slotID)) return false;
 
-            var index = 0;
+            SearchSlot(tabID, slotID).content = new Content(itemID, count);
 
-            foreach (var found in Contents)
-            {
-                if (Equals(found, content)) return index;
-                index++;
-            }
-
-            return null;
-        }
-
-        public string GetIdentifier(int tabID, int slotID)
-        {
-            if (Contents == null) return null;
-
-            var found = Search(tabID, slotID);
-
-            if (found == null)
-            {
-                return null;
-            }
-            else
-            {
-                return ((Content)found).identifier;
-            }
-        }
-
-        public int? GetCount(int tabID, int slotID)
-        {
-            if (Contents == null) return null;
-
-            var found = Search(tabID, slotID);
-
-            if (found == null)
-            {
-                return null;
-            }
-            else
-            {
-                return ((Content)found).count;
-            }
-        }
-
-        public List<int> GetChildSlotIDs(int tabID)
-        {
-            var ids = new List<int>();
-
-            Contents.ForEach(content =>
-            {
-                if (content.tabID == tabID) ids.Add(content.slotID);
-            });
-
-            return ids;
-        }
-
-        [Button("Initialize")]
-        public void Initialize()
-        {
-            Contents = new List<Content>();
+            return true;
         }
 
         [Button("Assign")]
-        public void Assign(int tabID, int slotID, string identifier, int count = 1)
+        public bool Assign(int tabID, int slotID, DB.ItemInfo itemInfo, int count = 1)
         {
-            if (Contents == null) Initialize();
-
-            var assigner = new Content(tabID, slotID, identifier, count);
-            var found = Search(tabID, slotID);
-
-            if (found == null)
-            {
-                Contents.Add(assigner);
-            }
-            else
-            {
-                Contents[(int)SearchIndex((Content)found)] = assigner;
-            }
+            return Assign(tabID, slotID, itemInfo.Identifier, count);
         }
 
         [Button("Unassign")]
         public bool Unassign(int tabID, int slotID)
         {
-            if (Contents == null) return false;
+            if (!Exists(tabID, slotID)) return false;
 
-            if (Exists(tabID, slotID))
+            SearchSlot(tabID, slotID).content = null;
+
+            return true;
+        }
+
+        [Button("Initialize")]
+        public void Initialize(int tabsCount = 0, int slotsCount = 0)
+        {
+            if (!(0 <= tabsCount && tabsCount <= 10)) throw new System.Exception("このメソッドにより生成するタブの数は0から10の範囲で指定して下さい。");
+            if (!(0 <= slotsCount && slotsCount <= 100)) throw new System.Exception("このメソッドにより生成するスロットの数は0から100の範囲で指定して下さい。");
+            if (tabsCount == 0 && slotsCount > 0) throw new System.Exception("生成できないインベントリの形状です。");
+            if (tabsCount < 0 || slotsCount < 0) throw new System.Exception("生成できないインベントリの形状です。");
+            
+            Tabs = new List<Tab>();
+
+            for (int i = 0; i < tabsCount; i++)
             {
-                Contents.Remove((Content)Search(tabID, slotID));
-                return true;
-            }
+                var slots = new List<Slot>();
 
-            return false;
+                for (int j = 0; j < slotsCount; j++)
+                {
+                    slots.Add(new Slot(j, null));
+                }
+
+                Tabs.Add(new Tab(i, slots));
+            }
+        }
+
+        [Button("Reset")]
+        public void Reset()
+        {
+            Initialize(0, 0);
         }
     }
 }

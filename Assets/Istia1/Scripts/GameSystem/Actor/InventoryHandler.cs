@@ -28,7 +28,7 @@ namespace EllGames.Istia1.GameSystem.Actor
 
             return null;
         }
-
+        /*
         int? PushableSlotID(DB.ItemInfo itemInfo)
         {
             var tabID = TabID(itemInfo);
@@ -65,7 +65,7 @@ namespace EllGames.Istia1.GameSystem.Actor
         {
             InventoryProfile.Initialize();
         }
-
+        
         /// <summary>
         /// インベントリにアイテムを追加します。
         /// </summary>
@@ -82,7 +82,7 @@ namespace EllGames.Istia1.GameSystem.Actor
 
             return true;
         }
-
+        */
         /// <summary>
         /// インベントリにアイテムを追加します。
         /// </summary>
