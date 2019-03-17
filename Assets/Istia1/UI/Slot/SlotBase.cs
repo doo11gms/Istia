@@ -8,10 +8,11 @@ using UnityEngine.EventSystems;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 
-namespace EllGames
+namespace EllGames.Istia1.UI.Slot
 {
-    public class SlotBase : SerializedMonoBehaviour
+    public abstract class SlotBase : SerializedMonoBehaviour
     {
-	
+        [Title("Meta")]
+        [OdinSerialize] public int SlotID { get; set; }
     }
 }

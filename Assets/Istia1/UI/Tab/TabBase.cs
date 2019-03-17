@@ -8,10 +8,11 @@ using UnityEngine.EventSystems;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 
-namespace EllGames
+namespace EllGames.Istia1.UI.Tab
 {
-    public class TabBase : SerializedMonoBehaviour
+    public abstract class TabBase : SerializedMonoBehaviour
     {
-	
+        [Title("Meta")]
+        [OdinSerialize] public int TabID { get; set; }
     }
 }

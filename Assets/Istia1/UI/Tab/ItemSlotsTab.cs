@@ -8,10 +8,11 @@ using UnityEngine.EventSystems;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 
-namespace EllGames
+namespace EllGames.Istia1.UI.Tab
 {
-    public class ItemSlotsTab : SerializedMonoBehaviour
+    public class ItemSlotsTab : TabBase
     {
-	
+        [Title("State")]
+        [OdinSerialize] public List<Slot.ItemSlot> Contents { get; set; }
     }
 }

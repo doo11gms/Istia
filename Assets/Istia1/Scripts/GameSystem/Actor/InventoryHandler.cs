@@ -16,6 +16,7 @@ namespace EllGames.Istia1.GameSystem.Actor
         [OdinSerialize, Required] Profile.InventoryProfile InventoryProfile { get; set; }
         [OdinSerialize, Required] DB.ItemInfoProvider ItemInfoProvider { get; set; }
         [OdinSerialize, Required] Item.ItemCoolDownHandler ItemCoolDownHandler { get; set; }
+        [OdinSerialize, Required] UI.Window.InventoryWindow InventoryWindow { get; set; }
 
         [Title("Settings")]
         [OdinSerialize] int ConsumableTabID { get; set; } = 0;
@@ -85,6 +86,9 @@ namespace EllGames.Istia1.GameSystem.Actor
             var itemCount = 1;
             if (!InventoryProfile.IsEmpty((int)tabID, (int)slotID)) itemCount = InventoryProfile.GetItemCount((int)tabID, (int)slotID) + 1;
 
+            InventoryWindow.GetItemSlot((int)tabID, (int)slotID).Assign(itemInfo, itemCount);
+            InventoryWindow.GetItemSlot((int)tabID, (int)slotID).Refresh();
+
             return InventoryProfile.Assign((int)tabID, (int)slotID, itemInfo, itemCount);
         }
 
@@ -116,7 +120,7 @@ namespace EllGames.Istia1.GameSystem.Actor
         {
             var buffer = ItemInfoProvider.Provide(InventoryProfile.GetItemID(tabID, slotID));
 
-            Dispose(tabID, slotID);
+            DisposeItem(tabID, slotID);
 
             return buffer;
         }
@@ -131,20 +135,23 @@ namespace EllGames.Istia1.GameSystem.Actor
         {
             var itemInfo = ItemInfoProvider.Provide(InventoryProfile.GetItemID(tabID, slotID));
 
-            if (!ItemCoolDownHandler.CoolTimeHasFinished(itemInfo))
+            if (itemInfo.UsingCoolTime)
             {
-                Debug.Log("クールタイム中のため、アイテムを使用できません。");
-                return false;
-            }
+                if (!ItemCoolDownHandler.CoolTimeHasFinished(itemInfo))
+                {
+                    Debug.Log("クールタイム中のため、アイテムを使用できません。");
+                    return false;
+                }
 
-            ItemCoolDownHandler.Assign(itemInfo);
+                ItemCoolDownHandler.Assign(itemInfo);
+            }
 
             if (itemInfo.ItemUsingEffects != null)
             {
                 itemInfo.ItemUsingEffects.ForEach(effect => Instantiate(effect));
             }
 
-            Dispose(tabID, slotID);
+            if (itemInfo.Consumable) DisposeItem(tabID, slotID);
 
             return true;
         }
@@ -154,20 +161,30 @@ namespace EllGames.Istia1.GameSystem.Actor
         /// </summary>
         /// <param name="tabID"></param>
         /// <param name="slotID"></param>
-        [Button("Dispose")]
-        public void Dispose(int tabID, int slotID)
+        [Button("Dispose Item")]
+        public bool DisposeItem(int tabID, int slotID)
         {
+            if (InventoryProfile.IsEmpty(tabID, slotID)) return false;
+
+            var itemInfo = ItemInfoProvider.Provide(InventoryProfile.GetItemID(tabID, slotID));
+            if (!itemInfo.Disposable) return false;
+
             int itemCount = InventoryProfile.GetItemCount(tabID, slotID) - 1;
 
             if (itemCount == 0)
             {
                 InventoryProfile.Unassign(tabID, slotID);
+                InventoryWindow.GetItemSlot(tabID, slotID).Unassign();
             }
             else
             {
-                var itemInfo = ItemInfoProvider.Provide(InventoryProfile.GetItemID(tabID, slotID));
                 InventoryProfile.Assign(tabID, slotID, itemInfo, itemCount);
+                InventoryWindow.GetItemSlot(tabID, slotID).Assign(itemInfo, itemCount);
             }
+
+            InventoryWindow.GetItemSlot(tabID, slotID).Refresh();
+
+            return true;
         }
 
         /// <summary>
@@ -176,10 +193,10 @@ namespace EllGames.Istia1.GameSystem.Actor
         /// </summary>
         /// <param name="tabID"></param>
         /// <param name="slotID"></param>
-        [Button("Dispose All")]
-        public void DisposeAll(int tabID, int slotID)
+        [Button("Dispose Item All")]
+        public bool DisposeItemAll(int tabID, int slotID)
         {
-            InventoryProfile.Unassign(tabID, slotID);
+            return InventoryProfile.Unassign(tabID, slotID);
         }
 
         /// <summary>
@@ -197,6 +214,7 @@ namespace EllGames.Istia1.GameSystem.Actor
         [Button("Refresh")]
         public void Refresh()
         {
+            InventoryWindow.Refresh();
         }
 
         [Button("Inventory Initialize")]
