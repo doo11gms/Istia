@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4297875bcae94d2408fdb1711cb74f8e, type: 3}
-  m_Name: TestConsumableItem
+  m_Name: TestConsumableItemInfo1
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -25,7 +25,7 @@ MonoBehaviour:
     - Name: IconSprite
       Entry: 10
       Data: 0
-    - Name: Identifier
+    - Name: ItemID
       Entry: 1
       Data: "\u30C6\u30B9\u30C8\u6D88\u8CBB\u30A2\u30A4\u30C6\u30E01"
     - Name: ItemName
@@ -63,7 +63,7 @@ MonoBehaviour:
       Data: 0
     - Name: UsingCoolTime
       Entry: 5
-      Data: false
+      Data: true
     - Name: CoolTime
       Entry: 4
-      Data: 0
+      Data: 1

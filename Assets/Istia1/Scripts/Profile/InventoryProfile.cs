@@ -15,12 +15,58 @@ namespace EllGames.Istia1.Profile
     {
         void Save.ISavable.Save()
         {
-            // TODO
+            Dictionary<int, List<int>> shape = new Dictionary<int, List<int>>();
+
+            foreach (var tab in Tabs)
+            {
+                var slotIDs = new List<int>();
+
+                foreach (var slot in tab.contents)
+                {
+                    var path = GetInstanceID() + tab.tabID.ToString() + slot.slotID.ToString();
+
+                    if (slot.content == null)
+                    {
+                        if (ES2.Exists(path + "itemID")) ES2.Delete(path + "itemID");
+                        if (ES2.Exists(path + "count")) ES2.Delete(path + "count");
+                    }
+                    else
+                    {
+                        ES2.Save(slot.content.itemID, GetInstanceID() + tab.tabID.ToString() + slot.slotID.ToString() + "itemID");
+                        ES2.Save(slot.content.count, GetInstanceID() + tab.tabID.ToString() + slot.slotID.ToString() + "count");
+                    }
+
+                    slotIDs.Add(slot.slotID);
+                }
+
+                shape.Add(tab.tabID, slotIDs);
+            }
+
+            ES2.Save(shape, GetInstanceID() + "shape");
         }
 
+        /// <summary>
+        /// ロード時のインベントリの形状は、セーブした時と同じ形状である必要があります。
+        /// </summary>
         void Save.ISavable.Load()
         {
-            // TODO
+            foreach (var tab in Tabs)
+            {
+                foreach (var slot in tab.contents)
+                {
+                    var path = GetInstanceID() + tab.tabID.ToString() + slot.slotID.ToString();
+
+                    string itemID;
+                    if (ES2.Exists(path + "itemID")) itemID = ES2.Load<string>(path + "itemID");
+                    else continue;
+
+                    int count;
+                    if (ES2.Exists(path + "count")) count = ES2.Load<int>(path + "count");
+                    else continue;
+
+                    Assign(tab.tabID, slot.slotID, itemID, count);
+                }
+            }
         }
 
         [System.Serializable]
@@ -171,6 +217,26 @@ namespace EllGames.Istia1.Profile
                 }
 
                 Tabs.Add(new Tab(i, slots));
+            }
+        }
+
+        [Button("Initialize")]
+        public void Initialize(Dictionary<int, List<int>> shape)
+        {
+            Reset();
+
+            Tabs = new List<Tab>();
+
+            foreach (var pair in shape)
+            {
+                var slots = new List<Slot>();
+
+                for (int i = 0; i < pair.Value.Count; i++)
+                {
+                    slots.Add(new Slot(pair.Value[i], null));
+                }
+
+                Tabs.Add(new Tab(pair.Key, slots));
             }
         }
 

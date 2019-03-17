@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4297875bcae94d2408fdb1711cb74f8e, type: 3}
+  m_Name: TestConsumableItemInfo2
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 21300000, guid: 97a6c6fba35327b4c89b87c9bb620093, type: 3}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: IconSprite
+      Entry: 10
+      Data: 0
+    - Name: ItemID
+      Entry: 1
+      Data: "\u30C6\u30B9\u30C8\u6D88\u8CBB\u30A2\u30A4\u30C6\u30E02"
+    - Name: ItemName
+      Entry: 1
+      Data: "\u30C6\u30B9\u30C8\u6D88\u8CBB\u30A2\u30A4\u30C6\u30E02"
+    - Name: MaxStackCount
+      Entry: 3
+      Data: 20
+    - Name: Usable
+      Entry: 5
+      Data: true
+    - Name: Consumable
+      Entry: 5
+      Data: true
+    - Name: Equipable
+      Entry: 5
+      Data: false
+    - Name: Sellable
+      Entry: 5
+      Data: true
+    - Name: BuyingPrice
+      Entry: 3
+      Data: 10
+    - Name: SellingPrice
+      Entry: 3
+      Data: 10
+    - Name: Disposable
+      Entry: 5
+      Data: true
+    - Name: UsingHotKey
+      Entry: 5
+      Data: false
+    - Name: HotKey
+      Entry: 3
+      Data: 0
+    - Name: UsingCoolTime
+      Entry: 5
+      Data: false
+    - Name: CoolTime
+      Entry: 4
+      Data: 0

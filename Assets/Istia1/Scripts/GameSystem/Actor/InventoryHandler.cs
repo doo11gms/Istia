@@ -18,71 +18,11 @@ namespace EllGames.Istia1.GameSystem.Actor
 
         [Title("Settings")]
         [OdinSerialize] int ConsumableTabID { get; set; } = 0;
+        [OdinSerialize] int EquipmentTabID { get; set; } = 1;
+        [OdinSerialize] int OtherTabID { get; set; } = 2;
+        [OdinSerialize] int MaterialTabID { get; set; } = 3;
+        [OdinSerialize] int QuestTabID { get; set; } = 4;
 
-        int? TabID(DB.ItemInfo itemInfo)
-        {
-            if (itemInfo.Consumable)
-            {
-                return ConsumableTabID;
-            }
-
-            return null;
-        }
-        /*
-        int? PushableSlotID(DB.ItemInfo itemInfo)
-        {
-            var tabID = TabID(itemInfo);
-
-            if (tabID == null)
-            {
-                return null;
-            }
-            else
-            {
-                var candidates = InventoryProfile.GetChildSlotIDs((int)tabID);
-
-                if (candidates == null) return null;
-
-                foreach (var slotID in candidates)
-                {
-                    if (Equals(itemInfo, ItemInfoProvider.Provide(InventoryProfile.GetIdentifier((int)tabID, slotID))))
-                    {
-                        if (InventoryProfile.GetCount((int)tabID, slotID) + 1 <= itemInfo.MaxStackCount) return slotID;
-                    }
-                }
-            }
-
-            return null;
-        }
-
-        [Title("Buttons")]
-
-        /// <summary>
-        /// インベントリを初期化します。
-        /// </summary>
-        [Button("Initialize")]
-        public void InventoryInitialize()
-        {
-            InventoryProfile.Initialize();
-        }
-        
-        /// <summary>
-        /// インベントリにアイテムを追加します。
-        /// </summary>
-        /// <param name="itemInfo"></param>
-        /// <returns></returns>
-        [Button("Push Item")]
-        public bool PushItem(DB.ItemInfo itemInfo)
-        {
-            var slotID = PushableSlotID(itemInfo);
-
-            if (slotID == null) return false;
-
-            InventoryProfile.Assign((int)TabID(itemInfo), (int)slotID, itemInfo.Identifier);
-
-            return true;
-        }
-        */
         /// <summary>
         /// インベントリにアイテムを追加します。
         /// </summary>

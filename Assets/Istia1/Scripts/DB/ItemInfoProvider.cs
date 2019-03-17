@@ -13,7 +13,7 @@ namespace EllGames.Istia1.DB
     [CreateAssetMenu(menuName = "Istia1/Provider/ItemInfoProvider", fileName = "ItemInfoProvider")]
     public class ItemInfoProvider : SerializedScriptableObject
     {
-        [OdinSerialize] List<ItemInfo> ItemInfos { get; set; } = new List<DB.ItemInfo>();
+        [OdinSerialize] List<ItemInfo> ItemInfos { get; set; } = new List<ItemInfo>();
 
         public ItemInfo Provide(string itemID)
         {
@@ -25,6 +25,15 @@ namespace EllGames.Istia1.DB
             }
 
             return null;
+        }
+
+        /// <summary>
+        /// データベースをリロードします。
+        /// </summary>
+        [Button("Reload")]
+        public void Reload()
+        {
+            Debug.Log("TODO: ScriptableObjectsフォルダを見て、自動ですべてのItemInfoを追加するようにします。");
         }
     }
 }
