@@ -9,24 +9,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6cc52de8903467440a97a10d7109195e, type: 3}
-  m_Name: InventoryProfile
+  m_Script: {fileID: 11500000, guid: c6589339210a35d4ea354c9d04d3e4b2, type: 3}
+  m_Name: ItemInfoProvider
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects: []
+    ReferencedUnityObjects:
+    - {fileID: 11400000, guid: 3e0f6ef8d90d5e143b7595d72fecfddd, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes:
-    - Name: Contents
+    - Name: ItemInfos
       Entry: 7
-      Data: 0|System.Collections.Generic.List`1[[EllGames.Istia1.Profile.InventoryProfile+Content,
-        Assembly-CSharp]], mscorlib
+      Data: 0|System.Collections.Generic.List`1[[EllGames.Istia1.DB.ItemInfo, Assembly-CSharp]],
+        mscorlib
     - Name: 
       Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 10
       Data: 0
     - Name: 
       Entry: 13

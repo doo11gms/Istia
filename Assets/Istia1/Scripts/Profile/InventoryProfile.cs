@@ -109,6 +109,18 @@ namespace EllGames.Istia1.Profile
             }
         }
 
+        public List<int> GetChildSlotIDs(int tabID)
+        {
+            var ids = new List<int>();
+
+            Contents.ForEach(content =>
+            {
+                if (content.tabID == tabID) ids.Add(content.slotID);
+            });
+
+            return ids;
+        }
+
         [Button("Initialize")]
         public void Initialize()
         {
