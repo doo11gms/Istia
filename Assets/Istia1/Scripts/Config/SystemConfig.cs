@@ -8,10 +8,11 @@ using UnityEngine.EventSystems;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 
-namespace EllGames
+namespace EllGames.Istia1.Config
 {
-    public class SystemConfig : SerializedMonoBehaviour
+    [CreateAssetMenu(menuName = "Istia1/Config/SystemConfig", fileName = "SystemConfig")]
+    public class SystemConfig : SerializedScriptableObject
     {
-	
+        [SerializeField] public string MapScenePrefix { get; set; } = "Map_";
     }
 }

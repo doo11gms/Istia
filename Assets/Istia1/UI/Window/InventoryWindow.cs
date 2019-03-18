@@ -50,5 +50,10 @@ namespace EllGames.Istia1.UI.Window
         {
             Tabs.ForEach(tab => tab.Contents.ForEach(slot => slot.Initialize()));
         }
+
+        protected override void Awake()
+        {
+            base.Awake();
+        }
     }
 }
