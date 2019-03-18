@@ -7,6 +7,7 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
+using System.Linq;
 
 namespace EllGames.Istia1.Profile
 {
@@ -148,6 +149,11 @@ namespace EllGames.Istia1.Profile
             return null;
         }
 
+        bool Exists(int tabID)
+        {
+            return SearchTab(tabID) != null;
+        }
+
         /// <summary>
         /// 対象のスロットが存在するか判定します。
         /// </summary>
@@ -189,6 +195,35 @@ namespace EllGames.Istia1.Profile
             SearchTab(tabID).contents.Add(new Slot(slotID));
 
             return true;
+        }
+
+        public string GetItemID(int tabID, int slotID)
+        {
+            return SearchSlot(tabID, slotID).content.itemID;
+        }
+
+        public int GetItemCount(int tabID, int slotID)
+        {
+            return SearchSlot(tabID, slotID).content.count;
+        }
+
+        public bool IsEmpty(int tabID, int slotID)
+        {
+            if (!Exists(tabID, slotID)) return false;
+
+            return SearchSlot(tabID, slotID).content == null;
+        }
+
+        /// <summary>
+        /// 対象のタブに属するスロットを返します。
+        /// </summary>
+        /// <param name="tabID"></param>
+        /// <returns></returns>
+        public List<int> ChildSlotIDs(int tabID)
+        {
+            if (!Exists(tabID)) return null;
+
+            return SearchTab(tabID).contents.Select(content => content.slotID).ToList();
         }
 
         /// <summary>
