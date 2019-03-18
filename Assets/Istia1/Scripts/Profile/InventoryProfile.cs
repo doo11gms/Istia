@@ -214,6 +214,16 @@ namespace EllGames.Istia1.Profile
             return SearchSlot(tabID, slotID).content == null;
         }
 
+        public List<int> GetAllTabIDs()
+        {
+            return Tabs.Select(tab => tab.tabID).ToList();
+        }
+
+        public List<int> GetAllSlotIDs(int tabID)
+        {
+            return SearchTab(tabID).contents.Select(content => content.slotID).ToList();
+        }
+
         /// <summary>
         /// 対象のタブに属するスロットを返します。
         /// </summary>

@@ -48,19 +48,16 @@ MonoBehaviour:
       Entry: 3
       Data: 0
     - Name: content
-      Entry: 6
-      Data: 
+      Entry: 7
+      Data: 4|EllGames.Istia1.Profile.InventoryProfile+Content, Assembly-CSharp
+    - Name: itemID
+      Entry: 1
+      Data: "\u30C6\u30B9\u30C8\u6D88\u8CBB\u30A2\u30A4\u30C6\u30E01"
+    - Name: count
+      Entry: 3
+      Data: 3
     - Name: 
       Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 4|EllGames.Istia1.Profile.InventoryProfile+Slot, Assembly-CSharp
-    - Name: slotID
-      Entry: 3
-      Data: 1
-    - Name: content
-      Entry: 6
       Data: 
     - Name: 
       Entry: 8
@@ -68,6 +65,27 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 5|EllGames.Istia1.Profile.InventoryProfile+Slot, Assembly-CSharp
+    - Name: slotID
+      Entry: 3
+      Data: 1
+    - Name: content
+      Entry: 7
+      Data: 6|EllGames.Istia1.Profile.InventoryProfile+Content, Assembly-CSharp
+    - Name: itemID
+      Entry: 1
+      Data: "\u30C6\u30B9\u30C8\u6D88\u8CBB\u30A2\u30A4\u30C6\u30E01"
+    - Name: count
+      Entry: 3
+      Data: 3
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 7|EllGames.Istia1.Profile.InventoryProfile+Slot, Assembly-CSharp
     - Name: slotID
       Entry: 3
       Data: 2
@@ -79,7 +97,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 6|EllGames.Istia1.Profile.InventoryProfile+Slot, Assembly-CSharp
+      Data: 8|EllGames.Istia1.Profile.InventoryProfile+Slot, Assembly-CSharp
     - Name: slotID
       Entry: 3
       Data: 3

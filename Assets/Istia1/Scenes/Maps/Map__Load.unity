@@ -13756,7 +13756,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &702750413
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13824,7 +13824,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 5
+  m_Text: 3
 --- !u!222 &702750416
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -15981,7 +15981,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &806385305
 RectTransform:
   m_ObjectHideFlags: 0
@@ -25820,6 +25820,7 @@ MonoBehaviour:
     - {fileID: 1324787246}
     - {fileID: 1599854363}
     - {fileID: 702750415}
+    - {fileID: 11400000, guid: a9fb8fb4d03c2ff4394a96fe90b24280, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -25859,11 +25860,11 @@ MonoBehaviour:
       Entry: 5
       Data: true
     - Name: Content
-      Entry: 6
-      Data: 
+      Entry: 10
+      Data: 9
     - Name: ContentCount
       Entry: 3
-      Data: 0
+      Data: 3
 --- !u!1 &1104379917
 GameObject:
   m_ObjectHideFlags: 0
@@ -26328,7 +26329,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1139649050
 RectTransform:
   m_ObjectHideFlags: 0
@@ -26369,7 +26370,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 9ddced2415f580c40b5952ee80afe203, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -36344,7 +36345,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1508123161
 RectTransform:
   m_ObjectHideFlags: 0
@@ -36412,7 +36413,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 5
+  m_Text: 3
 --- !u!222 &1508123164
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -36587,7 +36588,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1513073649
 RectTransform:
   m_ObjectHideFlags: 0
@@ -36628,7 +36629,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 9ddced2415f580c40b5952ee80afe203, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -38059,7 +38060,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1592821650
 RectTransform:
   m_ObjectHideFlags: 0
@@ -44380,6 +44381,7 @@ MonoBehaviour:
     - {fileID: 1424237914}
     - {fileID: 1731241586}
     - {fileID: 1508123163}
+    - {fileID: 11400000, guid: a9fb8fb4d03c2ff4394a96fe90b24280, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -44419,11 +44421,11 @@ MonoBehaviour:
       Entry: 5
       Data: true
     - Name: Content
-      Entry: 6
-      Data: 
+      Entry: 10
+      Data: 9
     - Name: ContentCount
       Entry: 3
-      Data: 0
+      Data: 3
 --- !u!222 &1878717992
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -49944,7 +49946,7 @@ PrefabInstance:
     - target: {fileID: 1888049103042350458, guid: 18362f55fc78c454583273119bfefa62,
         type: 3}
       propertyPath: serializationData.PrefabModifications.Array.data[0]
-      value: '"path":"m_Text","value":{"$id":0,"$type":"System.String, mscorlib",""}'
+      value: '"path":"m_Text","value":{"$id":0,"$type":"System.String, mscorlib","\u30d7\u30ec\u30a4\u30e4\u30fc\u304c\u79fb\u52d5\u3067\u304d\u308b\u3088\u3046\u306b\u3059\u308b\n"}'
       objectReference: {fileID: 0}
     - target: {fileID: 1888049103042350457, guid: 18362f55fc78c454583273119bfefa62,
         type: 3}
