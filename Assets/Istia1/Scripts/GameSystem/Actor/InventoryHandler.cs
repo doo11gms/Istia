@@ -10,6 +10,10 @@ using Sirenix.Serialization;
 
 namespace EllGames.Istia1.GameSystem.Actor
 {
+    /// <summary>
+    /// インベントリのエントリです。
+    /// このクラス以外を通じてインベントリを操作した場合、UIとプロファイルに不整合が生じるなど、動作は保証されません。
+    /// </summary>
     public class InventoryHandler : SerializedMonoBehaviour
     {
         [Title("Required")]
@@ -115,7 +119,6 @@ namespace EllGames.Istia1.GameSystem.Actor
         /// <param name="tabID"></param>
         /// <param name="slotID"></param>
         /// <returns></returns>
-        [Button("Pop Item")]
         public DB.ItemInfo PopItem(int tabID, int slotID)
         {
             var buffer = ItemInfoProvider.Provide(InventoryProfile.GetItemID(tabID, slotID));
@@ -196,7 +199,10 @@ namespace EllGames.Istia1.GameSystem.Actor
         [Button("Dispose Item All")]
         public bool DisposeItemAll(int tabID, int slotID)
         {
-            return InventoryProfile.Unassign(tabID, slotID);
+            var buf = InventoryProfile.Unassign(tabID, slotID);
+            InventoryWindow.GetItemSlot(tabID, slotID).Unassign();
+            Refresh();
+            return buf;
         }
 
         /// <summary>
@@ -208,19 +214,25 @@ namespace EllGames.Istia1.GameSystem.Actor
             Debug.Log("この機能は未実装です。");
         }
 
-        /// <summary>
-        /// インベントリの内容を最新の状態に更新します。
-        /// </summary>
-        [Button("Refresh")]
         public void Refresh()
         {
             InventoryWindow.Refresh();
         }
 
-        [Button("Inventory Initialize")]
-        public void InventoryInitialize()
+        /// <summary>
+        /// インベントリを空にします。
+        /// </summary>
+        [Button("Clean")]
+        public void Clean()
         {
             InventoryProfile.Reset();
+            InventoryWindow.Initialize();
+            InventoryWindow.Refresh();
+        }
+
+        private void Awake()
+        {
+            Refresh();
         }
     }
 }

@@ -45,5 +45,10 @@ namespace EllGames.Istia1.UI.Window
         {
             Tabs.ForEach(tab => tab.Contents.ForEach(slot => slot.Refresh()));
         }
+
+        public void Initialize()
+        {
+            Tabs.ForEach(tab => tab.Contents.ForEach(slot => slot.Initialize()));
+        }
     }
 }

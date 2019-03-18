@@ -14,6 +14,7 @@ namespace EllGames.Istia1.UI.Slot
     {
         void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
         {
+            if (IsEmpty()) return;
             HoverOverlay.gameObject.SetActive(true);
         }
 
@@ -24,6 +25,7 @@ namespace EllGames.Istia1.UI.Slot
 
         void IPointerDownHandler.OnPointerDown(PointerEventData eventData)
         {
+            if (IsEmpty()) return;
             if (UnityEngine.Input.GetMouseButton(KeyConfig.EquipMouseButton))
             {
                 // TODO: 装備する
@@ -34,7 +36,7 @@ namespace EllGames.Istia1.UI.Slot
                 PressOverlay.gameObject.SetActive(true);
             }
 
-            if (UnityEngine.Input.GetMouseButton(KeyConfig.DisposeAllItemMouseButton) && UnityEngine.Input.GetKey(KeyConfig.DisposeAllItemKey))
+            if (UnityEngine.Input.GetMouseButton(KeyConfig.DisposeItemAllMouseButton) && UnityEngine.Input.GetKey(KeyConfig.DisposeItemAllKey))
             {
                 InventoryHandler.DisposeItemAll(ParentTab.TabID, SlotID);
                 Refresh();
@@ -73,6 +75,11 @@ namespace EllGames.Istia1.UI.Slot
         [Title("State")]
         [OdinSerialize] DB.ItemInfo Content { get; set; }
         [OdinSerialize] int ContentCount { get; set; }
+
+        public bool IsEmpty()
+        {
+            return Content == null;
+        }
 
         [Title("Buttons")]
 
@@ -126,6 +133,13 @@ namespace EllGames.Istia1.UI.Slot
                     CountText.gameObject.SetActive(false);
                 }
             }
+        }
+
+        [Button("Initialize")]
+        public void Initialize()
+        {
+            Unassign();
+            Refresh();
         }
 
         private void Update()
