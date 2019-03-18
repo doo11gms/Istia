@@ -284,33 +284,19 @@ namespace EllGames.Istia1.Profile
             }
         }
 
-        [Button("Initialize")]
-        public void Initialize(Dictionary<int, List<int>> shape)
-        {
-            Reset();
-
-            Tabs = new List<Tab>();
-
-            foreach (var pair in shape)
-            {
-                var slots = new List<Slot>();
-
-                for (int i = 0; i < pair.Value.Count; i++)
-                {
-                    slots.Add(new Slot(pair.Value[i], null));
-                }
-
-                Tabs.Add(new Tab(pair.Key, slots));
-            }
-        }
-
         /// <summary>
         /// プロファイルをリセットします。
         /// </summary>
         [Button("Reset")]
         public void Reset()
         {
-            Initialize(0, 0);
+            foreach(var tab in Tabs)
+            {
+                foreach(var slot in tab.contents)
+                {
+                    slot.content = null;
+                }
+            }
         }
     }
 }
