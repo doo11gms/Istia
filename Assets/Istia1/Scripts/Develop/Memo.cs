@@ -12,6 +12,6 @@ namespace EllGames.Istia1.Develop
 {
     public class Memo : SerializedMonoBehaviour
     {
-        [OdinSerialize, TextArea(10, 10)] string m_Text;
+        [OdinSerialize, TextArea(20, 20)] string m_Text;
     }
 }
