@@ -214,18 +214,8 @@ namespace EllGames.Istia1.GameSystem.Actor
             Debug.Log("この機能は未実装です。");
         }
 
-        /// <summary>
-        /// プロファイルの内容をUIに反映します。
-        /// </summary>
-        public void ApplyProfile()
-        {
-            Debug.Log("この機能は未実装です。2018/03/18現在、プロファイルの内容をUIに反映させる安全な方法は無く、インベントリをリセットして下さい。");
-        }
-
-        [Button("Refresh")]
         public void Refresh()
         {
-            ApplyProfile();
             InventoryWindow.Refresh();
         }
 
