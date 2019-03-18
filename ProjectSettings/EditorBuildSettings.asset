@@ -4,5 +4,17 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Istia1/Scenes/Title.unity
+    guid: 673425209311e5b4a84d371e0c576a1f
+  - enabled: 1
+    path: Assets/Istia1/Scenes/Load.unity
+    guid: c5a27e4b92dbf064fb497bc231a8a006
+  - enabled: 1
+    path: Assets/Istia1/Scenes/Maps/Map_TestField.unity
+    guid: 469ff486b4ce96f41812a99e2e1c6906
+  - enabled: 1
+    path: Assets/Istia1/Scenes/Maps/Map_TestVillage.unity
+    guid: f79424aea4388b847b99d751f0598588
   m_configObjects: {}
