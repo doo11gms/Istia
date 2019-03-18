@@ -36,7 +36,7 @@ namespace EllGames.Istia1.UI.Slot
                 PressOverlay.gameObject.SetActive(true);
             }
 
-            if (UnityEngine.Input.GetMouseButton(KeyConfig.DisposeAllItemMouseButton) && UnityEngine.Input.GetKey(KeyConfig.DisposeAllItemKey))
+            if (UnityEngine.Input.GetMouseButton(KeyConfig.DisposeItemAllMouseButton) && UnityEngine.Input.GetKey(KeyConfig.DisposeItemAllKey))
             {
                 InventoryHandler.DisposeItemAll(ParentTab.TabID, SlotID);
                 Refresh();
