@@ -267,6 +267,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock06
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: adcb2d6a3ce208e49a5adb6e7f883a3a, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: adcb2d6a3ce208e49a5adb6e7f883a3a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 350.36
@@ -334,7 +338,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 915173417}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Rocks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1225,6 +1229,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock05
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 0ed1033ec33e5c342b9a7eef9f9fe9be, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 0ed1033ec33e5c342b9a7eef9f9fe9be, type: 3}
       propertyPath: m_LocalPosition.x
       value: 310.53
@@ -1389,6 +1397,38 @@ PrefabInstance:
     - target: {fileID: 100014, guid: 50db49deec744b84e80b35ccb3d6a651, type: 3}
       propertyPath: m_Name
       value: Mana Tunnel (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100014, guid: 50db49deec744b84e80b35ccb3d6a651, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 50db49deec744b84e80b35ccb3d6a651, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 50db49deec744b84e80b35ccb3d6a651, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: 50db49deec744b84e80b35ccb3d6a651, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: 50db49deec744b84e80b35ccb3d6a651, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 100008, guid: 50db49deec744b84e80b35ccb3d6a651, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 100010, guid: 50db49deec744b84e80b35ccb3d6a651, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 100012, guid: 50db49deec744b84e80b35ccb3d6a651, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 400014, guid: 50db49deec744b84e80b35ccb3d6a651, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1679,7 +1719,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1459823695}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Mana Tunnels
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1710,7 +1750,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1492966986}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Level
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1871,7 +1911,7 @@ GameObject:
   - component: {fileID: 1873566555}
   - component: {fileID: 1873566554}
   - component: {fileID: 1873566553}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Terrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
