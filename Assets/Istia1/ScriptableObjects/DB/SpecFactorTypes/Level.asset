@@ -30,3 +30,6 @@ MonoBehaviour:
     - Name: Abbreviation
       Entry: 1
       Data: Lv
+    - Name: Percentage
+      Entry: 5
+      Data: false

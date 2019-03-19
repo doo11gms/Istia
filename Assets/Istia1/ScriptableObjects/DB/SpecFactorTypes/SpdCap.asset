@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3cb799909827ac647a0760eeefe0d4e7, type: 3}
-  m_Name: MaxMP
+  m_Name: SpdCap
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -23,13 +23,13 @@ MonoBehaviour:
     SerializationNodes:
     - Name: ID
       Entry: 1
-      Data: MaxMP
+      Data: SpeedCap
     - Name: Name
       Entry: 1
-      Data: "\u6700\u5927MP"
+      Data: "\u79FB\u52D5\u901F\u5EA6Cap"
     - Name: Abbreviation
       Entry: 1
-      Data: "\u6700\u5927MP"
+      Data: "\u79FB\u52D5\u901F\u5EA6Cap"
     - Name: Percentage
       Entry: 5
       Data: false

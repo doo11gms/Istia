@@ -13,8 +13,10 @@ namespace EllGames.Istia1.DB
     [CreateAssetMenu(menuName = "Istia1/DB/SpecFactorType", fileName = "SpecFactorType")]
     public class SpecFactorType : SerializedScriptableObject
     {
+        [Title("Settings")]
         [OdinSerialize] public string ID { get; set; }
         [OdinSerialize] public string Name { get; set; }
         [OdinSerialize] public string Abbreviation { get; set; }
+        [OdinSerialize] public bool Percentage { get; set; } = false;
     }
 }

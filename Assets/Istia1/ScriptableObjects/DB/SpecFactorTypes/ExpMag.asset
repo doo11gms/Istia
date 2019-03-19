@@ -30,3 +30,6 @@ MonoBehaviour:
     - Name: Abbreviation
       Entry: 1
       Data: "\u7D4C\u9A13\u5024\u500D\u7387"
+    - Name: Percentage
+      Entry: 5
+      Data: true
