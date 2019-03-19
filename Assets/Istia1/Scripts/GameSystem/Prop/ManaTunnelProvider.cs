@@ -15,6 +15,13 @@ namespace EllGames.Istia1.GameSystem.Prop
     {
         [OdinSerialize] List<ManaTunnel> ManaTunnels { get; set; } = new List<ManaTunnel>();
         
+        public bool Register(ManaTunnel target)
+        {
+            if (ManaTunnels.Contains(target)) return false;
+            ManaTunnels.Add(target);
+            return true;
+        }
+
 	    public ManaTunnel Provide(string id)
         {
             if (ManaTunnels == null) return null;
