@@ -9,17 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d9bcbdc98d184444b9c0d1e28259c22, type: 3}
-  m_Name: PlayerDefaultStatus
+  m_Script: {fileID: 11500000, guid: fc64c47549c38c1468fb3bf3896c2887, type: 3}
+  m_Name: PlayerProfile
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects:
-    - {fileID: 11400000, guid: 420548c578a84b64aa73c4f11378e54d, type: 2}
-    - {fileID: 11400000, guid: b1963ae77865a4a42b409292fb04cbae, type: 2}
-    - {fileID: 11400000, guid: 4ca7612f394a3a546aac114007ee427d, type: 2}
-    - {fileID: 11400000, guid: a4a5af1feea811f40ba375c3d8b87b86, type: 2}
+    - {fileID: 0}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -28,7 +25,7 @@ MonoBehaviour:
     - Name: Name
       Entry: 1
       Data: "\u7121\u540D\u306E\u30D7\u30EC\u30A4\u30E4\u30FC"
-    - Name: Stats
+    - Name: StatInfos
       Entry: 7
       Data: 0|System.Collections.Generic.Dictionary`2[[EllGames.Istia1.DB.StatInfo,
         Assembly-CSharp],[System.Int64, mscorlib]], mscorlib
@@ -41,7 +38,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 12
-      Data: 4
+      Data: 1
     - Name: 
       Entry: 7
       Data: 
@@ -50,43 +47,7 @@ MonoBehaviour:
       Data: 0
     - Name: 
       Entry: 3
-      Data: 50
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: 
-      Entry: 10
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 50
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: 
-      Entry: 10
-      Data: 2
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: 
-      Entry: 10
-      Data: 3
-    - Name: 
-      Entry: 3
-      Data: 50
+      Data: 10
     - Name: 
       Entry: 8
       Data: 

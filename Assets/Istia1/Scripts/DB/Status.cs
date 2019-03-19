@@ -11,7 +11,6 @@ using Sirenix.Serialization;
 namespace EllGames.Istia1.DB
 {
     [CreateAssetMenu(menuName = "Istia1/DB/Status", fileName = "Status")]
-    [System.Serializable]
     public class Status : SerializedScriptableObject
     {
         [Title("Basic")]
