@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc64c47549c38c1468fb3bf3896c2887, type: 3}
-  m_Name: PlayerProfile
+  m_Script: {fileID: 11500000, guid: 4d9bcbdc98d184444b9c0d1e28259c22, type: 3}
+  m_Name: TestDefaultStatus
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -24,7 +24,7 @@ MonoBehaviour:
     SerializationNodes:
     - Name: Name
       Entry: 1
-      Data: "\u7121\u540D\u306E\u30D7\u30EC\u30A4\u30E4\u30FC"
+      Data: "\u30C6\u30B9\u30C8\u7528\u30E2\u30F3\u30B9\u30BF\u30FC"
     - Name: SpecFactors
       Entry: 7
       Data: 0|System.Collections.Generic.Dictionary`2[[EllGames.Istia1.DB.SpecFactorType,
@@ -47,7 +47,7 @@ MonoBehaviour:
       Data: 0
     - Name: 
       Entry: 3
-      Data: 1000
+      Data: 100
     - Name: 
       Entry: 8
       Data: 

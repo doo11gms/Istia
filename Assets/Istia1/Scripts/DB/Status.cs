@@ -16,13 +16,7 @@ namespace EllGames.Istia1.DB
         [Title("Basic")]
         [OdinSerialize] public string Name { get; set; } = "NameHere";
 
-        [Title("Stats")]
-        [OdinSerialize] public Dictionary<StatInfo, long> Stats { get; set; } = new Dictionary<StatInfo, long>();
-
-        [Button("Reset")]
-        public void Reset()
-        {
-            (new List<StatInfo>(Stats.Keys)).ForEach(key => Stats[key] = key.DefaultValue);
-        }
+        [Title("Spec")]
+        [OdinSerialize] public Dictionary<SpecFactorType, long> SpecFactors { get; set; } = new Dictionary<SpecFactorType, long>();
     }
 }

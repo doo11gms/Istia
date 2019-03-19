@@ -20,7 +20,7 @@ namespace EllGames.Istia1.DB
 	    [OdinSerialize] public string StateName { get; set; }
         [OdinSerialize] public float Duration { get; set; } = 60f;
 
-        [Title("Effect")]
-        [OdinSerialize] Dictionary<StatInfo, long> Effect { get; set; } = new Dictionary<StatInfo, long>();
+        [Title("Status Correciton")]
+        [OdinSerialize] Dictionary<SpecFactorType, long> AddingSpecFactors { get; set; } = new Dictionary<SpecFactorType, long>();
     }
 }

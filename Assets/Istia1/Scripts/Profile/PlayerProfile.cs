@@ -15,25 +15,22 @@ namespace EllGames.Istia1.Profile
     {
         void Save.ISavable.Save()
         {
-            if (StatInfos == null) throw new System.Exception("StatInfosがnullであるため、セーブできません。");
+            if (SpecFactors == null) throw new System.Exception("SpecFactorsがnullであるため、セーブできません。");
             ES2.Save(Name, GetInstanceID() + "Name");
-            ES2.Save(StatInfos, GetInstanceID() + "StatInfos");
+            ES2.Save(SpecFactors, GetInstanceID() + "SpecFactors");
         }
 
         void Save.ISavable.Load()
         {
-            if (StatInfos == null) throw new System.Exception("StatInfosがnullであるため、ロードできません。");
+            if (SpecFactors == null) throw new System.Exception("SpecFactorsがnullであるため、ロードできません。");
             Name = ES2.Load<string>(GetInstanceID() + "Name");
-            StatInfos = ES2.LoadDictionary<DB.StatInfo, long>(GetInstanceID() + "StatInfos");
+            SpecFactors = ES2.LoadDictionary<DB.SpecFactorType, long>(GetInstanceID() + "SpecFactors");
         }
 
+        [Title("Basic")]
         [OdinSerialize] public string Name { get; set; }
-        [OdinSerialize] public Dictionary<DB.StatInfo, long> StatInfos { get; set; } = new Dictionary<DB.StatInfo, long>();
 
-        [Button("Reset")]
-        public void Reset()
-        {
-            (new List<DB.StatInfo>(StatInfos.Keys)).ForEach(key => StatInfos[key] = key.DefaultValue);
-        }
+        [Title("Spec")]
+        [OdinSerialize] public Dictionary<DB.SpecFactorType, long> SpecFactors { get; set; } = new Dictionary<DB.SpecFactorType, long>();
     }
 }
