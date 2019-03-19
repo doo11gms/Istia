@@ -214,8 +214,36 @@ namespace EllGames.Istia1.GameSystem.Actor
             Debug.Log("この機能は未実装です。");
         }
 
+        /// <summary>
+        /// プロファイルの内容をUIに反映します。
+        /// </summary>
+        void ApplyProfile()
+        {
+            foreach(var tabID in InventoryProfile.GetAllTabIDs())
+            {
+                foreach(var slotID in InventoryProfile.GetAllSlotIDs(tabID))
+                {
+                    if (InventoryProfile.IsEmpty(tabID, slotID))
+                    {
+                        InventoryWindow.GetItemSlot(tabID, slotID).Unassign();
+                    }
+                    else
+                    {
+                        var itemInfo = ItemInfoProvider.Provide(InventoryProfile.GetItemID(tabID, slotID));
+                        var count = InventoryProfile.GetItemCount(tabID, slotID);
+                        InventoryWindow.GetItemSlot(tabID, slotID).Assign(itemInfo, count);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// インベントリを最新の情報に更新します。
+        /// </summary>
+        [Button("Refresh")]
         public void Refresh()
         {
+            ApplyProfile();
             InventoryWindow.Refresh();
         }
 

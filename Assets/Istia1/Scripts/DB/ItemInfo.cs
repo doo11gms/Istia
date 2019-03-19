@@ -14,41 +14,46 @@ namespace EllGames.Istia1.DB
     public class ItemInfo : SerializedScriptableObject
     {
         [Title("Graphic")]
-        [OdinSerialize, PreviewField] public Sprite IconSprite { get; set; }
+        [OdinSerialize, PreviewField, PropertyOrder(1)] public Sprite IconSprite { get; set; }
 
         [Title("Meta")]
-        [OdinSerialize] public string ItemID { get; set; }
+        [OdinSerialize, PropertyOrder(1)] public string ItemID { get; set; }
 
         [Title("Basic")]
-        [OdinSerialize] public string ItemName { get; set; }
+        [OdinSerialize, PropertyOrder(1)] public string ItemName { get; set; }
+        [OdinSerialize, TextArea(2, 2), PropertyOrder(2)] string m_Description;
+        public string Description
+        {
+            get { return m_Description; }
+        }
 
         [Title("Stack")]
-        [OdinSerialize] public int MaxStackCount { get; set; } = 99;
+        [OdinSerialize, PropertyOrder(3)] public int MaxStackCount { get; set; } = 99;
 
         [Title("Usage")]
-        [OdinSerialize] public bool Usable { get; set; } = true;
-        [OdinSerialize] public bool Consumable { get; set; } = true;
+        [OdinSerialize, PropertyOrder(3)] public bool Usable { get; set; } = true;
+        [OdinSerialize, PropertyOrder(3)] public bool Consumable { get; set; } = true;
 
         [Title("Equip")]
-        [OdinSerialize] public bool Equipable { get; set; } = false;
+        [OdinSerialize, PropertyOrder(3)] public bool Equipable { get; set; } = false;
 
         [Title("Trade")]
-        [OdinSerialize] public bool Sellable { get; set; } = true;
-        [OdinSerialize] public uint BuyingPrice { get; set; } = 10;
-        [OdinSerialize] public uint SellingPrice { get; set; } = 10;
+        [OdinSerialize, PropertyOrder(3)] public bool Sellable { get; set; } = true;
+        [OdinSerialize, PropertyOrder(3)] public uint BuyingPrice { get; set; } = 10;
+        [OdinSerialize, PropertyOrder(3)] public uint SellingPrice { get; set; } = 10;
 
         [Title("Disposal")]
-        [OdinSerialize] public bool Disposable { get; set; } = true;
+        [OdinSerialize, PropertyOrder(3)] public bool Disposable { get; set; } = true;
 
         [Title("Hot Key")]
-        [OdinSerialize] public bool UsingHotKey { get; set; } = false;
-        [OdinSerialize, EnableIf("UsingHotKey")] public KeyCode HotKey { get; set; } = KeyCode.None;
+        [OdinSerialize, PropertyOrder(3)] public bool UsingHotKey { get; set; } = false;
+        [OdinSerialize, EnableIf("UsingHotKey"), PropertyOrder(3)] public KeyCode HotKey { get; set; } = KeyCode.None;
 
         [Title("Cool Time")]
-        [OdinSerialize] public bool UsingCoolTime { get; set; } = false;
-        [OdinSerialize, EnableIf("UsingCoolTime")] public float CoolTime { get; set; }
+        [OdinSerialize, PropertyOrder(3)] public bool UsingCoolTime { get; set; } = false;
+        [OdinSerialize, EnableIf("UsingCoolTime"), PropertyOrder(3)] public float CoolTime { get; set; }
 
         [Title("Using Effect")]
-        [OdinSerialize] public List<GameSystem.Item.ItemUsingEffectBase> ItemUsingEffects { get; set; }
+        [OdinSerialize, PropertyOrder(3)] public List<GameSystem.Item.ItemUsingEffectBase> ItemUsingEffects { get; set; }
     }
 }

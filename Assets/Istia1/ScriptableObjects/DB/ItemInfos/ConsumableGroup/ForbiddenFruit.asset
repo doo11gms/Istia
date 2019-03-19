@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4297875bcae94d2408fdb1711cb74f8e, type: 3}
+  m_Name: ForbiddenFruit
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 21300000, guid: a973981b0d0061b47af8d44fa34bf5fd, type: 3}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: IconSprite
+      Entry: 10
+      Data: 0
+    - Name: ItemID
+      Entry: 1
+      Data: "\u7981\u65AD\u306E\u679C\u5B9F"
+    - Name: ItemName
+      Entry: 1
+      Data: "\u7981\u65AD\u306E\u679C\u5B9F"
+    - Name: MaxStackCount
+      Entry: 3
+      Data: 1
+    - Name: Usable
+      Entry: 5
+      Data: true
+    - Name: Consumable
+      Entry: 5
+      Data: true
+    - Name: Equipable
+      Entry: 5
+      Data: false
+    - Name: Sellable
+      Entry: 5
+      Data: true
+    - Name: BuyingPrice
+      Entry: 3
+      Data: 99999
+    - Name: SellingPrice
+      Entry: 3
+      Data: 9999
+    - Name: Disposable
+      Entry: 5
+      Data: true
+    - Name: UsingHotKey
+      Entry: 5
+      Data: false
+    - Name: HotKey
+      Entry: 3
+      Data: 0
+    - Name: UsingCoolTime
+      Entry: 5
+      Data: false
+    - Name: CoolTime
+      Entry: 4
+      Data: 0
+    - Name: ItemUsingEffects
+      Entry: 6
+      Data: 
+    - Name: m_Description
+      Entry: 1
+      Data: "\u98DF\u3079\u308B\u3068\u6027\u5225\u304C\u5909\u308F\u308B\u3068\u3044\u3046\u3001\u4E16\u306B\u3082\u73CD\u3057\u3044\u679C\u5B9F\u3002"

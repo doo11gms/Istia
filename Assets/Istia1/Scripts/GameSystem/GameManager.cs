@@ -39,6 +39,7 @@ namespace EllGames.Istia1.GameSystem
         {
             SceneManager.sceneLoaded += OnSceneLoaded;
             SceneManager.sceneUnloaded += OnSceneUnloaded;
+
             DontDestroyOnLoad(gameObject);
             DontDestroysInMapScene.ForEach(obj => DontDestroyOnLoad(obj));
         }
