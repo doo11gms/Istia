@@ -21,5 +21,8 @@ namespace EllGames.Istia1.Config
         [SerializeField] public KeyCode DisposeItemAllKey = KeyCode.LeftAlt;
         [SerializeField] public int DisposeItemAllMouseButton = 0;
         [SerializeField] public int EquipMouseButton = 1;
+
+        [Title("Player Move")]
+        [SerializeField] public int PlayerMoveMouseButton = 0;
     }
 }
