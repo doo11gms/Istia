@@ -143,7 +143,7 @@ PrefabInstance:
     - target: {fileID: 1888049103042350458, guid: 18362f55fc78c454583273119bfefa62,
         type: 3}
       propertyPath: serializationData.PrefabModifications.Array.data[0]
-      value: '"path":"m_Text","value":{"$id":0,"$type":"System.String, mscorlib","\u30de\u30ca\u30c8\u30f3\u30cd\u30eb\u306f\u3001\u706b\u304c\u6d88\u3048\u3066\u3044\u308b\u3068\u4f7f\u3048\u306a\u3044\u3002\n\u7cbe\u970a\u306e\u706b\u3092\u3068\u3082\u3057\u3066\u3042\u3052\u306a\u3044\u3068\u3044\u3051\u306a\u3044\u3002"}'
+      value: '"path":"m_Text","value":{"$id":0,"$type":"System.String, mscorlib","\u30de\u30ca\u30c8\u30f3\u30cd\u30eb\u306f\u3001\u30de\u30ca\u306e\u706b\u304c\u6d88\u3048\u3066\u3044\u308b\u3068\u4f7f\u3048\u306a\u3044\u3002\n\u7cbe\u970a\u306e\u706b\u3092\u3068\u3082\u3057\u3066\u3042\u3052\u306a\u3044\u3068\u3044\u3051\u306a\u3044\u3002"}'
       objectReference: {fileID: 0}
     - target: {fileID: 1888049103042350457, guid: 18362f55fc78c454583273119bfefa62,
         type: 3}

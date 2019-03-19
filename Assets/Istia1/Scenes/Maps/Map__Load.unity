@@ -13824,7 +13824,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 3
+  m_Text: 2
 --- !u!222 &702750416
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -25864,7 +25864,7 @@ MonoBehaviour:
       Data: 9
     - Name: ContentCount
       Entry: 3
-      Data: 3
+      Data: 2
 --- !u!1 &1104379917
 GameObject:
   m_ObjectHideFlags: 0
@@ -36413,7 +36413,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 3
+  m_Text: 2
 --- !u!222 &1508123164
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -44425,7 +44425,7 @@ MonoBehaviour:
       Data: 9
     - Name: ContentCount
       Entry: 3
-      Data: 3
+      Data: 2
 --- !u!222 &1878717992
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -49946,7 +49946,7 @@ PrefabInstance:
     - target: {fileID: 1888049103042350458, guid: 18362f55fc78c454583273119bfefa62,
         type: 3}
       propertyPath: serializationData.PrefabModifications.Array.data[0]
-      value: '"path":"m_Text","value":{"$id":0,"$type":"System.String, mscorlib","\u30d7\u30ec\u30a4\u30e4\u30fc\u304c\u79fb\u52d5\u3067\u304d\u308b\u3088\u3046\u306b\u3059\u308b\n"}'
+      value: '"path":"m_Text","value":{"$id":0,"$type":"System.String, mscorlib","\u3072\u3068\u307e\u305a\u30d7\u30ec\u30a4\u30e4\u30fc\u304c\u79fb\u52d5\u3067\u304d\u308b\u3088\u3046\u306b\u3057\u3066\u3001\u30de\u30ca\u30c8\u30f3\u30cd\u30eb\u3092\u5b9f\u88c5\u3057\u3066\u3001\u30b2\u30fc\u30e0\u8d77\u52d5\uff5e\u30de\u30c3\u30d7\u79fb\u52d5\u304c\u67d4\u8edf\u306b\u3067\u304d\u308b\u3088\u3046\u306b\u3059\u308b\u3002"}'
       objectReference: {fileID: 0}
     - target: {fileID: 1888049103042350457, guid: 18362f55fc78c454583273119bfefa62,
         type: 3}
