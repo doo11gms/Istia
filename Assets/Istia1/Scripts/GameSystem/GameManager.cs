@@ -15,7 +15,6 @@ namespace EllGames.Istia1.GameSystem
     {
         [Title("Required")]
         [OdinSerialize, Required] Config.SystemConfig SystemConfig { get; set; }
-        [OdinSerialize, Required] Prop.ManaTunnelProvider ManaTunnelProvider { get; set; }
 
         [Title("Settings")]
         [OdinSerialize] List<GameObject> DontDestroysInMapScene { get; set; } = new List<GameObject>();
@@ -43,11 +42,6 @@ namespace EllGames.Istia1.GameSystem
 
             DontDestroyOnLoad(gameObject);
             DontDestroysInMapScene.ForEach(obj => DontDestroyOnLoad(obj));
-
-            foreach(var found in FindObjectsOfType(typeof(Prop.ManaTunnel)))
-            {
-                ManaTunnelProvider.Register((Prop.ManaTunnel)found);
-            }
         }
 
         private void OnDestroy()
