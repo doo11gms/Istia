@@ -21,8 +21,9 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  UseItemMouseButton: 0
-  DisposeAllItemKey: 308
-  DisposeAllItemMouseButton: 1
-  EquipMouseButton: 1
   InventoryWindowKey: 105
+  UseItemMouseButton: 0
+  DisposeItemAllKey: 308
+  DisposeItemAllMouseButton: 0
+  EquipMouseButton: 1
+  Test: {fileID: 0}
