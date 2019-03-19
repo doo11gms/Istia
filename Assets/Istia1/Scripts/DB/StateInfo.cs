@@ -13,17 +13,14 @@ namespace EllGames.Istia1.DB
     [CreateAssetMenu(menuName = "Istia1/DB/StateInfo", fileName = "StateInfo")]
     public class StateInfo : SerializedScriptableObject
     {
+        [Title("Graphic")]
+        [OdinSerialize, PreviewField] public Sprite IconSprite { get; set; }
+
         [Title("Basic")]
 	    [OdinSerialize] public string StateName { get; set; }
         [OdinSerialize] public float Duration { get; set; } = 60f;
 
         [Title("Effect")]
-        [OdinSerialize] public Status Adder { get; set; }
-
-        [Title("Buttons")]
-        public void Initialize()
-        {
-
-        }
+        [OdinSerialize] Dictionary<StatInfo, long> Effect { get; set; } = new Dictionary<StatInfo, long>();
     }
 }

@@ -15,103 +15,78 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects: []
+    ReferencedUnityObjects:
+    - {fileID: 11400000, guid: 420548c578a84b64aa73c4f11378e54d, type: 2}
+    - {fileID: 11400000, guid: b1963ae77865a4a42b409292fb04cbae, type: 2}
+    - {fileID: 11400000, guid: 4ca7612f394a3a546aac114007ee427d, type: 2}
+    - {fileID: 11400000, guid: a4a5af1feea811f40ba375c3d8b87b86, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes:
-    - Name: Level
-      Entry: 3
-      Data: 1
-    - Name: MaxLevel
-      Entry: 3
-      Data: 99
-    - Name: Exp
-      Entry: 3
-      Data: 0
-    - Name: NextExp
-      Entry: 3
-      Data: 9999
-    - Name: MaxHP
-      Entry: 3
-      Data: 1000
-    - Name: HP
-      Entry: 3
-      Data: 1000
-    - Name: MaxMP
-      Entry: 3
-      Data: 1000
-    - Name: MP
-      Entry: 3
-      Data: 1000
-    - Name: MaxAtk
-      Entry: 3
-      Data: 10
-    - Name: Atk
-      Entry: 3
-      Data: 10
-    - Name: MaxDef
-      Entry: 3
-      Data: 10
-    - Name: Def
-      Entry: 3
-      Data: 10
-    - Name: MaxMat
-      Entry: 3
-      Data: 10
-    - Name: Mat
-      Entry: 3
-      Data: 10
-    - Name: MaxMdf
-      Entry: 3
-      Data: 10
-    - Name: Mdf
-      Entry: 3
-      Data: 10
-    - Name: WalkSpeed
-      Entry: 4
-      Data: 1.5
-    - Name: RunSpeed
-      Entry: 4
-      Data: 3
-    - Name: CR
-      Entry: 4
-      Data: 0.05
-    - Name: Cdm
-      Entry: 4
-      Data: 1.5
-    - Name: Mdr
-      Entry: 4
-      Data: 0.1
-    - Name: Mdm
-      Entry: 4
-      Data: 1
-    - Name: Idr
-      Entry: 4
-      Data: 0.05
-    - Name: EM
-      Entry: 4
-      Data: 1
-    - Name: StatusParameters
+    - Name: Name
+      Entry: 1
+      Data: "\u7121\u540D\u306E\u30D7\u30EC\u30A4\u30E4\u30FC"
+    - Name: Stats
       Entry: 7
-      Data: 0|System.Collections.Generic.List`1[[EllGames.Istia1.DB.StatusParameter,
+      Data: 0|System.Collections.Generic.Dictionary`2[[EllGames.Istia1.DB.StatInfo,
+        Assembly-CSharp],[System.Int64, mscorlib]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 1|System.Collections.Generic.ObjectEqualityComparer`1[[EllGames.Istia1.DB.StatInfo,
         Assembly-CSharp]], mscorlib
     - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
       Entry: 12
-      Data: 1
+      Data: 4
     - Name: 
       Entry: 7
-      Data: 1|EllGames.Istia1.DB.StatusParameter, Assembly-CSharp
-    - Name: m_ParameterName
-      Entry: 1
-      Data: HP
-    - Name: m_ValueOfInt
-      Entry: 3
-      Data: 100
-    - Name: m_ValueOfFloat
-      Entry: 4
+      Data: 
+    - Name: 
+      Entry: 10
       Data: 0
+    - Name: 
+      Entry: 3
+      Data: 50
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: 
+      Entry: 10
+      Data: 1
+    - Name: 
+      Entry: 3
+      Data: 50
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: 
+      Entry: 10
+      Data: 2
+    - Name: 
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: 
+      Entry: 10
+      Data: 3
+    - Name: 
+      Entry: 3
+      Data: 50
     - Name: 
       Entry: 8
       Data: 
