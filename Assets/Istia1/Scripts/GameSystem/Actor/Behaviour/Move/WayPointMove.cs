@@ -31,7 +31,7 @@ namespace EllGames.Istia1.GameSystem.Actor.Behaviour.Move
         [OdinSerialize] bool UsingAnimation { get; set; } = false;
         [OdinSerialize, EnableIf("UsingAnimation")] PlayerAvatorManager PlayerAvatorManager { get; set; }
         [OdinSerialize, EnableIf("UsingAnimation")] string AnimationName { get; set; }
-        [OdinSerialize, EnableIf("UsingAnimation")] string AnimationSpeedMultiplierName { get; set; }
+        [OdinSerialize, EnableIf("UsingAnimation")] string AnimationMultiplierName { get; set; }
         [OdinSerialize, EnableIf("UsingAnimation")] float AnimationSpeedMag { get; set; } = 0.1f;
 
         [Title("State")]
@@ -103,7 +103,7 @@ namespace EllGames.Istia1.GameSystem.Actor.Behaviour.Move
                 if (UsingAnimation)
                 {
                     PlayerAvatorManager.Animator.SetBool(AnimationName, true);
-                    PlayerAvatorManager.Animator.SetFloat(AnimationSpeedMultiplierName, AnimationSpeed());
+                    PlayerAvatorManager.Animator.SetFloat(AnimationMultiplierName, AnimationSpeed());
                 }
             }
             else
