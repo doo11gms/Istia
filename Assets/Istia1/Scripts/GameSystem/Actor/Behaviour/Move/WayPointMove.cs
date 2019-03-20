@@ -95,8 +95,6 @@ namespace EllGames.Istia1.GameSystem.Actor.Behaviour.Move
             if (UnityEngine.Input.GetMouseButton(KeyConfig.PlayerMoveMouseButton) &&
                 !UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject()) DestinationUpdate();
 
-            var test = PlayerAvatorManager.Animator.GetBool(AnimationName);
-
             if (CloseToDestination())
             {
                 LookAtDestination();

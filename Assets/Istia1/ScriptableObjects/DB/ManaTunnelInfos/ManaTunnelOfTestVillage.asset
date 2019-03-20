@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7bec33fada9fe244aa0da6f5a3fc09f3, type: 3}
-  m_Name: ManaTunnelProvider
+  m_Script: {fileID: 11500000, guid: df1bb0fe7ec7ac64785dffbcf32d13a6, type: 3}
+  m_Name: ManaTunnelOfTestVillage
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -21,16 +21,39 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes:
-    - Name: ManaTunnels
+    - Name: Name
+      Entry: 6
+      Data: 
+    - Name: SceneName
+      Entry: 6
+      Data: 
+    - Name: Point
       Entry: 7
-      Data: 0|System.Collections.Generic.List`1[[EllGames.Istia1.GameSystem.Prop.ManaTunnel,
-        Assembly-CSharp]], mscorlib
+      Data: UnityEngine.Vector3, UnityEngine.CoreModule
     - Name: 
-      Entry: 12
+      Entry: 4
       Data: 0
     - Name: 
-      Entry: 13
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 8
       Data: 
+    - Name: EulerAngles
+      Entry: 7
+      Data: UnityEngine.Vector3, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 4
+      Data: 0
     - Name: 
       Entry: 8
       Data: 

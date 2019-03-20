@@ -12,39 +12,54 @@ namespace EllGames.Istia1.GameSystem.Prop
 {
     public class ManaTunnel : SerializedMonoBehaviour
     {
-        [OdinSerialize] public string ID { get; private set; }
-        [OdinSerialize] public string Name { get; private set; }
+        [Title("Required")]
+        [OdinSerialize, Required] Profile.ManaTunnelProfile ManaTunnelProfile { get; set; }
 
-        /// <summary>
-        /// 転送先のマナトンネルIDです。
-        /// </summary>
-        [OdinSerialize] public string Destination { get; private set; }
+        [Title("Settings")]
+        [OdinSerialize] DB.ManaTunnelInfo SelfInfo { get; set; }
+        [OdinSerialize] DB.ManaTunnelInfo DestinationInfo { get; set; }
 
-        public void SetDestination(ManaTunnel destination)
+        [Title("Game Object Reference")]
+        [OdinSerialize] GameObject ManaFlames { get; set; }
+
+        [Title("Read Only")]
+        [OdinSerialize, ReadOnly] const float FADE_DURATION = 1f;
+        [OdinSerialize, ReadOnly] const string PLAYER_TAG = "Player";
+
+        [Button("Transport")]
+        public bool Transport()
         {
-            Destination = destination.ID;
-        }
+            if (ManaTunnelProfile.IsLocked(SelfInfo)) return false;
 
-        public void SetDestination(string id)
-        {
-            Destination = id;
-        }
-
-        public void Unassign()
-        {
-            Destination = null;
-        }
-
-        public void Transport()
-        {
-            if (Destination == null)
+            if (DestinationInfo == null)
             {
                 Debug.Log("このマナトンネルには転送先が登録されていません。");
+                return false;
             }
             else
             {
+                Gui.FadeManager.Instance.LoadScene(DestinationInfo.SceneName, FADE_DURATION);
 
+                var player = GameObject.FindWithTag(PLAYER_TAG);
+                player.transform.position = DestinationInfo.Point;
+                player.transform.eulerAngles = DestinationInfo.EulerAngles;
             }
+
+            return true;
+        }
+
+        [Button("Lock")]
+        public void Lock()
+        {
+            ManaTunnelProfile.Lock(SelfInfo);
+            ManaFlames.gameObject.SetActive(false);
+        }
+
+        [Button("Unlock")]
+        public void Unlock()
+        {
+            ManaTunnelProfile.Unlock(SelfInfo);
+            ManaFlames.gameObject.SetActive(true);
         }
     }
 }
