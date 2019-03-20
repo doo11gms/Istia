@@ -22,23 +22,23 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes:
     - Name: Name
-      Entry: 6
-      Data: 
+      Entry: 1
+      Data: "\u30C6\u30B9\u30C8\u306E\u68EE\u306E\u30DE\u30CA\u30C8\u30F3\u30CD\u30EB"
     - Name: SceneName
-      Entry: 6
-      Data: 
+      Entry: 1
+      Data: Map_TestField
     - Name: Point
       Entry: 7
       Data: UnityEngine.Vector3, UnityEngine.CoreModule
     - Name: 
       Entry: 4
-      Data: 0
+      Data: 325.87
     - Name: 
       Entry: 4
       Data: 0
     - Name: 
       Entry: 4
-      Data: 0
+      Data: 204.51
     - Name: 
       Entry: 8
       Data: 
@@ -50,7 +50,7 @@ MonoBehaviour:
       Data: 0
     - Name: 
       Entry: 4
-      Data: 0
+      Data: 61.516
     - Name: 
       Entry: 4
       Data: 0

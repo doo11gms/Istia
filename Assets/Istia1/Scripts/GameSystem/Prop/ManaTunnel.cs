@@ -7,6 +7,7 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
+using SM = UnityEngine.SceneManagement;
 
 namespace EllGames.Istia1.GameSystem.Prop
 {
@@ -40,9 +41,14 @@ namespace EllGames.Istia1.GameSystem.Prop
             {
                 Gui.FadeManager.Instance.LoadScene(DestinationInfo.SceneName, FADE_DURATION);
 
-                var player = GameObject.FindWithTag(PLAYER_TAG);
-                player.transform.position = DestinationInfo.Point;
-                player.transform.eulerAngles = DestinationInfo.EulerAngles;
+
+                void FixPlayerPosition()
+                {
+                    var player = GameObject.FindWithTag(PLAYER_TAG);
+                    player.transform.position = DestinationInfo.Point;
+                    player.transform.eulerAngles = DestinationInfo.EulerAngles;
+                }
+
             }
 
             return true;

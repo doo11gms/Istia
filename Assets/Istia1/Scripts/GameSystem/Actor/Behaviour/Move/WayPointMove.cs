@@ -98,7 +98,7 @@ namespace EllGames.Istia1.GameSystem.Actor.Behaviour.Move
             if (CloseToDestination())
             {
                 LookAtDestination();
-                if (UsingAnimation)
+                if (UsingAnimation && PlayerAvatorManager.Animator != null)
                 {
                     PlayerAvatorManager.Animator.SetBool(AnimationName, true);
                     PlayerAvatorManager.Animator.SetFloat(AnimationMultiplierName, AnimationSpeed());
@@ -106,7 +106,7 @@ namespace EllGames.Istia1.GameSystem.Actor.Behaviour.Move
             }
             else
             {
-                if (UsingAnimation) PlayerAvatorManager.Animator.SetBool(AnimationName, false);
+                if (UsingAnimation && PlayerAvatorManager.Animator != null) PlayerAvatorManager.Animator.SetBool(AnimationName, false);
             }
         }
 
