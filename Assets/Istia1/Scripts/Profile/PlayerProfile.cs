@@ -30,6 +30,9 @@ namespace EllGames.Istia1.Profile
         [Title("Basic")]
         [OdinSerialize] public string Name { get; set; }
 
+        [Title("Avator")]
+        [OdinSerialize] public DB.Avator Avator { get; set; }
+
         [Title("Spec")]
         [OdinSerialize] public Dictionary<DB.SpecFactorType, long> SpecFactors { get; set; } = new Dictionary<DB.SpecFactorType, long>();
     }
