@@ -14,24 +14,21 @@ namespace EllGames.Istia1.GameSystem.Actor
     {
 	    [OdinSerialize, Required] Profile.PlayerProfile PlayerProfile { get; set; }
 
-        GameObject m_CurrentModel;
-        List<GameObject> m_InstantiatedModels;
-
-        private void Awake()
-        {
-            m_InstantiatedModels = new List<GameObject>();
-        }
+        DB.Avator CurrentAvatar { get; set; }
+        GameObject CurrentModel { get; set; }
+        public Animator Animator { get; private set; }
 
         private void Update()
         {
-            var nextModel = PlayerProfile.Avator.Model;
+            var nextAvatar = PlayerProfile.Avator;
 
-            if (m_CurrentModel != nextModel)
+            if (CurrentAvatar != nextAvatar)
             {
-                m_InstantiatedModels.ForEach(model => Destroy(model));
-                m_InstantiatedModels.Clear();
-                m_InstantiatedModels.Add(Instantiate(nextModel, transform));
-                m_CurrentModel = nextModel;
+                var buffer = CurrentModel;
+                CurrentAvatar = nextAvatar;
+                CurrentModel = Instantiate(nextAvatar.Model, transform);
+                Animator = CurrentModel.GetComponent<Animator>();
+                Destroy(buffer);
             }
         }
     }

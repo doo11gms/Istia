@@ -21,6 +21,6 @@ namespace EllGames.Istia1.DB
         [OdinSerialize] public float Duration { get; set; } = 60f;
 
         [Title("Status Correciton")]
-        [OdinSerialize] Dictionary<SpecFactorType, long> AddingSpecFactors { get; set; } = new Dictionary<SpecFactorType, long>();
+        [OdinSerialize] Dictionary<SpecFactorType, long> AddingSpecValues { get; set; } = new Dictionary<SpecFactorType, long>();
     }
 }

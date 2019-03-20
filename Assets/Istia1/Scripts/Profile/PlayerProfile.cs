@@ -15,16 +15,16 @@ namespace EllGames.Istia1.Profile
     {
         void Save.ISavable.Save()
         {
-            if (SpecFactors == null) throw new System.Exception("SpecFactorsがnullであるため、セーブできません。");
+            if (SpecValues == null) throw new System.Exception("SpecValuesがnullであるため、セーブできません。");
             ES2.Save(Name, GetInstanceID() + "Name");
-            ES2.Save(SpecFactors, GetInstanceID() + "SpecFactors");
+            ES2.Save(SpecValues, GetInstanceID() + "SpecValues");
         }
 
         void Save.ISavable.Load()
         {
-            if (SpecFactors == null) throw new System.Exception("SpecFactorsがnullであるため、ロードできません。");
+            if (SpecValues == null) throw new System.Exception("SpecValuesがnullであるため、ロードできません。");
             Name = ES2.Load<string>(GetInstanceID() + "Name");
-            SpecFactors = ES2.LoadDictionary<DB.SpecFactorType, long>(GetInstanceID() + "SpecFactors");
+            SpecValues = ES2.LoadDictionary<DB.SpecFactorType, long>(GetInstanceID() + "SpecValues");
         }
 
         [Title("Basic")]
@@ -34,6 +34,6 @@ namespace EllGames.Istia1.Profile
         [OdinSerialize] public DB.Avator Avator { get; set; }
 
         [Title("Spec")]
-        [OdinSerialize] public Dictionary<DB.SpecFactorType, long> SpecFactors { get; set; } = new Dictionary<DB.SpecFactorType, long>();
+        [OdinSerialize] public Dictionary<DB.SpecFactorType, long> SpecValues { get; set; } = new Dictionary<DB.SpecFactorType, long>();
     }
 }

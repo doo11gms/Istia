@@ -17,8 +17,9 @@ MonoBehaviour:
     SerializedBytes: 
     ReferencedUnityObjects:
     - {fileID: 11400000, guid: c5cb8810059f6a74382872d2088e794c, type: 2}
-    - {fileID: 11400000, guid: f8b679bbb9d180140a828bd953337551, type: 2}
     - {fileID: 11400000, guid: 6d9b925c608cb4e45ad2dd0088336965, type: 2}
+    - {fileID: 11400000, guid: f8b679bbb9d180140a828bd953337551, type: 2}
+    - {fileID: 11400000, guid: f2a0949c0acbf8f4fb08c8c1bb728e93, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -30,7 +31,7 @@ MonoBehaviour:
     - Name: Avator
       Entry: 10
       Data: 0
-    - Name: SpecFactors
+    - Name: SpecValues
       Entry: 7
       Data: 0|System.Collections.Generic.Dictionary`2[[EllGames.Istia1.DB.SpecFactorType,
         Assembly-CSharp],[System.Int64, mscorlib]], mscorlib
@@ -43,7 +44,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 12
-      Data: 2
+      Data: 3
     - Name: 
       Entry: 7
       Data: 
@@ -52,7 +53,7 @@ MonoBehaviour:
       Data: 1
     - Name: 
       Entry: 3
-      Data: 1000
+      Data: 500
     - Name: 
       Entry: 8
       Data: 
@@ -64,7 +65,19 @@ MonoBehaviour:
       Data: 2
     - Name: 
       Entry: 3
-      Data: 500
+      Data: 1000
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: 
+      Entry: 10
+      Data: 3
+    - Name: 
+      Entry: 3
+      Data: 1000
     - Name: 
       Entry: 8
       Data: 

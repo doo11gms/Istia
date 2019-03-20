@@ -13,13 +13,6 @@ namespace EllGames.Istia1.GameSystem.Actor.Behaviour.Move
 {
     public class WayPointMove : MoveBase
     {
-        // TODO プレイヤーのモデルが切り替わっても対応できるようにする
-        enum STATE
-        {
-            Idling,
-            Moving,
-        }
-
         [Title("Required")]
         [OdinSerialize, Required] CharacterController CharacterController { get; set; }
         [OdinSerialize, Required] Profile.PlayerProfile PlayerProfile { get; set; }
@@ -27,20 +20,24 @@ namespace EllGames.Istia1.GameSystem.Actor.Behaviour.Move
         [OdinSerialize, Required] DB.SpecFactorType SpecFactorTypeOfSpeed { get; set; }
 
         [Title("Settings")]
+        [OdinSerialize, InfoBox("Multiplying this value by Speed becomes Stopping Distance.")] float StoppingDistanceRate { get; set; } = 0.03f;
+        [OdinSerialize] float SpeedMag { get; set; } = 0.01f;
 
         [Title("Raycast")]
         [OdinSerialize] Camera RaycastCamera { get; set; }
         [OdinSerialize] List<string> IgnoreLayers = new List<string>();
 
         [Title("Animation")]
-        [OdinSerialize] bool UsingAnimation = false;
-        [OdinSerialize, EnableIf("UsingAnimation")] Animator Animator { get; set; }
+        [OdinSerialize] bool UsingAnimation { get; set; } = false;
+        [OdinSerialize, EnableIf("UsingAnimation")] PlayerAvatorManager PlayerAvatorManager { get; set; }
         [OdinSerialize, EnableIf("UsingAnimation")] string AnimationName { get; set; }
+        [OdinSerialize, EnableIf("UsingAnimation")] string AnimationSpeedMultiplierName { get; set; }
+        [OdinSerialize, EnableIf("UsingAnimation")] float AnimationSpeedMag { get; set; } = 0.1f;
 
-        [Title("Read Only")]
-        [OdinSerialize, ReadOnly] STATE State { get; set; }
+        [Title("State")]
         [OdinSerialize, ReadOnly] bool Movable { get; set; } = true;
-        [OdinSerialize, ReadOnly] Vector3 Destination { get; set; }
+
+        Vector3 Destination { get; set; }
 
         void DestinationUpdate()
         {
@@ -49,55 +46,44 @@ namespace EllGames.Istia1.GameSystem.Actor.Behaviour.Move
             var ray = RaycastCamera.ScreenPointToRay(UnityEngine.Input.mousePosition);
             var hit = new RaycastHit();
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask)) Destination = hit.point;
+            else SetDestinationToSelf();
         }
 
-        void StateUpdate()
+        Vector3 MoveDirection() => ((Destination - CharacterController.transform.position)).normalized;
+        float Speed() => PlayerProfile.SpecValues[SpecFactorTypeOfSpeed] * SpeedMag;
+        Vector3 CurrentPoint() => CharacterController.transform.position;
+        float StoppingDistance() => StoppingDistanceRate * Speed();
+        float AnimationSpeed() => AnimationSpeedMag * Speed();
+
+        void SetDestinationToSelf()
         {
-
+            Destination = CharacterController.transform.position;
         }
-
-        void AnimationUpdate()
-        {
-            switch (State)
-            {
-                case STATE.Idling:
-                    break;
-                case STATE.Moving:
-                    break;
-            }
-        }
-
-        Vector3 MoveDirection() => (Destination - CharacterController.transform.position).normalized;
 
         bool CloseToDestination()
         {
-            var speed = PlayerProfile.SpecFactors[SpecFactorTypeOfSpeed];
-            speed /= 100;
-            var moveTo = CharacterController.transform.position + MoveDirection() * speed * Time.deltaTime;
+            // SimpleMoveはy方向のスピードを無視するので、水平距離で比較します。
+            var moveTo = CharacterController.transform.position + MoveDirection() * Speed() * Time.deltaTime;
+            if (Vector3.Distance((Destination).Flatten(), CharacterController.transform.position.Flatten()) <= Vector3.Distance((Destination).Flatten(), moveTo.Flatten())) return false;
+            if (Vector3.Distance(CurrentPoint().Flatten(), Destination.Flatten()) <= StoppingDistance()) return false;
 
-            float HorizontalDistance(Vector3 a, Vector3 b)
-            {
-                a.y = 0f;
-                b.y = 0f;
-                return Vector3.Distance(a, b);
-            }
-
-            float error = 0.01f;
-
-            // SimpleMoveはy方向のspeedを無視するので、水平距離で比較します。
-            if (Vector3.Distance(Destination.Flatten(), CharacterController.transform.position.Flatten()) <= Vector3.Distance(Destination.Flatten(), moveTo.Flatten()) + error) return false;
-            //if (HorizontalDistance(Destination, CharacterController.transform.position) <= HorizontalDistance(Destination, moveTo) + error) return false;
-
-            CharacterController.SimpleMove(MoveDirection() * speed);
+            CharacterController.SimpleMove(MoveDirection() * Speed());
 
             return true;
+        }
+
+        void LookAtDestination()
+        {
+            var lookedAt = Destination;
+            lookedAt.y = CharacterController.transform.position.y;
+            CharacterController.transform.LookAt(lookedAt);
         }
 
         protected override void Awake()
         {
             base.Awake();
 
-            Stop();
+            SetDestinationToSelf();
         }
 
         protected override void Update()
@@ -109,22 +95,21 @@ namespace EllGames.Istia1.GameSystem.Actor.Behaviour.Move
             if (UnityEngine.Input.GetMouseButton(KeyConfig.PlayerMoveMouseButton) &&
                 !UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject()) DestinationUpdate();
 
-            StateUpdate();
-            AnimationUpdate();
+            var test = PlayerAvatorManager.Animator.GetBool(AnimationName);
 
-            CloseToDestination();
-            switch (State)
+            if (CloseToDestination())
             {
-                case STATE.Idling:
-                    break;
-                case STATE.Moving:
-                    break;
+                LookAtDestination();
+                if (UsingAnimation)
+                {
+                    PlayerAvatorManager.Animator.SetBool(AnimationName, true);
+                    PlayerAvatorManager.Animator.SetFloat(AnimationSpeedMultiplierName, AnimationSpeed());
+                }
             }
-        }
-
-        protected override void FixedUpdate()
-        {
-            //todo:move 
+            else
+            {
+                if (UsingAnimation) PlayerAvatorManager.Animator.SetBool(AnimationName, false);
+            }
         }
 
         #region Buttons
@@ -132,20 +117,22 @@ namespace EllGames.Istia1.GameSystem.Actor.Behaviour.Move
         [Title("Buttons")]
 
         [Button("Stop")]
-        public void Stop()
+        public override void Stop()
         {
-            Destination = CharacterController.transform.position;
+            SetDestinationToSelf();
+            if (UsingAnimation) PlayerAvatorManager.Animator.SetBool(AnimationName, false);
         }
 
         [Button("Allow Move")]
-        public void AllowMove()
+        public override void AllowMove()
         {
             Movable = true;
         }
 
         [Button("Disallow Move")]
-        public void DisallowMove()
+        public override void DisallowMove()
         {
+            Stop();
             Movable = false;
         }
 
