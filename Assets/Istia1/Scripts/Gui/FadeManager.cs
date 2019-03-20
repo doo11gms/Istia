@@ -65,7 +65,6 @@ namespace EllGames.Istia1.Gui
         /// <summary>フェード色</summary>
         public Color fadeColor = Color.black;
 
-
         public void Awake()
         {
             if (this != Instance)

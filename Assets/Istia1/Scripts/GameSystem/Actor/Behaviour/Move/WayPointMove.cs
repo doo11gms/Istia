@@ -31,7 +31,7 @@ namespace EllGames.Istia1.GameSystem.Actor.Behaviour.Move
         [OdinSerialize] bool UsingAnimation { get; set; } = false;
         [OdinSerialize, EnableIf("UsingAnimation")] PlayerAvatorManager PlayerAvatorManager { get; set; }
         [OdinSerialize, EnableIf("UsingAnimation")] string AnimationName { get; set; }
-        [OdinSerialize, EnableIf("UsingAnimation")] string AnimationSpeedMultiplierName { get; set; }
+        [OdinSerialize, EnableIf("UsingAnimation")] string AnimationMultiplierName { get; set; }
         [OdinSerialize, EnableIf("UsingAnimation")] float AnimationSpeedMag { get; set; } = 0.1f;
 
         [Title("State")]
@@ -95,20 +95,18 @@ namespace EllGames.Istia1.GameSystem.Actor.Behaviour.Move
             if (UnityEngine.Input.GetMouseButton(KeyConfig.PlayerMoveMouseButton) &&
                 !UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject()) DestinationUpdate();
 
-            var test = PlayerAvatorManager.Animator.GetBool(AnimationName);
-
             if (CloseToDestination())
             {
                 LookAtDestination();
-                if (UsingAnimation)
+                if (UsingAnimation && PlayerAvatorManager.Animator != null)
                 {
                     PlayerAvatorManager.Animator.SetBool(AnimationName, true);
-                    PlayerAvatorManager.Animator.SetFloat(AnimationSpeedMultiplierName, AnimationSpeed());
+                    PlayerAvatorManager.Animator.SetFloat(AnimationMultiplierName, AnimationSpeed());
                 }
             }
             else
             {
-                if (UsingAnimation) PlayerAvatorManager.Animator.SetBool(AnimationName, false);
+                if (UsingAnimation && PlayerAvatorManager.Animator != null) PlayerAvatorManager.Animator.SetBool(AnimationName, false);
             }
         }
 
