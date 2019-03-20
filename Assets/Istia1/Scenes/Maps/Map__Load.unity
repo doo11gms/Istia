@@ -1750,6 +1750,12 @@ MonoBehaviour:
     - Name: AnimationName
       Entry: 1
       Data: Run
+    - Name: AnimationSpeedMultiplierName
+      Entry: 1
+      Data: RunSpeedMultiplier
+    - Name: AnimationSpeedMag
+      Entry: 4
+      Data: 0.001
     - Name: Movable
       Entry: 5
       Data: true

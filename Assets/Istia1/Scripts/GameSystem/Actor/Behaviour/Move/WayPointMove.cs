@@ -31,6 +31,8 @@ namespace EllGames.Istia1.GameSystem.Actor.Behaviour.Move
         [OdinSerialize] bool UsingAnimation { get; set; } = false;
         [OdinSerialize, EnableIf("UsingAnimation")] PlayerAvatorManager PlayerAvatorManager { get; set; }
         [OdinSerialize, EnableIf("UsingAnimation")] string AnimationName { get; set; }
+        [OdinSerialize, EnableIf("UsingAnimation")] string AnimationSpeedMultiplierName { get; set; }
+        [OdinSerialize, EnableIf("UsingAnimation")] float AnimationSpeedMag { get; set; } = 0.1f;
 
         [Title("State")]
         [OdinSerialize, ReadOnly] bool Movable { get; set; } = true;
@@ -51,6 +53,7 @@ namespace EllGames.Istia1.GameSystem.Actor.Behaviour.Move
         float Speed() => PlayerProfile.SpecValues[SpecFactorTypeOfSpeed] * SpeedMag;
         Vector3 CurrentPoint() => CharacterController.transform.position;
         float StoppingDistance() => StoppingDistanceRate * Speed();
+        float AnimationSpeed() => AnimationSpeedMag * Speed();
 
         void SetDestinationToSelf()
         {
@@ -97,7 +100,11 @@ namespace EllGames.Istia1.GameSystem.Actor.Behaviour.Move
             if (CloseToDestination())
             {
                 LookAtDestination();
-                if (UsingAnimation) PlayerAvatorManager.Animator.SetBool(AnimationName, true);
+                if (UsingAnimation)
+                {
+                    PlayerAvatorManager.Animator.SetBool(AnimationName, true);
+                    PlayerAvatorManager.Animator.SetFloat(AnimationSpeedMultiplierName, AnimationSpeed());
+                }
             }
             else
             {
