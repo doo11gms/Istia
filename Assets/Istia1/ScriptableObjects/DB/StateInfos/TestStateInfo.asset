@@ -32,7 +32,7 @@ MonoBehaviour:
     - Name: Duration
       Entry: 4
       Data: 60
-    - Name: AddingSpecFactors
+    - Name: AddingSpecValues
       Entry: 7
       Data: 0|System.Collections.Generic.Dictionary`2[[EllGames.Istia1.DB.SpecFactorType,
         Assembly-CSharp],[System.Int64, mscorlib]], mscorlib

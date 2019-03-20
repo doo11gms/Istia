@@ -12,6 +12,10 @@ namespace EllGames.Istia1.GameSystem.Actor.Behaviour.Move
 {
     public abstract class MoveBase : SerializedMonoBehaviour
     {
+        public abstract void Stop();
+        public abstract void AllowMove();
+        public abstract void DisallowMove();
+
 	    protected virtual void Awake()
         {
 
