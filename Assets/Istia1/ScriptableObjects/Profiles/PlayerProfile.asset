@@ -92,19 +92,19 @@ MonoBehaviour:
       Data: EllGames.Istia1.Profile.PlayerProfile+Location, Assembly-CSharp
     - Name: scene
       Entry: 1
-      Data: Map_TestField
+      Data: a
     - Name: position
       Entry: 7
       Data: UnityEngine.Vector3, UnityEngine.CoreModule
     - Name: 
       Entry: 4
-      Data: 325.87
+      Data: 0
     - Name: 
       Entry: 4
       Data: 0
     - Name: 
       Entry: 4
-      Data: 204.51
+      Data: 0
     - Name: 
       Entry: 8
       Data: 
@@ -116,7 +116,7 @@ MonoBehaviour:
       Data: 0
     - Name: 
       Entry: 4
-      Data: 61
+      Data: 0
     - Name: 
       Entry: 4
       Data: 0
