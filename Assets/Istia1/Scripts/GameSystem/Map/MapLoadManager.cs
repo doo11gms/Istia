@@ -57,6 +57,7 @@ namespace EllGames.Istia1.GameSystem.Map
                     if (UnityEngine.Input.anyKeyDown)
                     {
                         async.allowSceneActivation = true;
+                        Gui.FadeManager.Instance.FadeIn();
                         yield return async;
                     }
                 }

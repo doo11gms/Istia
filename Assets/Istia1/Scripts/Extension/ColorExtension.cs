@@ -12,6 +12,5 @@ namespace EllGames.Istia1.Extension
 {
     public static class ColorExtension
     {
-        public static Color SetAlpha(this Color self, float alpha) => new Color(self.r, self.g, self.b, alpha);
     }
 }

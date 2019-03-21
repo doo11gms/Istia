@@ -33,8 +33,9 @@ namespace EllGames.Istia1.Gui
         [OdinSerialize] public Color DefaultFadeColor { get; set; } = Color.black;
         [OdinSerialize] public float DefaultFadeDuration { get; set; } = 1f;
 
-        Color m_FadeColor;
-        bool m_RenderingIsNeeded;
+        [Title("State")]
+        [OdinSerialize, ReadOnly] Color m_FadeColor;
+        [OdinSerialize, ReadOnly, LabelText("Rendered")] bool m_RenderingIsNeeded;
 
         public void FadeIn(Color? color = null, float? duration = null)
         {
@@ -55,7 +56,7 @@ namespace EllGames.Istia1.Gui
         void DrawRect()
         {
             GUI.color = m_FadeColor;
-            GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), Texture2D.blackTexture);
+            GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), Texture2D.whiteTexture);
         }
 
         private void Awake()
@@ -77,17 +78,18 @@ namespace EllGames.Istia1.Gui
 
         IEnumerator FadeCoroutine(float duration, FADE_TYPE type)
         {
-            m_RenderingIsNeeded = false;
+            m_RenderingIsNeeded = true;
 
             var timeElapsed = 0f;
 
             while (timeElapsed <= duration)
             {
-                m_FadeColor.SetAlpha(CalculateAlpha());
+                timeElapsed += Time.deltaTime;
+                m_FadeColor.a = CalculateAlpha();
                 yield return null;
             }
 
-            m_RenderingIsNeeded = true;
+            m_RenderingIsNeeded = false;
 
             float CalculateAlpha()
             {
