@@ -10,7 +10,7 @@ using Sirenix.Serialization;
 using UnityEngine.SceneManagement;
 using Behaviour = EllGames.Istia1.GameSystem.Actor.Player.Behaviour;
 
-namespace EllGames.Istia1.GameSystem.Map
+namespace EllGames.Istia1.GameSystem
 {
     public class MapLoadManager : SerializedMonoBehaviour
     {
