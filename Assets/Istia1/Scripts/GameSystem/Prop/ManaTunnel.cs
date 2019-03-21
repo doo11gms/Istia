@@ -27,6 +27,8 @@ namespace EllGames.Istia1.GameSystem.Prop
         [Title("Game Object Reference")]
         [OdinSerialize] GameObject ManaFlamesRoot { get; set; }
 
+        const string PLAYER_TAG = "Player";
+
         /// <summary>
         /// マナトンネルを起動します。
         /// </summary>
@@ -45,6 +47,11 @@ namespace EllGames.Istia1.GameSystem.Prop
         private void Update()
         {
             ManaFlamesRoot.gameObject.SetActive(ManaTunnelProfile.IsActive(SelfInfo));
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.gameObject.tag == PLAYER_TAG) Boot();
         }
     }
 }

@@ -32,7 +32,7 @@ namespace EllGames.Istia1.GameSystem.Actor.Player.Behaviour
         [OdinSerialize, EnableIf("UsingAnimation")] PlayerAvatorManager PlayerAvatorManager { get; set; }
         [OdinSerialize, EnableIf("UsingAnimation")] string AnimationName { get; set; }
         [OdinSerialize, EnableIf("UsingAnimation")] string AnimationMultiplierName { get; set; }
-        [OdinSerialize, EnableIf("UsingAnimation")] float AnimationSpeedMag { get; set; } = 0.1f;
+        [OdinSerialize, EnableIf("UsingAnimation")] float AnimationSpeedMag { get; set; } = 0.13f;
 
         Vector3 Destination { get; set; }
 
