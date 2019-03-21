@@ -8,9 +8,9 @@ using UnityEngine.EventSystems;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 
-namespace EllGames
+namespace EllGames.Istia1.GameSystem.Actor.Player.Behaviour
 {
-    public class Revive : SerializedMonoBehaviour
+    public class Ressurect : SerializedMonoBehaviour
     {
 	
     }

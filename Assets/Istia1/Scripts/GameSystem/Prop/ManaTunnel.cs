@@ -39,7 +39,7 @@ namespace EllGames.Istia1.GameSystem.Prop
             }
             else
             {
-                Gui.FadeManager.Instance.LoadScene(DestinationInfo.SceneName, FADE_DURATION);
+                //Gui.FadeManager.Instance.LoadScene(DestinationInfo.SceneName, FADE_DURATION);
 
 
                 void FixPlayerPosition()
