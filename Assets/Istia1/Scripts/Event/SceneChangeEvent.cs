@@ -25,7 +25,8 @@ namespace EllGames.Istia1.Event
 
             if (UsingFadeOut)
             {
-                Gui.FadeManager.Instance.LoadScene(NextSceneName, Duration);
+                Debug.Log("TODO");
+                //Gui.FadeManager.Instance.LoadScene(NextSceneName, Duration);
             }
             else
             {

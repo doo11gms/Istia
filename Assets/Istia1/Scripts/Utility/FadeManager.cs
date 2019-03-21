@@ -4,11 +4,20 @@ using System;
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
+using Sirenix.Serialization;
+using EllGames.Istia1.Extension;
 
 namespace EllGames.Istia1.Utility
 {
     public class FadeManager : MonoBehaviour
     {
+        enum FADE_TYPE
+        {
+            FadeIn,
+            FadeOut
+        }
+
         static FadeManager m_Instance;
 
         public static FadeManager Instance
@@ -20,80 +29,78 @@ namespace EllGames.Istia1.Utility
             }
         }
 
-        public Action m_OnFadeOutFinished { get; set; }
-        public Action m_OnFadeInStarted { get; set; }
+        [Title("Settings")]
+        [OdinSerialize] public Color DefaultFadeColor { get; set; } = Color.black;
+        [OdinSerialize] public float DefaultFadeDuration { get; set; } = 1f;
 
-        /// <summary>フェード中の透明度</summary>
-        private float fadeAlpha = 0;
-        /// <summary>フェード中かどうか</summary>
-        private bool isFading = false;
-        /// <summary>フェード色</summary>
-        public Color fadeColor = Color.black;
+        Color m_FadeColor;
+        bool m_RenderingIsNeeded;
 
-        public void Awake()
+        public void FadeIn(Color? color = null, float? duration = null)
         {
-            if (this != Instance)
-            {
-                Destroy(this.gameObject);
-                return;
-            }
-
-            DontDestroyOnLoad(this.gameObject);
+            Fade(FADE_TYPE.FadeIn, color, duration);
         }
 
-        public void OnGUI()
+        public void FadeOut(Color? color = null, float? duration = null)
         {
+            Fade(FADE_TYPE.FadeOut, color, duration);
+        }
 
-            // Fade .
-            if (this.isFading)
+        void Fade(FADE_TYPE type, Color? color = null, float? duration = null)
+        {
+            m_FadeColor = color == null ? DefaultFadeColor : (Color)color;
+            StartCoroutine(FadeCoroutine(duration == null ? DefaultFadeDuration : (float)duration, type));
+        }
+
+        void DrawRect()
+        {
+            GUI.color = m_FadeColor;
+            GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), Texture2D.blackTexture);
+        }
+
+        private void Awake()
+        {
+            if (m_Instance == this)
             {
-                //色と透明度を更新して白テクスチャを描画 .
-                this.fadeColor.a = this.fadeAlpha;
-                GUI.color = this.fadeColor;
-                GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), Texture2D.whiteTexture);
+                DontDestroyOnLoad(gameObject);
+            }
+            else
+            {
+                Destroy(gameObject);
             }
         }
 
-        /// <summary>
-        /// 画面遷移 .
-        /// </summary>
-        /// <param name='scene'>シーン名</param>
-        /// <param name='interval'>暗転にかかる時間(秒)</param>
-        public void LoadScene(string scene, float interval)
+        private void OnGUI()
         {
-            StartCoroutine(TransScene(scene, interval));
+            if (m_RenderingIsNeeded) DrawRect();
         }
 
-        /// <summary>
-        /// シーン遷移用コルーチン .
-        /// </summary>
-        /// <param name='scene'>シーン名</param>
-        /// <param name='interval'>暗転にかかる時間(秒)</param>
-        private IEnumerator TransScene(string scene, float interval)
+        IEnumerator FadeCoroutine(float duration, FADE_TYPE type)
         {
-            //だんだん暗く .
-            this.isFading = true;
-            float time = 0;
-            while (time <= interval)
+            m_RenderingIsNeeded = false;
+
+            var timeElapsed = 0f;
+
+            while(timeElapsed <= duration)
             {
-                this.fadeAlpha = Mathf.Lerp(0f, 1f, time / interval);
-                time += Time.deltaTime;
-                yield return 0;
+                m_FadeColor.SetAlpha(CalculateAlpha());
+                yield return null;
             }
 
-            //シーン切替 .
-            SceneManager.LoadScene(scene);
+            m_RenderingIsNeeded = true;
 
-            //だんだん明るく .
-            time = 0;
-            while (time <= interval)
+            float CalculateAlpha()
             {
-                this.fadeAlpha = Mathf.Lerp(1f, 0f, time / interval);
-                time += Time.deltaTime;
-                yield return 0;
+                switch (type)
+                {
+                    default:
+                        return 0f;
+                    case FADE_TYPE.FadeIn:
+                        return 1f - timeElapsed / duration;
+                    case FADE_TYPE.FadeOut:
+                        return timeElapsed / duration;
+                }
             }
-
-            this.isFading = false;
         }
     }
 }

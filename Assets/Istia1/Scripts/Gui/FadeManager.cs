@@ -4,171 +4,103 @@ using System;
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
+using Sirenix.Serialization;
+using EllGames.Istia1.Extension;
 
 namespace EllGames.Istia1.Gui
 {
-//  The MIT License(MIT)
-//
-//  Copyright(c) 2015 naichi
-//
-//  Permission is hereby granted, free of charge, to any person obtaining a copy
-//  of this software and associated documentation files (the "Software"), to deal
-//  in the Software without restriction, including without limitation the rights
-//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-//  copies of the Software, and to permit persons to whom the Software is
-//  furnished to do so, subject to the following conditions:
-//
-//  The above copyright notice and this permission notice shall be included in all
-//  copies or substantial portions of the Software.
-//
-//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-//  SOFTWARE.
-    public class FadeManager : MonoBehaviour
+    public class FadeManager : SerializedMonoBehaviour
     {
-        #region Singleton
+        enum FADE_TYPE
+        {
+            FadeIn,
+            FadeOut
+        }
 
-        private static FadeManager instance;
+        static FadeManager m_Instance;
 
         public static FadeManager Instance
         {
             get
             {
-                if (instance == null)
-                {
-                    instance = (FadeManager)FindObjectOfType(typeof(FadeManager));
-
-                    if (instance == null)
-                    {
-                        Debug.LogError(typeof(FadeManager) + "is nothing");
-                    }
-                }
-
-                return instance;
+                if (m_Instance == null) m_Instance = (FadeManager)FindObjectOfType(typeof(FadeManager));
+                return m_Instance;
             }
         }
 
-        #endregion Singleton
+        [Title("Settings")]
+        [OdinSerialize] public Color DefaultFadeColor { get; set; } = Color.black;
+        [OdinSerialize] public float DefaultFadeDuration { get; set; } = 1f;
 
-        /// <summary>
-        /// デバッグモード .
-        /// </summary>
-        public bool DebugMode = true;
-        /// <summary>フェード中の透明度</summary>
-        private float fadeAlpha = 0;
-        /// <summary>フェード中かどうか</summary>
-        private bool isFading = false;
-        /// <summary>フェード色</summary>
-        public Color fadeColor = Color.black;
+        Color m_FadeColor;
+        bool m_RenderingIsNeeded;
 
-        public void Awake()
+        public void FadeIn(Color? color = null, float? duration = null)
         {
-            if (this != Instance)
-            {
-                Destroy(this.gameObject);
-                return;
-            }
-
-            DontDestroyOnLoad(this.gameObject);
+            Fade(FADE_TYPE.FadeIn, color, duration);
         }
 
-        public void OnGUI()
+        public void FadeOut(Color? color = null, float? duration = null)
         {
+            Fade(FADE_TYPE.FadeOut, color, duration);
+        }
 
-            // Fade .
-            if (this.isFading)
+        void Fade(FADE_TYPE type, Color? color = null, float? duration = null)
+        {
+            m_FadeColor = color == null ? DefaultFadeColor : (Color)color;
+            StartCoroutine(FadeCoroutine(duration == null ? DefaultFadeDuration : (float)duration, type));
+        }
+
+        void DrawRect()
+        {
+            GUI.color = m_FadeColor;
+            GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), Texture2D.blackTexture);
+        }
+
+        private void Awake()
+        {
+            if (Instance == this)
             {
-                //色と透明度を更新して白テクスチャを描画 .
-                this.fadeColor.a = this.fadeAlpha;
-                GUI.color = this.fadeColor;
-                GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), Texture2D.whiteTexture);
+                DontDestroyOnLoad(gameObject);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+        }
+
+        private void OnGUI()
+        {
+            if (m_RenderingIsNeeded) DrawRect();
+        }
+
+        IEnumerator FadeCoroutine(float duration, FADE_TYPE type)
+        {
+            m_RenderingIsNeeded = false;
+
+            var timeElapsed = 0f;
+
+            while (timeElapsed <= duration)
+            {
+                m_FadeColor.SetAlpha(CalculateAlpha());
+                yield return null;
             }
 
-            if (this.DebugMode)
+            m_RenderingIsNeeded = true;
+
+            float CalculateAlpha()
             {
-                if (!this.isFading)
+                switch (type)
                 {
-                    //Scene一覧を作成 .
-                    //(UnityEditor名前空間を使わないと自動取得できなかったので決めうちで作成) .
-                    List<string> scenes = new List<string>();
-                    scenes.Add("SampleScene");
-                    //scenes.Add ("SomeScene1");
-                    //scenes.Add ("SomeScene2");
-
-
-                    //Sceneが一つもない .
-                    if (scenes.Count == 0)
-                    {
-                        GUI.Box(new Rect(10, 10, 200, 50), "Fade Manager(Debug Mode)");
-                        GUI.Label(new Rect(20, 35, 180, 20), "Scene not found.");
-                        return;
-                    }
-
-
-                    GUI.Box(new Rect(10, 10, 300, 50 + scenes.Count * 25), "Fade Manager(Debug Mode)");
-                    GUI.Label(new Rect(20, 30, 280, 20), "Current Scene : " + SceneManager.GetActiveScene().name);
-
-                    int i = 0;
-                    foreach (string sceneName in scenes)
-                    {
-                        if (GUI.Button(new Rect(20, 55 + i * 25, 100, 20), "Load Level"))
-                        {
-                            LoadScene(sceneName, 1.0f);
-                        }
-                        GUI.Label(new Rect(125, 55 + i * 25, 1000, 20), sceneName);
-                        i++;
-                    }
+                    default:
+                        return 0f;
+                    case FADE_TYPE.FadeIn:
+                        return 1f - timeElapsed / duration;
+                    case FADE_TYPE.FadeOut:
+                        return timeElapsed / duration;
                 }
             }
-
-
-
-        }
-
-        /// <summary>
-        /// 画面遷移 .
-        /// </summary>
-        /// <param name='scene'>シーン名</param>
-        /// <param name='interval'>暗転にかかる時間(秒)</param>
-        public void LoadScene(string scene, float interval)
-        {
-            StartCoroutine(TransScene(scene, interval));
-        }
-
-        /// <summary>
-        /// シーン遷移用コルーチン .
-        /// </summary>
-        /// <param name='scene'>シーン名</param>
-        /// <param name='interval'>暗転にかかる時間(秒)</param>
-        private IEnumerator TransScene(string scene, float interval)
-        {
-            //だんだん暗く .
-            this.isFading = true;
-            float time = 0;
-            while (time <= interval)
-            {
-                this.fadeAlpha = Mathf.Lerp(0f, 1f, time / interval);
-                time += Time.deltaTime;
-                yield return 0;
-            }
-
-            //シーン切替 .
-            SceneManager.LoadScene(scene);
-
-            //だんだん明るく .
-            time = 0;
-            while (time <= interval)
-            {
-                this.fadeAlpha = Mathf.Lerp(1f, 0f, time / interval);
-                time += Time.deltaTime;
-                yield return 0;
-            }
-
-            this.isFading = false;
         }
     }
 }
