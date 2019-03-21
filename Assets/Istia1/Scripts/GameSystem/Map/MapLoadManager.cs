@@ -25,10 +25,6 @@ namespace EllGames.Istia1.GameSystem.Map
 
         private void Start()
         {
-            Actor.Behaviour.BehaviourController playerBehaviourController = null;
-
-            playerBehaviourController.Stop();
-            // teleport 
 
             MoveToNextScene();
         }

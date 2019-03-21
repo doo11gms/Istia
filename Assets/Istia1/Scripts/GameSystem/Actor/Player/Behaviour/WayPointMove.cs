@@ -9,9 +9,9 @@ using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 using EllGames.Istia1.Extension;
 
-namespace EllGames.Istia1.GameSystem.Actor.Behaviour.Move
+namespace EllGames.Istia1.GameSystem.Actor.Player.Behaviour
 {
-    public class WayPointMove : MoveBase
+    public class WayPointMove : SerializedMonoBehaviour
     {
         [Title("Required")]
         [OdinSerialize, Required] CharacterController CharacterController { get; set; }
@@ -33,9 +33,6 @@ namespace EllGames.Istia1.GameSystem.Actor.Behaviour.Move
         [OdinSerialize, EnableIf("UsingAnimation")] string AnimationName { get; set; }
         [OdinSerialize, EnableIf("UsingAnimation")] string AnimationMultiplierName { get; set; }
         [OdinSerialize, EnableIf("UsingAnimation")] float AnimationSpeedMag { get; set; } = 0.1f;
-
-        [Title("State")]
-        [OdinSerialize, ReadOnly] bool Movable { get; set; } = true;
 
         Vector3 Destination { get; set; }
 
@@ -79,19 +76,18 @@ namespace EllGames.Istia1.GameSystem.Actor.Behaviour.Move
             CharacterController.transform.LookAt(lookedAt);
         }
 
-        protected override void Awake()
+        private void OnEnable()
         {
-            base.Awake();
-
             SetDestinationToSelf();
         }
 
-        protected override void Update()
+        private void OnDisable()
         {
-            base.Update();
+            Stop();
+        }
 
-            if (!Movable) return;
-
+        private void Update()
+        {
             if (UnityEngine.Input.GetMouseButton(KeyConfig.PlayerMoveMouseButton) &&
                 !UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject()) DestinationUpdate();
 
@@ -110,30 +106,12 @@ namespace EllGames.Istia1.GameSystem.Actor.Behaviour.Move
             }
         }
 
-        #region Buttons
-
         [Title("Buttons")]
-
         [Button("Stop")]
-        public override void Stop()
+        public void Stop()
         {
             SetDestinationToSelf();
             if (UsingAnimation) PlayerAvatorManager.Animator.SetBool(AnimationName, false);
         }
-
-        [Button("Allow Move")]
-        public override void AllowMove()
-        {
-            Movable = true;
-        }
-
-        [Button("Disallow Move")]
-        public override void DisallowMove()
-        {
-            Stop();
-            Movable = false;
-        }
-
-        #endregion
     }
 }
