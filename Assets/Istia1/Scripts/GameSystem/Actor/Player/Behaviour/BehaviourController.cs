@@ -21,6 +21,12 @@ namespace EllGames.Istia1.GameSystem.Actor.Player.Behaviour
         [OdinSerialize, Required] Die m_Die;
         [OdinSerialize, Required] Ressurect m_Ressurect;
 
+        public void Stop()
+        {
+            m_WayPointMove.Stop();
+        }
+
+        [Title("Buttons")]
         [Button("Allow Move")]
         public void AllowMove()
         {
@@ -31,11 +37,6 @@ namespace EllGames.Istia1.GameSystem.Actor.Player.Behaviour
         public void DisallowMove()
         {
             m_WayPointMove.gameObject.SetActive(false);
-        }
-
-        public void Stop()
-        {
-            m_WayPointMove.Stop();
         }
 
         [Button("Teleport")]

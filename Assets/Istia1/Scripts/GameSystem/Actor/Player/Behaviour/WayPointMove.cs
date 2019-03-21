@@ -111,7 +111,7 @@ namespace EllGames.Istia1.GameSystem.Actor.Player.Behaviour
         public void Stop()
         {
             SetDestinationToSelf();
-            if (UsingAnimation) PlayerAvatorManager.Animator.SetBool(AnimationName, false);
+            if (UsingAnimation && PlayerAvatorManager.Animator != null) PlayerAvatorManager.Animator.SetBool(AnimationName, false);
         }
     }
 }

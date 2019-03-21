@@ -13960,7 +13960,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &720449274
 Transform:
   m_ObjectHideFlags: 0
@@ -22986,7 +22986,7 @@ GameObject:
   - component: {fileID: 1129597286}
   - component: {fileID: 1129597287}
   m_Layer: 2
-  m_Name: Behaviour Controller
+  m_Name: Behaviour Controller (Player)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33773,12 +33773,11 @@ PrefabInstance:
         type: 3}
       propertyPath: serializationData.Prefab
       value: 
-      objectReference: {fileID: 7610456019739041076, guid: 75e3fc876110ae8479e8cc2bf7dfec04,
-        type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 7610456019739041076, guid: 75e3fc876110ae8479e8cc2bf7dfec04,
         type: 3}
       propertyPath: serializationData.PrefabModifications.Array.data[0]
-      value: '"path":"NextSceneName","value":{"$id":0,"$type":"System.String, mscorlib","Map_TestField"}'
+      value: '"path":"NextSceneName","value":{"$id":0,"$type":"System.String, mscorlib","SystemMap_MapLoad"}'
       objectReference: {fileID: 0}
     - target: {fileID: 7610456019739041076, guid: 75e3fc876110ae8479e8cc2bf7dfec04,
         type: 3}
@@ -45599,7 +45598,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2132440893
 Transform:
   m_ObjectHideFlags: 0
