@@ -15,31 +15,40 @@ namespace EllGames.Istia1.Profile
     {
         void Save.ISavable.Save()
         {
-            Debug.Log("TODO");
+            ES2.Save(ActiveStates, GetInstanceID() + "ActiveStates");
         }
 
         void Save.ISavable.Load()
         {
+            ActiveStates = ES2.LoadDictionary<DB.ManaTunnelInfo, bool>(GetInstanceID() + "ActiveStates");
+        }
+
+        [OdinSerialize] Dictionary<DB.ManaTunnelInfo, bool> ActiveStates { get; set; } = new Dictionary<DB.ManaTunnelInfo, bool>();
+
+        /// <summary>
+        /// マナトンネルが活性化されている場合はtrueを、活性化されていない場合はfalseを返します。
+        /// </summary>
+        /// <param name="manaTunnelInfo"></param>
+        /// <returns></returns>
+        public bool IsActive(DB.ManaTunnelInfo manaTunnelInfo)
+        {
+            return ActiveStates[manaTunnelInfo];
         }
 
         /// <summary>
-        /// マナトンネルが開放されていなければtrueを、開放されているならばfalseを指定して下さい。
+        /// マナトンネルを活性化します。
         /// </summary>
-        [OdinSerialize, InfoBox("マナトンネルが閉鎖されているならばtrueを、開放されているならばfalseを指定して下さい。")] Dictionary<DB.ManaTunnelInfo, bool> LockStates { get; set; } = new Dictionary<DB.ManaTunnelInfo, bool>();
-
-        public bool IsLocked(DB.ManaTunnelInfo manaTunnelInfo)
+        public void Activate(DB.ManaTunnelInfo manaTunnelInfo)
         {
-            return LockStates[manaTunnelInfo];
+            ActiveStates[manaTunnelInfo] = true;
         }
 
-        public void Lock(DB.ManaTunnelInfo manaTunnelInfo)
+        /// <summary>
+        /// マナトンネルを非活性化します。
+        /// </summary>
+        public void Deactivate(DB.ManaTunnelInfo manaTunnelInfo)
         {
-            LockStates[manaTunnelInfo] = true;
-        }
-
-        public void Unlock(DB.ManaTunnelInfo manaTunnelInfo)
-        {
-            LockStates[manaTunnelInfo] = false;
+            ActiveStates[manaTunnelInfo] = false;
         }
     }
 }

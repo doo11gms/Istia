@@ -23,7 +23,7 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes:
-    - Name: LockStates
+    - Name: ActiveStates
       Entry: 7
       Data: 0|System.Collections.Generic.Dictionary`2[[EllGames.Istia1.DB.ManaTunnelInfo,
         Assembly-CSharp],[System.Boolean, mscorlib]], mscorlib
@@ -45,7 +45,7 @@ MonoBehaviour:
       Data: 0
     - Name: 
       Entry: 5
-      Data: false
+      Data: true
     - Name: 
       Entry: 8
       Data: 
@@ -57,7 +57,7 @@ MonoBehaviour:
       Data: 1
     - Name: 
       Entry: 5
-      Data: false
+      Data: true
     - Name: 
       Entry: 8
       Data: 

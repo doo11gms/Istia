@@ -19,6 +19,13 @@ namespace EllGames.Istia1.Profile
             public string scene;
             public Vector3 position;
             public Vector3 eulerAngles;
+
+            public Location(string scene, Vector3 position, Vector3 eulerAngles)
+            {
+                this.scene = scene;
+                this.position = position;
+                this.eulerAngles = eulerAngles;
+            }
         }
 
         void Save.ISavable.Save()

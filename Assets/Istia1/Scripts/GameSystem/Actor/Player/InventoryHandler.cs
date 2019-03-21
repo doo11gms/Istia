@@ -8,7 +8,7 @@ using UnityEngine.EventSystems;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 
-namespace EllGames.Istia1.GameSystem.Actor
+namespace EllGames.Istia1.GameSystem.Actor.Player
 {
     /// <summary>
     /// インベントリのエントリです。

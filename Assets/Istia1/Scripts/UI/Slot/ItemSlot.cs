@@ -58,7 +58,7 @@ namespace EllGames.Istia1.UI.Slot
 
         [Title("Required")]
         [OdinSerialize, Required] Config.KeyConfig KeyConfig { get; set; }
-        [OdinSerialize, Required] GameSystem.Actor.InventoryHandler InventoryHandler { get; set; }
+        [OdinSerialize, Required] GameSystem.Actor.Player.InventoryHandler InventoryHandler { get; set; }
         [OdinSerialize, Required] GameSystem.Item.ItemCoolDownHandler ItemCoolDownHandler { get; set; }
 
         [Title("UI Reference")]
