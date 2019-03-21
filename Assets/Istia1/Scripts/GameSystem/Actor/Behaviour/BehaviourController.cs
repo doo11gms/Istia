@@ -29,5 +29,15 @@ namespace EllGames.Istia1.GameSystem.Actor.Behaviour
         {
             //
         }
+
+        public void Stop()
+        {
+            Debug.Log("TODO:Stop method");
+        }
+
+        public void Teleport(Vector3? position = null, Vector3? eulerAngles = null)
+        {
+            Debug.Log("TODO:MoveにTeleportを追加");
+        }
     }
 }

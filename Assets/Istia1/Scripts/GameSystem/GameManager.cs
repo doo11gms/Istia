@@ -19,7 +19,17 @@ namespace EllGames.Istia1.GameSystem
         [Title("Settings")]
         [OdinSerialize] List<GameObject> DontDestroysInMapScene { get; set; } = new List<GameObject>();
 
-        bool IsMapScene(Scene scene) => scene.name.IndexOf(SystemConfig.MapScenePrefix) == 0;
+        bool IsMapScene(Scene scene)
+        {
+            if (SystemConfig.MapScenePrefixes == null) return false;
+
+            foreach(var prefix in SystemConfig.MapScenePrefixes)
+            {
+                if (scene.name.IndexOf(prefix) == 0) return true;
+            }
+
+            return false;
+        }
 
         void OnSceneLoaded(Scene loaded, LoadSceneMode mode)
         {
