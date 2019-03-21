@@ -13,6 +13,6 @@ namespace EllGames.Istia1.Config
     [CreateAssetMenu(menuName = "Istia1/Config/SystemConfig", fileName = "SystemConfig")]
     public class SystemConfig : SerializedScriptableObject
     {
-        [SerializeField] public string MapScenePrefix { get; set; } = "Map_";
+        [SerializeField] public List<string> MapScenePrefixes { get; set; } = new List<string> { "Map_", "SystemMap_", };
     }
 }
