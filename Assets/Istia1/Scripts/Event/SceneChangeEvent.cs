@@ -13,25 +13,12 @@ namespace EllGames.Istia1.Event
     public class SceneChangeEvent : EventBase
     {
         [Title("Settings")]
-        [OdinSerialize] string NextSceneName { get; set; }
-
-        [Title("Fade Out")]
-        [OdinSerialize] bool UsingFadeOut { get; set; } = true;
-        [OdinSerialize, EnableIf("UsingFadeOut")] float Duration { get; set; } = 1f;
+        [OdinSerialize] string Scene { get; set; }
 
         protected override void Execute()
         {
-            if (NextSceneName == null) throw new System.Exception("遷移先のシーンが指定されていません。");
-
-            if (UsingFadeOut)
-            {
-                Debug.Log("TODO");
-                //Gui.FadeManager.Instance.LoadScene(NextSceneName, Duration);
-            }
-            else
-            {
-                UnityEngine.SceneManagement.SceneManager.LoadScene(NextSceneName);
-            }
+            if (Scene == null) throw new System.Exception("遷移先のシーンが指定されていません。");
+            UnityEngine.SceneManagement.SceneManager.LoadScene(Scene);
         }
     }
 }
