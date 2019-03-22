@@ -22,6 +22,8 @@ namespace EllGames.Istia2.Profile
             EquipmentSlots = new List<EquipmentSlot>();
         }
 
+        #region EquipmentSlot class
+
         [System.Serializable]
         public class EquipmentSlot
         {
@@ -86,5 +88,8 @@ namespace EllGames.Istia2.Profile
                 m_Content = null;
             }
         }
+
+        #endregion
+
     }
 }

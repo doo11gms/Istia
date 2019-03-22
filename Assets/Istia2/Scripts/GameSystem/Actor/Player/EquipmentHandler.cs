@@ -17,14 +17,23 @@ namespace EllGames.Istia2.GameSystem.Actor.Player
     {
         [OdinSerialize, Required] Profile.EquipmentProfile EquipmentProfile { get; set; }
 
-        public bool Equip(DB.Inventory.EquipmentInfoBase equipmentInfo)
+        [Title("Buttons")]
+        [Button("Equip")]
+        public bool Equip(Inventory.Equipment equipment)
         {
-            return true;
+            foreach(var slot in EquipmentProfile.EquipmentSlots)
+            {
+                if (slot.Assign(equipment)) return true;
+            }
+
+            return false;
         }
 
+        [Button("Unequip")]
         public bool Unequip()
         {
-            return true;
+            //TODO
+            return false;
         }
     }
 }

@@ -158,15 +158,16 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects: []
+    ReferencedUnityObjects:
+    - {fileID: 11400000, guid: d6315e2fa1554314287245623de6dbb1, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes:
     - Name: EquipmentProfile
-      Entry: 6
-      Data: 
+      Entry: 10
+      Data: 0
 --- !u!1 &334733779
 GameObject:
   m_ObjectHideFlags: 0
@@ -384,7 +385,7 @@ MonoBehaviour:
   openReferences: 0
   openPrefabs: 0
   idRef:
-    _Keys: b0a3ba25644a563d29d58f26d039ae3a284fa45c7777233d3c2b5177cdaa9816a3dec47bf718432ff7a60a80aa4d3b32f75141c1d718e226c8f8ea39f8de707dc387365001d6ce0f0b74531d81a4e812f11e807c68d63f443f14bd10fd82d71877704caea73b506a525d2a36a6125d3fb7592a10cab2b6025803e5459d957f0e0d20cc466672ce10b8596fd7a8fbff32
+    _Keys: b0a3ba25644a563d29d58f26d039ae3a284fa45c7777233d3c2b5177cdaa9816a3dec47bf718432ff7a60a80aa4d3b32f75141c1d718e226c8f8ea39f8de707dc387365001d6ce0f0b74531d81a4e812f11e807c68d63f443f14bd10fd82d71877704caea73b506a525d2a36a6125d3fb7592a10cab2b6025803e5459d957f0e0d20cc466672ce10b8596fd7a8fbff32c8b40db0852e48245a6b19ed4127bf6208194bdeb7920704c88f60b06a880211a12981022d937c351686d4d1b959b4059ff52151d2717e5b
     _Values:
     - {fileID: 41584846}
     - {fileID: 41584847}
@@ -404,6 +405,13 @@ MonoBehaviour:
     - {fileID: 0}
     - {fileID: 11400000, guid: e250581c55f5fb54cb2bf1a0f1ad7d8e, type: 2}
     - {fileID: 11500000, guid: 3a968b598643afe4bb9304618d704a22, type: 3}
+    - {fileID: 11400000, guid: d6315e2fa1554314287245623de6dbb1, type: 2}
+    - {fileID: 2025331077630852512, guid: f439c1057c40bad469380b9ce5cf6b5f, type: 3}
+    - {fileID: 2025331077630852513, guid: f439c1057c40bad469380b9ce5cf6b5f, type: 3}
+    - {fileID: 2025331077630852574, guid: f439c1057c40bad469380b9ce5cf6b5f, type: 3}
+    - {fileID: 11500000, guid: b0e8aa8388b21e64e961dd0189448d27, type: 3}
+    - {fileID: 11500000, guid: 36a9cbfbee38f0445a6632e93eb4a4f3, type: 3}
+    - {fileID: 11400000, guid: 3787ce6ce2ea8004ab4b64eaf0224abb, type: 2}
   prefabs: []
 --- !u!114 &716427540
 MonoBehaviour:
