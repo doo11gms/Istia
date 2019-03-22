@@ -11,18 +11,8 @@ using Sirenix.Serialization;
 namespace EllGames.Istia2.DB.Inventory
 {
     [CreateAssetMenu(fileName = "EquipmentInfo", menuName = "Istia2/DB/EquipmentInfo")]
-    public class EquipmentInfo : InventoryItemBase, Save.ISavable
+    public class EquipmentInfo : InventoryItemBase
     {
-        void Save.ISavable.Save()
-        {
-            (EquipmentCategory as Save.ISavable).Save();
-        }
-
-        void Save.ISavable.Load()
-        {
-            (EquipmentCategory as Save.ISavable).Load();
-        }
-
         [Title("Category")]
         [OdinSerialize] public EquipmentCategory EquipmentCategory { get; set; }
 
