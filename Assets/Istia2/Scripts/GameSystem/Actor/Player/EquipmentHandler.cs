@@ -42,5 +42,14 @@ namespace EllGames.Istia2.GameSystem.Actor.Player
 
             return found.Unassign();
         }
+
+        [Button("Unequip All")]
+        public void UnequipAll()
+        {
+            foreach(var slot in EquipmentProfile.EquipmentSlots)
+            {
+                if (!slot.IsEmpty()) slot.Unassign();
+            }
+        }
     }
 }
