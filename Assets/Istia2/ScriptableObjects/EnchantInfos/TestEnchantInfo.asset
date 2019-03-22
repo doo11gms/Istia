@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0e8aa8388b21e64e961dd0189448d27, type: 3}
-  m_Name: EquipmentProfile
+  m_Script: {fileID: 11500000, guid: cab428d905c0b774eb82ee5af94b2a70, type: 3}
+  m_Name: TestEnchantInfo
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -22,25 +22,19 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes:
-    - Name: EquipmentSlots
+    - Name: Name
+      Entry: 1
+      Data: "\u30C6\u30B9\u30C8\u7528\u306E"
+    - Name: EnchantableCategories
       Entry: 7
-      Data: 0|System.Collections.Generic.List`1[[EllGames.Istia2.Profile.EquipmentProfile+EquipmentSlot,
+      Data: 0|System.Collections.Generic.List`1[[EllGames.Istia2.DB.Inventory.EquipmentCategory,
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
-      Entry: 7
-      Data: 1|EllGames.Istia2.Profile.EquipmentProfile+EquipmentSlot, Assembly-CSharp
-    - Name: m_AssignableCategory
       Entry: 10
       Data: 0
-    - Name: m_Content
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
     - Name: 
       Entry: 13
       Data: 

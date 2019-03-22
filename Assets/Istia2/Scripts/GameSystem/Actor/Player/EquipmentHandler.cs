@@ -15,6 +15,8 @@ namespace EllGames.Istia2.GameSystem.Actor.Player
     /// </summary>
     public class EquipmentHandler : SerializedMonoBehaviour
     {
+        [OdinSerialize, Required] Profile.EquipmentProfile EquipmentProfile { get; set; }
+
         public bool Equip(DB.Inventory.EquipmentInfoBase equipmentInfo)
         {
             return true;
