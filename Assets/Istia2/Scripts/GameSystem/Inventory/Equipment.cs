@@ -12,7 +12,7 @@ namespace EllGames.Istia2.GameSystem.Inventory
 {
     public class Equipment : InventoryItemBase
     {
-	    [OdinSerialize] public DB.Inventory.EquipmentInfoBase EquipmentInfo { get; private set; }
+	    [OdinSerialize] public DB.Inventory.EquipmentInfo EquipmentInfo { get; private set; }
         [OdinSerialize] public DB.Inventory.EnchantInfo EnchantInfo { get; private set; }
     }
 }

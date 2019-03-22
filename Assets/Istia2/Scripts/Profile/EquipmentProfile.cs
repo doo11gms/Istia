@@ -25,11 +25,16 @@ namespace EllGames.Istia2.Profile
             return null;
         }
 
-        [Title("Buttons")]
-        [Button("Initialize")]
         public void Initialize()
         {
             EquipmentSlots = new List<EquipmentSlot>();
+        }
+
+        [Title("Buttons")]
+        [Button("Emptimize")]
+        public void Emptimize()
+        {
+            EquipmentSlots.ForEach(slot => slot.Emptimize());
         }
 
         #region EquipmentSlot class

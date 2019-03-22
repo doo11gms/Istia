@@ -46,10 +46,16 @@ namespace EllGames.Istia2.GameSystem.Actor.Player
         [Button("Unequip All")]
         public void UnequipAll()
         {
-            foreach(var slot in EquipmentProfile.EquipmentSlots)
-            {
-                if (!slot.IsEmpty()) slot.Unassign();
-            }
+            EquipmentProfile.EquipmentSlots.ForEach(slot => slot.Emptimize());
+        }
+
+        /// <summary>
+        /// インベントリを最新の状態に更新します。
+        /// </summary>
+        [Button("Refresh")]
+        public void Refresh()
+        {
+            Debug.Log("TODO");
         }
     }
 }
