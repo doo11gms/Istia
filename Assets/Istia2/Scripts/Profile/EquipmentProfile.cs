@@ -13,16 +13,28 @@ namespace EllGames.Istia2.Profile
     [CreateAssetMenu(fileName = "EquipmentProfile", menuName = "Istia2/Profile/EquipmentProfile")]
     public class EquipmentProfile : SerializedScriptableObject, Save.ISavable
     {
-        [OdinSerialize] GameObject test;
-
         void Save.ISavable.Save()
         {
-
+            int i = 0;
+            EquipmentSlots.ForEach(slot =>
+            {
+                ES2.Save(slot.SlotID, GetInstanceID() + i + "SlotID");
+                ((slot.AssignableCategory) as Save.ISavable).Save();
+                ((slot.Content) as Save.ISavable).Save();
+                i++;
+            });
         }
 
         void Save.ISavable.Load()
         {
-
+            int i = 0;
+            EquipmentSlots.ForEach(slot =>
+            {
+                slot.SlotID = ES2.Load<int>(GetInstanceID() + i + "SlotID");
+                ((slot.AssignableCategory) as Save.ISavable).Load();
+                ((slot.Content) as Save.ISavable).Load();
+                i++;
+            });
         }
 
         [OdinSerialize] public List<EquipmentSlot> EquipmentSlots { get; private set; } = new List<EquipmentSlot>();
