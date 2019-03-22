@@ -8,11 +8,11 @@ using UnityEngine.EventSystems;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 
-namespace EllGames.Istia2.DB.Inventory
+namespace EllGames.Istia2.Save
 {
-    [CreateAssetMenu(fileName = "EquipmentCategory", menuName = "Istia2/DB/EquipmentCategory")]
-    public class EquipmentCategory : SerializedScriptableObject
+    public interface ISavable
     {
-        [OdinSerialize] public string Name { get; set; }
+        void Save();
+        void Load();
     }
 }

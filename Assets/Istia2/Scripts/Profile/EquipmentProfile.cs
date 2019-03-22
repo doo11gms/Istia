@@ -11,8 +11,52 @@ using Sirenix.Serialization;
 namespace EllGames.Istia2.Profile
 {
     [CreateAssetMenu(fileName = "EquipmentProfile", menuName = "Istia2/Profile/EquipmentProfile")]
-    public class EquipmentProfile : SerializedScriptableObject
+    public class EquipmentProfile : SerializedScriptableObject, Save.ISavable
     {
+        [OdinSerialize] GameObject test;
+
+        void Save.ISavable.Save()
+        {
+            ES2.Save(test, GetInstanceID().ToString());
+            return;
+            EquipmentSlots.ForEach(slot =>
+            {
+                ES2.Save(slot.SlotID, GetInstanceID() + "SlotID");
+                ES2.Save(slot.AssignableCategory.Name, GetInstanceID() + "AssignableCategory_Name");
+
+                if (slot.IsEmpty())
+                {
+                    if (ES2.Exists(GetInstanceID() + "Content_gameObject")) ES2.Delete(GetInstanceID() + "Content_gameObject");
+                }
+                else
+                {
+                    ES2.Save(slot.Content.gameObject, GetInstanceID() + "Content_gameObject");
+                }
+            });
+        }
+
+        void Save.ISavable.Load()
+        {
+            test = ES2.Load<GameObject>(GetInstanceID().ToString());
+            return;
+            EquipmentSlots.ForEach(slot =>
+            {
+                slot.SlotID = ES2.Load<int>(GetInstanceID() + "SlotID");
+                slot.AssignableCategory.Name = ES2.Load<string>(GetInstanceID() + "AssignableCategory_Name");
+
+                GameObject content = ES2.Load<GameObject>(GetInstanceID() + "Content_gameObject");
+                if (content == null)
+                {
+                    slot.Emptimize();
+                }
+                else
+                {
+                    slot.Emptimize();
+                    slot.Assign(content.GetComponent<GameSystem.Inventory.Equipment>());
+                }
+            });
+        }
+
         [OdinSerialize] public List<EquipmentSlot> EquipmentSlots { get; private set; } = new List<EquipmentSlot>();
 
         public EquipmentSlot SearchSlot(int slotID)
@@ -46,18 +90,21 @@ namespace EllGames.Istia2.Profile
             public int SlotID
             {
                 get { return m_SlotID; }
+                set { m_SlotID = value; }
             }
 
             [OdinSerialize] DB.Inventory.EquipmentCategory m_AssignableCategory;
             public DB.Inventory.EquipmentCategory AssignableCategory
             {
                 get { return m_AssignableCategory; }
+                set { m_AssignableCategory = value; }
             }
 
             [OdinSerialize] GameSystem.Inventory.Equipment m_Content;
             public GameSystem.Inventory.Equipment Content
             {
                 get { return m_Content; }
+                set { m_Content = value; }
             }
 
             /// <summary>

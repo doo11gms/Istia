@@ -9,49 +9,32 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0e8aa8388b21e64e961dd0189448d27, type: 3}
-  m_Name: EquipmentProfile
+  m_Script: {fileID: 11500000, guid: 177f629415448304392ab325e481ca86, type: 3}
+  m_Name: SaveHandler
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects:
-    - {fileID: 11400000, guid: 3787ce6ce2ea8004ab4b64eaf0224abb, type: 2}
-    - {fileID: 0}
-    - {fileID: 0}
+    - {fileID: 11400000, guid: d6315e2fa1554314287245623de6dbb1, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes:
-    - Name: EquipmentSlots
+    - Name: m_ISavables
       Entry: 7
-      Data: 0|System.Collections.Generic.List`1[[EllGames.Istia2.Profile.EquipmentProfile+EquipmentSlot,
-        Assembly-CSharp]], mscorlib
+      Data: 0|System.Collections.Generic.List`1[[EllGames.Istia2.Save.ISavable, Assembly-CSharp]],
+        mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
-      Entry: 7
-      Data: 1|EllGames.Istia2.Profile.EquipmentProfile+EquipmentSlot, Assembly-CSharp
-    - Name: m_SlotID
-      Entry: 3
-      Data: 0
-    - Name: m_AssignableCategory
       Entry: 10
       Data: 0
-    - Name: m_Content
-      Entry: 10
-      Data: 1
-    - Name: 
-      Entry: 8
-      Data: 
     - Name: 
       Entry: 13
       Data: 
     - Name: 
       Entry: 8
       Data: 
-    - Name: test
-      Entry: 10
-      Data: 2
