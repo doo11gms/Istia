@@ -15,14 +15,41 @@ namespace EllGames.Istia2.GameSystem.Actor.Player
     /// </summary>
     public class EquipmentHandler : SerializedMonoBehaviour
     {
-        public bool Equip(DB.Inventory.EquipmentInfoBase equipmentInfo)
+        [OdinSerialize, Required] Profile.EquipmentProfile EquipmentProfile { get; set; }
+
+        [Title("Buttons")]
+        [Button("Equip")]
+        public bool Equip(Inventory.Equipment equipment)
         {
-            return true;
+            foreach(var slot in EquipmentProfile.EquipmentSlots)
+            {
+                if (slot.Assign(equipment)) return true;
+            }
+
+            return false;
         }
 
-        public bool Unequip()
+        [Button("Unequip")]
+        public bool Unequip(int slotID)
         {
-            return true;
+            var found = EquipmentProfile.SearchSlot(slotID);
+
+            if (found == null)
+            {
+                Debug.Log("対象のスロットが見つからなかったため、装備解除に失敗しました。");
+                return false;
+            }
+
+            return found.Unassign();
+        }
+
+        [Button("Unequip All")]
+        public void UnequipAll()
+        {
+            foreach(var slot in EquipmentProfile.EquipmentSlots)
+            {
+                if (!slot.IsEmpty()) slot.Unassign();
+            }
         }
     }
 }

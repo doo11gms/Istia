@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a968b598643afe4bb9304618d704a22, type: 3}
-  m_Name: TestSword
+  m_Script: {fileID: 11500000, guid: cab428d905c0b774eb82ee5af94b2a70, type: 3}
+  m_Name: TestEnchantInfo
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -22,6 +22,22 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes:
-    - Name: EquipmentCategory
+    - Name: Name
+      Entry: 1
+      Data: "\u30C6\u30B9\u30C8\u7528\u306E"
+    - Name: EnchantableCategories
+      Entry: 7
+      Data: 0|System.Collections.Generic.List`1[[EllGames.Istia2.DB.Inventory.EquipmentCategory,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
       Entry: 10
       Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 

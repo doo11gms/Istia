@@ -15,9 +15,36 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects: []
+    ReferencedUnityObjects:
+    - {fileID: 11400000, guid: 3787ce6ce2ea8004ab4b64eaf0224abb, type: 2}
+    - {fileID: 2025331077630852574, guid: f439c1057c40bad469380b9ce5cf6b5f, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes: []
+    SerializationNodes:
+    - Name: EquipmentSlots
+      Entry: 7
+      Data: 0|System.Collections.Generic.List`1[[EllGames.Istia2.Profile.EquipmentProfile+EquipmentSlot,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 1|EllGames.Istia2.Profile.EquipmentProfile+EquipmentSlot, Assembly-CSharp
+    - Name: m_AssignableCategory
+      Entry: 10
+      Data: 0
+    - Name: m_Content
+      Entry: 10
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 

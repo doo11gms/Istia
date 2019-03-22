@@ -8,10 +8,10 @@ using UnityEngine.EventSystems;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 
-namespace EllGames.Istia2.DB.Inventory
+namespace EllGames.Istia2.GameSystem.Inventory
 {
-    public abstract class EquipmentInfoBase : InventoryItemBase
+    public abstract class InventoryItemBase : SerializedMonoBehaviour
     {
-        [OdinSerialize] public EquipmentCategory EquipmentCategory { get; private set; }
+	
     }
 }
