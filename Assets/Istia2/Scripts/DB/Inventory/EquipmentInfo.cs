@@ -14,7 +14,7 @@ namespace EllGames.Istia2.DB.Inventory
     public class EquipmentInfo : InventoryItemBase
     {
         [Title("Category")]
-        [OdinSerialize] public EquipmentCategory EquipmentCategory { get; private set; }
+        [OdinSerialize] public EquipmentCategory EquipmentCategory { get; set; }
 
         [Title("Spec")]
         [OdinSerialize] Dictionary<Parameter, int> ParameterValues { get; set; } = new Dictionary<Parameter, int>();

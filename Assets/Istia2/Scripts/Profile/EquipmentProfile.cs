@@ -11,8 +11,20 @@ using Sirenix.Serialization;
 namespace EllGames.Istia2.Profile
 {
     [CreateAssetMenu(fileName = "EquipmentProfile", menuName = "Istia2/Profile/EquipmentProfile")]
-    public class EquipmentProfile : SerializedScriptableObject
+    public class EquipmentProfile : SerializedScriptableObject, Save.ISavable
     {
+        [OdinSerialize] GameObject test;
+
+        void Save.ISavable.Save()
+        {
+
+        }
+
+        void Save.ISavable.Load()
+        {
+
+        }
+
         [OdinSerialize] public List<EquipmentSlot> EquipmentSlots { get; private set; } = new List<EquipmentSlot>();
 
         public EquipmentSlot SearchSlot(int slotID)
@@ -46,18 +58,21 @@ namespace EllGames.Istia2.Profile
             public int SlotID
             {
                 get { return m_SlotID; }
+                set { m_SlotID = value; }
             }
 
             [OdinSerialize] DB.Inventory.EquipmentCategory m_AssignableCategory;
             public DB.Inventory.EquipmentCategory AssignableCategory
             {
                 get { return m_AssignableCategory; }
+                set { m_AssignableCategory = value; }
             }
 
-            [OdinSerialize] GameSystem.Inventory.Equipment m_Content;
-            public GameSystem.Inventory.Equipment Content
+            [OdinSerialize] DB.Inventory.EquipmentInfo m_Content;
+            public DB.Inventory.EquipmentInfo Content
             {
                 get { return m_Content; }
+                set { m_Content = null; }
             }
 
             /// <summary>
@@ -72,18 +87,18 @@ namespace EllGames.Istia2.Profile
             /// </summary>
             /// <param name="equipmentInfo"></param>
             /// <returns></returns>
-            public bool Assign(GameSystem.Inventory.Equipment equipment)
+            public bool Assign(DB.Inventory.EquipmentInfo equipmentInfo)
             {
-                if (equipment.EquipmentInfo.EquipmentCategory == null)
+                if (equipmentInfo.EquipmentCategory == null)
                 {
                     Debug.Log("装備品のカテゴリがnullであるため、Assignに失敗しました。");
                     return false;
                 }
 
-                if (equipment.EquipmentInfo.EquipmentCategory != m_AssignableCategory) return false;
+                if (equipmentInfo.EquipmentCategory != m_AssignableCategory) return false;
                 if (!IsEmpty()) return false;
 
-                m_Content = equipment;
+                m_Content = equipmentInfo;
 
                 return true;
             }

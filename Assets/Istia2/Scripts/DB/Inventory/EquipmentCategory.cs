@@ -13,6 +13,6 @@ namespace EllGames.Istia2.DB.Inventory
     [CreateAssetMenu(fileName = "EquipmentCategory", menuName = "Istia2/DB/EquipmentCategory")]
     public class EquipmentCategory : SerializedScriptableObject
     {
-        [OdinSerialize] public string Name { get; private set; }
+        [OdinSerialize] public string Name { get; set; }
     }
 }

@@ -8,9 +8,11 @@ using UnityEngine.EventSystems;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 
-namespace EllGames.Istia2.GameSystem.Inventory
+namespace EllGames.Istia2.Save
 {
-    public abstract class InventoryItemBase : SerializedMonoBehaviour
+    public interface ISavable
     {
+        void Save();
+        void Load();
     }
 }
