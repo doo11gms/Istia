@@ -10,8 +10,13 @@ using Sirenix.Serialization;
 
 namespace EllGames.Istia2.DB.Inventory
 {
-    public abstract class EquipmentInfoBase : InventoryItemBase
+    [CreateAssetMenu(fileName = "EquipmentInfo", menuName = "Istia2/DB/EquipmentInfo")]
+    public class EquipmentInfo : InventoryItemBase
     {
+        [Title("Category")]
         [OdinSerialize] public EquipmentCategory EquipmentCategory { get; private set; }
+
+        [Title("Spec")]
+        [OdinSerialize] Dictionary<Parameter, int> ParameterValues { get; set; } = new Dictionary<Parameter, int>();
     }
 }

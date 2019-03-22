@@ -12,6 +12,5 @@ namespace EllGames.Istia2.GameSystem.Inventory
 {
     public abstract class InventoryItemBase : SerializedMonoBehaviour
     {
-	
     }
 }

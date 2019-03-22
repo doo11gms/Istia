@@ -12,6 +12,8 @@ namespace EllGames.Istia2.DB.Inventory
 {
     public abstract class InventoryItemBase : SerializedScriptableObject
     {
-
+        [Title("Drop")]
+        [OdinSerialize] public bool Droppable { get; private set; } = true;
+        [OdinSerialize, EnableIf("Droppable")] public GameObject Model { get; private set; }
     }
 }
