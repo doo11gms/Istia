@@ -19,11 +19,11 @@ namespace EllGames.Istia2.GameSystem.Actor.Player
 
         [Title("Buttons")]
         [Button("Equip")]
-        public bool Equip(Inventory.Equipment equipment)
+        public bool Equip(DB.Inventory.EquipmentInfo equipmentInfo)
         {
             foreach(var slot in EquipmentProfile.EquipmentSlots)
             {
-                if (slot.Assign(equipment)) return true;
+                if (slot.Assign(equipmentInfo)) return true;
             }
 
             return false;

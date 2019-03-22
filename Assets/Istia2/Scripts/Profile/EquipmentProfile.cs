@@ -17,44 +17,12 @@ namespace EllGames.Istia2.Profile
 
         void Save.ISavable.Save()
         {
-            ES2.Save(test, GetInstanceID().ToString());
-            return;
-            EquipmentSlots.ForEach(slot =>
-            {
-                ES2.Save(slot.SlotID, GetInstanceID() + "SlotID");
-                ES2.Save(slot.AssignableCategory.Name, GetInstanceID() + "AssignableCategory_Name");
 
-                if (slot.IsEmpty())
-                {
-                    if (ES2.Exists(GetInstanceID() + "Content_gameObject")) ES2.Delete(GetInstanceID() + "Content_gameObject");
-                }
-                else
-                {
-                    ES2.Save(slot.Content.gameObject, GetInstanceID() + "Content_gameObject");
-                }
-            });
         }
 
         void Save.ISavable.Load()
         {
-            test = ES2.Load<GameObject>(GetInstanceID().ToString());
-            return;
-            EquipmentSlots.ForEach(slot =>
-            {
-                slot.SlotID = ES2.Load<int>(GetInstanceID() + "SlotID");
-                slot.AssignableCategory.Name = ES2.Load<string>(GetInstanceID() + "AssignableCategory_Name");
 
-                GameObject content = ES2.Load<GameObject>(GetInstanceID() + "Content_gameObject");
-                if (content == null)
-                {
-                    slot.Emptimize();
-                }
-                else
-                {
-                    slot.Emptimize();
-                    slot.Assign(content.GetComponent<GameSystem.Inventory.Equipment>());
-                }
-            });
         }
 
         [OdinSerialize] public List<EquipmentSlot> EquipmentSlots { get; private set; } = new List<EquipmentSlot>();
@@ -100,11 +68,11 @@ namespace EllGames.Istia2.Profile
                 set { m_AssignableCategory = value; }
             }
 
-            [OdinSerialize] GameSystem.Inventory.Equipment m_Content;
-            public GameSystem.Inventory.Equipment Content
+            [OdinSerialize] DB.Inventory.EquipmentInfo m_Content;
+            public DB.Inventory.EquipmentInfo Content
             {
                 get { return m_Content; }
-                set { m_Content = value; }
+                set { m_Content = null; }
             }
 
             /// <summary>
@@ -119,18 +87,18 @@ namespace EllGames.Istia2.Profile
             /// </summary>
             /// <param name="equipmentInfo"></param>
             /// <returns></returns>
-            public bool Assign(GameSystem.Inventory.Equipment equipment)
+            public bool Assign(DB.Inventory.EquipmentInfo equipmentInfo)
             {
-                if (equipment.EquipmentInfo.EquipmentCategory == null)
+                if (equipmentInfo.EquipmentCategory == null)
                 {
                     Debug.Log("装備品のカテゴリがnullであるため、Assignに失敗しました。");
                     return false;
                 }
 
-                if (equipment.EquipmentInfo.EquipmentCategory != m_AssignableCategory) return false;
+                if (equipmentInfo.EquipmentCategory != m_AssignableCategory) return false;
                 if (!IsEmpty()) return false;
 
-                m_Content = equipment;
+                m_Content = equipmentInfo;
 
                 return true;
             }
