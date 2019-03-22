@@ -25,7 +25,7 @@ namespace EllGames.Istia1.GameSystem.Actor.Player.Behaviour
 
         [Title("Raycast")]
         [OdinSerialize] Camera RaycastCamera { get; set; }
-        [OdinSerialize] List<string> IgnoreLayers = new List<string>();
+        [OdinSerialize] List<string> RaycastHitLayers = new List<string>();
 
         [Title("Animation")]
         [OdinSerialize] bool UsingAnimation { get; set; } = false;
@@ -38,8 +38,8 @@ namespace EllGames.Istia1.GameSystem.Actor.Player.Behaviour
 
         void DestinationUpdate()
         {
-            if (IgnoreLayers == null) IgnoreLayers = new List<string>();
-            var layerMask = ~LayerMask.GetMask(IgnoreLayers.ToArray());
+            if (RaycastHitLayers == null) RaycastHitLayers = new List<string>();
+            var layerMask = LayerMask.GetMask(RaycastHitLayers.ToArray());
             var ray = RaycastCamera.ScreenPointToRay(UnityEngine.Input.mousePosition);
             var hit = new RaycastHit();
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask)) Destination = hit.point;

@@ -36,6 +36,7 @@ namespace EllGames.Istia1.DB
 
         [Title("Equip")]
         [OdinSerialize, PropertyOrder(3)] public bool Equipable { get; set; } = false;
+        //[OdinSerialize, PropertyOrder(3), EnableIf("Equipable")] EquipmentCategoly EquipmentCategoly { get; set; }
 
         [Title("Trade")]
         [OdinSerialize, PropertyOrder(3)] public bool Sellable { get; set; } = true;

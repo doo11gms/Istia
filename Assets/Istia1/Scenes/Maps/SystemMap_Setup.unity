@@ -4509,7 +4509,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 234364863}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: Status Controller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10780,7 +10780,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 576306913}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: Skill (Standard Attack)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14048,7 +14048,7 @@ GameObject:
   m_Component:
   - component: {fileID: 720449274}
   - component: {fileID: 720449275}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: Ressurect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23079,7 +23079,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1129597286}
   - component: {fileID: 1129597287}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: Behaviour Controller (Player)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27099,7 +27099,7 @@ GameObject:
   - component: {fileID: 1350935545}
   - component: {fileID: 1350935544}
   - component: {fileID: 1350935543}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -27250,7 +27250,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1353235262}
   - component: {fileID: 1353235263}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: Move (Way Point)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27334,12 +27334,15 @@ MonoBehaviour:
     - Name: AnimationSpeedMag
       Entry: 4
       Data: 0.13
-    - Name: IgnoreLayers
+    - Name: RaycastHitLayers
       Entry: 7
       Data: 0|System.Collections.Generic.List`1[[System.String, mscorlib]], mscorlib
     - Name: 
       Entry: 12
-      Data: 0
+      Data: 1
+    - Name: 
+      Entry: 1
+      Data: Level
     - Name: 
       Entry: 13
       Data: 
@@ -32194,7 +32197,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1597411679}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: Overhead Name Text Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36292,7 +36295,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1805467768}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: Points
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40631,7 +40634,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1998618215}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: Skill Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40899,7 +40902,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2013606256}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: Camera Focus Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45639,7 +45642,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2132440893}
   - component: {fileID: 2132440894}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: Die
   m_TagString: Untagged
   m_Icon: {fileID: 0}
