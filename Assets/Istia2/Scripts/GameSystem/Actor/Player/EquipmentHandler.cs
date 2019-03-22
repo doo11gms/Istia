@@ -10,8 +10,19 @@ using Sirenix.Serialization;
 
 namespace EllGames.Istia2.GameSystem.Actor.Player
 {
+    /// <summary>
+    /// 装備システムを安全に扱う機能を提供するエントリです。
+    /// </summary>
     public class EquipmentHandler : SerializedMonoBehaviour
     {
+        public bool Equip(DB.Inventory.EquipmentInfoBase equipmentInfo)
+        {
+            return true;
+        }
 
+        public bool Unequip()
+        {
+            return true;
+        }
     }
 }

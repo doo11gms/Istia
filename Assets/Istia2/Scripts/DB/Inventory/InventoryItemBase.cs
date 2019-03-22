@@ -8,9 +8,9 @@ using UnityEngine.EventSystems;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 
-namespace EllGames.Istia2.DB
+namespace EllGames.Istia2.DB.Inventory
 {
-    public abstract class ItemInfoBase : SerializedScriptableObject
+    public abstract class InventoryItemBase : SerializedScriptableObject
     {
 
     }

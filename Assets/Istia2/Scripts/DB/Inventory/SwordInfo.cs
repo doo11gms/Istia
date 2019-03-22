@@ -8,10 +8,10 @@ using UnityEngine.EventSystems;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 
-namespace EllGames.Istia2.DB
+namespace EllGames.Istia2.DB.Inventory
 {
-    [CreateAssetMenu(fileName = "EquipableItemInfo", menuName = "Istia2/DB/EquipableItemInfo")]
-    public class EquipableItemInfo : ItemInfoBase
+    [CreateAssetMenu(fileName = "SwordInfo", menuName = "Istia2/DB/Equipment/SwordInfo")]
+    public class SwordInfo : WeaponInfoBase
     {
 
     }
