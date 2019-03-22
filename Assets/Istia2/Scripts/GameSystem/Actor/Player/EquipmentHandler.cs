@@ -30,10 +30,17 @@ namespace EllGames.Istia2.GameSystem.Actor.Player
         }
 
         [Button("Unequip")]
-        public bool Unequip()
+        public bool Unequip(int slotID)
         {
-            //TODO
-            return false;
+            var found = EquipmentProfile.SearchSlot(slotID);
+
+            if (found == null)
+            {
+                Debug.Log("対象のスロットが見つからなかったため、装備解除に失敗しました。");
+                return false;
+            }
+
+            return found.Unassign();
         }
     }
 }

@@ -15,6 +15,16 @@ namespace EllGames.Istia2.Profile
     {
         [OdinSerialize] public List<EquipmentSlot> EquipmentSlots { get; private set; } = new List<EquipmentSlot>();
 
+        public EquipmentSlot SearchSlot(int slotID)
+        {
+            foreach(var slot in EquipmentSlots)
+            {
+                if (slot.SlotID == slotID) return slot;
+            }
+
+            return null;
+        }
+
         [Title("Buttons")]
         [Button("Initialize")]
         public void Initialize()
@@ -27,6 +37,12 @@ namespace EllGames.Istia2.Profile
         [System.Serializable]
         public class EquipmentSlot
         {
+            [OdinSerialize] int m_SlotID;
+            public int SlotID
+            {
+                get { return m_SlotID; }
+            }
+
             [OdinSerialize] DB.Inventory.EquipmentCategory m_AssignableCategory;
             public DB.Inventory.EquipmentCategory AssignableCategory
             {
@@ -73,7 +89,11 @@ namespace EllGames.Istia2.Profile
             /// </summary>
             public bool Unassign()
             {
-                if (IsEmpty()) return false;
+                if (IsEmpty())
+                {
+                    Debug.Log("スロットが既に空であり解除対象が存在しないため、Unassignに失敗しました。");
+                    return false;
+                }
 
                 m_Content = null;
 
