@@ -21,6 +21,9 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes:
+    - Name: ID
+      Entry: 1
+      Data: "\u5263"
     - Name: Name
       Entry: 1
       Data: "\u5263"
