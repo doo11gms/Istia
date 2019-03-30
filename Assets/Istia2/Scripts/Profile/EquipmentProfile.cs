@@ -13,19 +13,15 @@ namespace EllGames.Istia2.Profile
     [CreateAssetMenu(fileName = "EquipmentProfile", menuName = "Istia2/Profile/EquipmentProfile")]
     public class EquipmentProfile : SerializedScriptableObject, Save.ISavable
     {
-        [OdinSerialize] GameObject test;
-
         void Save.ISavable.Save()
         {
-
         }
 
         void Save.ISavable.Load()
         {
-
         }
 
-        [OdinSerialize] public List<EquipmentSlot> EquipmentSlots { get; private set; } = new List<EquipmentSlot>();
+        [OdinSerialize] public List<EquipmentSlot> EquipmentSlots { get; set; } = new List<EquipmentSlot>();
 
         public EquipmentSlot SearchSlot(int slotID)
         {
@@ -37,16 +33,18 @@ namespace EllGames.Istia2.Profile
             return null;
         }
 
-        public void Initialize()
-        {
-            EquipmentSlots = new List<EquipmentSlot>();
-        }
-
         [Title("Buttons")]
         [Button("Emptimize")]
         public void Emptimize()
         {
             EquipmentSlots.ForEach(slot => slot.Emptimize());
+        }
+
+        [Button("New Slot")]
+        void NewSlot(DB.Inventory.EquipmentCategory equipmentCategory)
+        {
+            EquipmentSlots.Add(new EquipmentSlot(EquipmentSlots.Count, equipmentCategory.ID));
+            UnityEditor.AssetDatabase.SaveAssets();
         }
 
         #region EquipmentSlot class
@@ -55,77 +53,31 @@ namespace EllGames.Istia2.Profile
         public class EquipmentSlot
         {
             [OdinSerialize] int m_SlotID;
-            public int SlotID
+            public int SlotID { get; set; }
+
+            [OdinSerialize] string m_AssignableCategoryID;
+            public string AssignableCategoryID { get; set; }
+
+            [OdinSerialize] string m_EquipmentInfoID;
+            public string EquipmentInfoID { get; set; }
+
+            public EquipmentSlot(int slotID = 0, string assignableCategoryID = null, string equipmentInfoID = null)
             {
-                get { return m_SlotID; }
-                set { m_SlotID = value; }
+                m_SlotID = slotID;
+                m_AssignableCategoryID = assignableCategoryID;
+                m_EquipmentInfoID = equipmentInfoID;
             }
 
-            [OdinSerialize] DB.Inventory.EquipmentCategory m_AssignableCategory;
-            public DB.Inventory.EquipmentCategory AssignableCategory
+            public bool IsEmpty() => m_EquipmentInfoID == null;
+
+            public void SetContent(string equipmentInfoID)
             {
-                get { return m_AssignableCategory; }
-                set { m_AssignableCategory = value; }
+                m_EquipmentInfoID = equipmentInfoID;
             }
 
-            [OdinSerialize] DB.Inventory.EquipmentInfo m_Content;
-            public DB.Inventory.EquipmentInfo Content
-            {
-                get { return m_Content; }
-                set { m_Content = null; }
-            }
-
-            /// <summary>
-            /// スロットが空であるかを判定します。
-            /// </summary>
-            /// <returns></returns>
-            public bool IsEmpty() => m_Content == null;
-
-            /// <summary>
-            /// スロットに装備品を登録します。
-            /// スロットが既に埋まっている場合はfalseを返します。
-            /// </summary>
-            /// <param name="equipmentInfo"></param>
-            /// <returns></returns>
-            public bool Assign(DB.Inventory.EquipmentInfo equipmentInfo)
-            {
-                if (equipmentInfo.EquipmentCategory == null)
-                {
-                    Debug.Log("装備品のカテゴリがnullであるため、Assignに失敗しました。");
-                    return false;
-                }
-
-                if (equipmentInfo.EquipmentCategory != m_AssignableCategory) return false;
-                if (!IsEmpty()) return false;
-
-                m_Content = equipmentInfo;
-
-                return true;
-            }
-
-            /// <summary>
-            /// 装備品の登録を解除します。
-            /// スロットが既に空であり解除対象が存在しない場合、falseを返します。
-            /// </summary>
-            public bool Unassign()
-            {
-                if (IsEmpty())
-                {
-                    Debug.Log("スロットが既に空であり解除対象が存在しないため、Unassignに失敗しました。");
-                    return false;
-                }
-
-                m_Content = null;
-
-                return true;
-            }
-
-            /// <summary>
-            /// スロットを空にします。
-            /// </summary>
             public void Emptimize()
             {
-                m_Content = null;
+                m_EquipmentInfoID = null;
             }
         }
 

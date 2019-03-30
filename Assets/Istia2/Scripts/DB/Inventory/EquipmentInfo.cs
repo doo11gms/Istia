@@ -13,10 +13,13 @@ namespace EllGames.Istia2.DB.Inventory
     [CreateAssetMenu(fileName = "EquipmentInfo", menuName = "Istia2/DB/EquipmentInfo")]
     public class EquipmentInfo : InventoryItemBase
     {
+        [Title("Meta")]
+        [OdinSerialize] public string ID { get; set; }
+
         [Title("Category")]
         [OdinSerialize] public EquipmentCategory EquipmentCategory { get; set; }
 
         [Title("Spec")]
-        [OdinSerialize] Dictionary<Parameter, int> ParameterValues { get; set; } = new Dictionary<Parameter, int>();
+        [OdinSerialize] public Dictionary<Parameter, int> ParameterValues { get; set; } = new Dictionary<Parameter, int>();
     }
 }

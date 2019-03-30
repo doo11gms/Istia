@@ -23,7 +23,20 @@ namespace EllGames.Istia2.GameSystem.Actor.Player
         {
             foreach(var slot in EquipmentProfile.EquipmentSlots)
             {
-                if (slot.Assign(equipmentInfo)) return true;
+                Debug.Log(slot.AssignableCategoryID);
+                Debug.Log(equipmentInfo.EquipmentCategory.ID);
+                Debug.Log(slot.IsEmpty());
+                Debug.Log("");
+                if (slot.AssignableCategoryID != equipmentInfo.EquipmentCategory.ID) continue;
+                if (slot.IsEmpty())
+                {
+                    slot.SetContent(equipmentInfo.ID);
+                    return true;
+                }
+                else
+                {
+                    continue;
+                }
             }
 
             return false;
@@ -32,15 +45,23 @@ namespace EllGames.Istia2.GameSystem.Actor.Player
         [Button("Unequip")]
         public bool Unequip(int slotID)
         {
-            var found = EquipmentProfile.SearchSlot(slotID);
+            var slot = EquipmentProfile.SearchSlot(slotID);
 
-            if (found == null)
+            if (slot == null)
             {
-                Debug.Log("対象のスロットが見つからなかったため、装備解除に失敗しました。");
+                Debug.LogError("対象のスロットが見つからなかったため、装備解除に失敗しました。");
                 return false;
             }
 
-            return found.Unassign();
+            if (slot.IsEmpty())
+            {
+                Debug.LogError("既に空であるスロットに対して装備解除できません。");
+                return false;
+            }
+
+            slot.Emptimize();
+
+            return true;
         }
 
         [Button("Unequip All")]

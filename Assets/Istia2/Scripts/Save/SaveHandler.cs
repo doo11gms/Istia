@@ -37,5 +37,8 @@ namespace EllGames.Istia2.Save
             ES2.DeleteDefaultFolder();
             Debug.Log("[SaveHandler]Deleted.");
         }
+
+        //public static string Path(object savable) => ((Object)savable).GetInstanceID() + nameof(savable);
+        public static string Path(object savable) => "Istia2/Test2";
     }
 }
