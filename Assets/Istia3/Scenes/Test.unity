@@ -178,7 +178,7 @@ MonoBehaviour:
   openReferences: 0
   openPrefabs: 0
   idRef:
-    _Keys: 8c6b9e8320501a2c0e4f75897be98a06cda772674b67a1162c8783ad471baf5953b11af9859aae4c74ab5307f5b238566bfcead0829ab50b0db4aea7d3c7740ea01c36c9ce908031fa25f39f149a2178b1d3bdb4ce212848fd0e073a4955203be09e9827839078267cb8d75ca615f758
+    _Keys: 8c6b9e8320501a2c0e4f75897be98a06cda772674b67a1162c8783ad471baf5953b11af9859aae4c74ab5307f5b238566bfcead0829ab50b0db4aea7d3c7740ea01c36c9ce908031fa25f39f149a2178b1d3bdb4ce212848fd0e073a4955203be09e9827839078267cb8d75ca615f758ae5fd0af7f94c71010da6b54bcc2c621dea3128fef34476e4b0275fcd7446a7826497ed791ac9d5b5cc2a7f7bc346e6aaa641ea71c077502ea40e4458573ae034ff08e745952d901cbc9cb56b9210f152eddbfa1f4152e47fe47035719e0af3d5b4ad028912ca80181718b4478cf8c3a
     _Values:
     - {fileID: 1598186096}
     - {fileID: 1598186095}
@@ -194,6 +194,20 @@ MonoBehaviour:
     - {fileID: 1854055199}
     - {fileID: 1742585824}
     - {fileID: 1742585825}
+    - {fileID: 11500000, guid: 821e711ce695ac942996cf8a6e1f3e4d, type: 3}
+    - {fileID: 11500000, guid: 799d12d75f4689c4bbb62075cd315294, type: 3}
+    - {fileID: 1854055201}
+    - {fileID: 1854055200}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 11500000, guid: 4be86be5c485aa64c9ce34e772ead467, type: 3}
+    - {fileID: 121578883}
+    - {fileID: 121578885}
+    - {fileID: 121578884}
+    - {fileID: 785172845}
+    - {fileID: 785172846}
+    - {fileID: 785172847}
   prefabs: []
 --- !u!114 &109128428
 MonoBehaviour:
@@ -227,6 +241,67 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &121578883
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 121578884}
+  - component: {fileID: 121578885}
+  m_Layer: 0
+  m_Name: Equipment Slot (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &121578884
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 121578883}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1854055199}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &121578885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 121578883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4be86be5c485aa64c9ce34e772ead467, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: m_SlotID
+      Entry: 3
+      Data: 0
+    - Name: m_CategoryID
+      Entry: 1
+      Data: "\u30BD\u30FC\u30C9"
+    - Name: m_EquipmentInfoID
+      Entry: 1
+      Data: "\u30C6\u30B9\u30C8\u7528\u30BD\u30FC\u30C9"
 --- !u!1 &590456539
 GameObject:
   m_ObjectHideFlags: 0
@@ -259,6 +334,67 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &785172845
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 785172846}
+  - component: {fileID: 785172847}
+  m_Layer: 0
+  m_Name: Equipment Slot (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &785172846
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 785172845}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1854055199}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &785172847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 785172845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4be86be5c485aa64c9ce34e772ead467, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: m_SlotID
+      Entry: 3
+      Data: 1
+    - Name: m_CategoryID
+      Entry: 1
+      Data: "\u30BD\u30FC\u30C9"
+    - Name: m_EquipmentInfoID
+      Entry: 1
+      Data: 
 --- !u!1 &1362822820
 GameObject:
   m_ObjectHideFlags: 17
@@ -506,6 +642,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1854055199}
+  - component: {fileID: 1854055201}
+  - component: {fileID: 1854055200}
   m_Layer: 0
   m_Name: Equipments
   m_TagString: Untagged
@@ -523,7 +661,80 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 121578884}
+  - {fileID: 785172846}
   m_Father: {fileID: 590456540}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1854055200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1854055198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 799d12d75f4689c4bbb62075cd315294, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: EquipmentSlots
+      Entry: 7
+      Data: 0|System.Collections.Generic.List`1[[EllGames.Istia3.GameSystem.Actor.Player.Equipment.Equipments+EquipmentSlot,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 1|EllGames.Istia3.GameSystem.Actor.Player.Equipment.Equipments+EquipmentSlot,
+        Assembly-CSharp
+    - Name: m_SlotID
+      Entry: 3
+      Data: 0
+    - Name: m_CategoryID
+      Entry: 1
+      Data: sda
+    - Name: m_EquipmentInfoID
+      Entry: 1
+      Data: asd
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+--- !u!114 &1854055201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1854055198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 821e711ce695ac942996cf8a6e1f3e4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
