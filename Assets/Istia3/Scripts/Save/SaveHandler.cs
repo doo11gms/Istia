@@ -22,7 +22,10 @@ namespace EllGames.Istia3.Save
         {
             var path = Path(obj, name);
             if (target.GetType() == typeof(int)) PlayerPrefs.SetInt(path, (int)((object)target));
-            if (target.GetType() == typeof(string)) PlayerPrefs.SetString(path, (string)((object)(target)));
+            if (target.GetType() == typeof(string))
+            {
+                if ((string)((object)(target)) != null) PlayerPrefs.SetString(path, (string)((object)(target)));
+            }
             PlayerPrefs.Save();
         }
 
@@ -30,7 +33,13 @@ namespace EllGames.Istia3.Save
         {
             var path = Path(obj, name);
             if (target.GetType() == typeof(int)) target = (T)(object)(PlayerPrefs.GetInt(path));
-            if (target.GetType() == typeof(string)) target = (T)(object)(PlayerPrefs.GetString(path));
+            if (target.GetType() == typeof(string))
+            {
+                if (PlayerPrefs.HasKey(path))
+                {
+                    target = (T)(object)(PlayerPrefs.GetString(path));
+                }
+            }
         }
 
         [Button("Delete")]

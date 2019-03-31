@@ -70,5 +70,28 @@ namespace EllGames.Istia3.GameSystem.Actor.Player.Equipment
         {
             Equipments.EquipmentSlots.ForEach(slot => ((EllGames.Istia3.Save.ISavable)slot).Load());
         }
+
+        [Button("Refresh")]
+        public void Refresh()
+        {
+            foreach(var slot in Equipments.EquipmentSlots)
+            {
+                var uiSlot = EquipmentWindow.SearchSlot(slot.SlotID);
+                if (uiSlot == null) throw new System.Exception("対象のUIスロットが見つかりません。");
+
+                if (slot.IsEmpty())
+                {
+                    uiSlot.Unassign();
+                    continue;
+                }
+                else
+                {
+                    var info = EquipmentInfoProvider.Provide(slot.EquipmentInfoID);
+                    if (info == null) throw new System.Exception("対象のEquipmentInfoが見つかりません。");
+
+                    uiSlot.Assign(info);
+                }
+            }
+        }
     }
 }

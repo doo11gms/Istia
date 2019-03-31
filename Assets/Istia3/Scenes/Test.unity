@@ -3325,7 +3325,7 @@ MonoBehaviour:
       Data: "\u30BD\u30FC\u30C9"
     - Name: m_EquipmentInfoID
       Entry: 1
-      Data: "\u30C6\u30B9\u30C8\u7528\u30BD\u30FC\u30C92"
+      Data: 
 --- !u!1 &138268918
 GameObject:
   m_ObjectHideFlags: 0
@@ -5081,7 +5081,7 @@ MonoBehaviour:
       Entry: 1
       Data: "\u30B7\u30FC\u30EB\u30C9"
     - Name: m_EquipmentInfoID
-      Entry: 6
+      Entry: 1
       Data: 
 --- !u!1 &802706246
 GameObject:
@@ -7554,7 +7554,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1443345339
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7595,7 +7595,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 373e14e6067a8cb42adc9e4ef37bc4fb, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -8477,7 +8477,6 @@ MonoBehaviour:
     SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects:
-    - {fileID: 11400000, guid: 56426429755b923498f01a5af38397b4, type: 2}
     - {fileID: 1443345340}
     - {fileID: 1494554898}
     - {fileID: 1116757391}
@@ -8490,17 +8489,17 @@ MonoBehaviour:
       Entry: 3
       Data: 0
     - Name: Content
-      Entry: 10
-      Data: 0
+      Entry: 6
+      Data: 
     - Name: IconImage
       Entry: 10
-      Data: 1
+      Data: 0
     - Name: HoverOverlay
       Entry: 10
-      Data: 2
+      Data: 1
     - Name: PressOverlay
       Entry: 10
-      Data: 3
+      Data: 2
 --- !u!1 &1742585824
 GameObject:
   m_ObjectHideFlags: 0
