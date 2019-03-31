@@ -47,9 +47,8 @@ namespace EllGames.Istia3.GameSystem.Actor.Player.Equipment
 
         [Title("Advanced Buttons")]
         [Button("New Slot")]
-        public void NewSlot()
+        public void NewSlot(DB.Inventory.EquipmentCategory equipmentCategory)
         {
-
         }
 
         [Button("Delete All Slots")]
