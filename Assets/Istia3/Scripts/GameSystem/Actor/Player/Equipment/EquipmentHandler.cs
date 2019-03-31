@@ -55,7 +55,7 @@ namespace EllGames.Istia3.GameSystem.Actor.Player.Equipment
         [Button("Delete All Slots")]
         public void DeleteAllSlots()
         {
-
+            Equipments.EquipmentSlots = new List<EquipmentSlot>();
         }
     }
 }
