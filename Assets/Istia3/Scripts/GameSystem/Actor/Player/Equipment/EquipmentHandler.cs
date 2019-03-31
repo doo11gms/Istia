@@ -14,6 +14,7 @@ namespace EllGames.Istia3.GameSystem.Actor.Player.Equipment
     {
         [OdinSerialize, Required] Equipments Equipments { get; set; }
 
+        [Title("Buttons")]
         [Button("Equip")]
         public bool Equip(DB.Inventory.EquipmentInfo equipmentInfo)
         {
@@ -42,6 +43,22 @@ namespace EllGames.Istia3.GameSystem.Actor.Player.Equipment
         public void UnequipAll()
         {
             Equipments.EquipmentSlots.ForEach(slot => slot.Emptimize());
+        }
+
+        [Title("Advanced Buttons")]
+        public void NewSlot()
+        {
+
+        }
+
+        public void ChangeSlotCategory()
+        {
+
+        }
+
+        public void DeleteAllSlots()
+        {
+
         }
     }
 }
