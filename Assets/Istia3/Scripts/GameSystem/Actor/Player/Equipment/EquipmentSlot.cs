@@ -52,7 +52,7 @@ namespace EllGames.Istia3.GameSystem.Actor.Player.Equipment
             m_EquipmentInfoID = equipmentInfoID;
         }
 
-        public bool IsEmpty() => m_EquipmentInfoID == null;
+        public bool IsEmpty() => m_EquipmentInfoID == "";
 
         public void SetContent(string equipmentInfoID)
         {
