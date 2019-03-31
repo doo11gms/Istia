@@ -44,17 +44,5 @@ namespace EllGames.Istia3.GameSystem.Actor.Player.Equipment
         {
             Equipments.EquipmentSlots.ForEach(slot => slot.Emptimize());
         }
-
-        [Title("Advanced Buttons")]
-        [Button("New Slot")]
-        public void NewSlot(DB.Inventory.EquipmentCategory equipmentCategory)
-        {
-        }
-
-        [Button("Delete All Slots")]
-        public void DeleteAllSlots()
-        {
-            Equipments.EquipmentSlots = new List<EquipmentSlot>();
-        }
     }
 }
