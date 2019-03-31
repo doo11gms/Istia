@@ -13,7 +13,6 @@ namespace EllGames.Istia3.GameSystem.Actor.Player.Equipment
 {
     public class EquipmentSlot : SerializedMonoBehaviour, ISavable
     {
-        [Button("Save")]
         void ISavable.Save()
         {
             SaveHandler.Save(this, m_SlotID, nameof(m_SlotID));
@@ -21,7 +20,6 @@ namespace EllGames.Istia3.GameSystem.Actor.Player.Equipment
             SaveHandler.Save(this, m_EquipmentInfoID, nameof(m_EquipmentInfoID));
         }
 
-        [Button("Load")]
         void ISavable.Load()
         {
             SaveHandler.Load(this, ref m_SlotID, nameof(m_SlotID));
@@ -30,13 +28,22 @@ namespace EllGames.Istia3.GameSystem.Actor.Player.Equipment
         }
 
         [OdinSerialize] int m_SlotID;
-        public int SlotID { get; set; }
+        public int SlotID
+        {
+            get { return m_SlotID; }
+        }
 
         [OdinSerialize] string m_CategoryID;
-        public string CategoryID { get; set; }
+        public string CategoryID
+        {
+            get { return m_CategoryID; }
+        }
 
         [OdinSerialize] string m_EquipmentInfoID;
-        public string EquipmentInfoID { get; set; }
+        public string EquipmentInfoID
+        {
+            get { return m_EquipmentInfoID; }
+        }
 
         public EquipmentSlot(int slotID = 0, string categoryID = null, string equipmentInfoID = null)
         {

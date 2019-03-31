@@ -8,10 +8,40 @@ using UnityEngine.EventSystems;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 
-namespace EllGames
+namespace EllGames.Istia3.GameSystem.Actor.Player.Equipment
 {
     public class EquipmentHandler : SerializedMonoBehaviour
     {
-	
+        [OdinSerialize, Required] Equipments Equipments { get; set; }
+
+        [Button("Equip")]
+        public bool Equip(DB.Inventory.EquipmentInfo equipmentInfo)
+        {
+            foreach(var slot in Equipments.EquipmentSlots)
+            {
+                if (slot.CategoryID != equipmentInfo.EquipmentCategory.ID) continue;
+                if (!slot.IsEmpty()) continue;
+                slot.SetContent(equipmentInfo.ID);
+                return true;
+            }
+
+            return false;
+        }
+
+        [Button("Unequip")]
+        public void Unequip(int slotID)
+        {
+            var slot = Equipments.SearchSlot(slotID);
+
+            if (slot == null) throw new System.Exception("対象のスロットが存在しません。");
+
+            slot.Emptimize();
+        }
+
+        [Button("Unequip All")]
+        public void UnequipAll()
+        {
+            Equipments.EquipmentSlots.ForEach(slot => slot.Emptimize());
+        }
     }
 }

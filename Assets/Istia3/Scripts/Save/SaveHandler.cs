@@ -10,7 +10,8 @@ using Sirenix.Serialization;
 
 namespace EllGames.Istia3.Save
 {
-    public class SaveHandler : SerializedMonoBehaviour
+    [CreateAssetMenu(fileName = "SaveHandler", menuName = "Istia3/Save/SaveHandler")]
+    public class SaveHandler : SerializedScriptableObject
     {
 	    public static string Path(Object obj, string name)
         {
@@ -32,6 +33,7 @@ namespace EllGames.Istia3.Save
             if (target.GetType() == typeof(string)) target = (T)(object)(PlayerPrefs.GetString(path));
         }
 
+        [Button("Delete")]
         public static void Delete()
         {
             PlayerPrefs.DeleteAll();
