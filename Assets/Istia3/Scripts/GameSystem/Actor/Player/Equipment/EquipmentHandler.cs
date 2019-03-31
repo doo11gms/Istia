@@ -44,5 +44,17 @@ namespace EllGames.Istia3.GameSystem.Actor.Player.Equipment
         {
             Equipments.EquipmentSlots.ForEach(slot => slot.Emptimize());
         }
+
+        [Button("Save")]
+        public void Save()
+        {
+            Equipments.EquipmentSlots.ForEach(slot => ((EllGames.Istia3.Save.ISavable)slot).Save());
+        }
+
+        [Button("Load")]
+        public void Load()
+        {
+            Equipments.EquipmentSlots.ForEach(slot => ((EllGames.Istia3.Save.ISavable)slot).Load());
+        }
     }
 }
