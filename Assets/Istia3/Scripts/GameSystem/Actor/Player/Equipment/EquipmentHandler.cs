@@ -43,16 +43,20 @@ namespace EllGames.Istia3.GameSystem.Actor.Player.Equipment
         public void Unequip(int slotID)
         {
             var slot = Equipments.SearchSlot(slotID);
-
             if (slot == null) throw new System.Exception("対象のスロットが存在しません。");
 
+            var slotUI = EquipmentWindow.SearchSlot(slot.SlotID);
+            if (slotUI == null) throw new System.Exception("対象のUIスロットがnullです。");
+
             slot.Emptimize();
+            slotUI.Unassign();
         }
 
         [Button("Unequip All")]
         public void UnequipAll()
         {
             Equipments.EquipmentSlots.ForEach(slot => slot.Emptimize());
+            EquipmentWindow.EquipmentSlots.ForEach(slot => slot.Unassign());
         }
 
         [Button("Save")]

@@ -10,7 +10,7 @@ using Sirenix.Serialization;
 
 namespace EllGames.Istia3.DB.Inventory
 {
-    public abstract class InventoryItemBase : SerializedScriptableObject
+    public abstract class InventoryItemInfoBase : SerializedScriptableObject
     {
         [Title("Drop")]
         [OdinSerialize] public bool Droppable { get; private set; } = true;

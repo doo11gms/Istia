@@ -11,7 +11,7 @@ using Sirenix.Serialization;
 namespace EllGames.Istia3.DB.Inventory
 {
     [CreateAssetMenu(fileName = "EquipmentInfo", menuName = "Istia3/DB/EquipmentInfo")]
-    public class EquipmentInfo : InventoryItemBase
+    public class EquipmentInfo : InventoryItemInfoBase
     {
         [Title("Meta")]
         [OdinSerialize] public string ID { get; set; }
