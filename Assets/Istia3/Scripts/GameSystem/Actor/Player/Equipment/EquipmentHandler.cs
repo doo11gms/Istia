@@ -46,16 +46,19 @@ namespace EllGames.Istia3.GameSystem.Actor.Player.Equipment
         }
 
         [Title("Advanced Buttons")]
+        [Button("New Slot")]
         public void NewSlot()
         {
 
         }
 
+        [Button("Change Slot Category")]
         public void ChangeSlotCategory()
         {
 
         }
 
+        [Button("Delete All Slots")]
         public void DeleteAllSlots()
         {
 
