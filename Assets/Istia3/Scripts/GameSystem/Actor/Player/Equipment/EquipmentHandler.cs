@@ -13,6 +13,8 @@ namespace EllGames.Istia3.GameSystem.Actor.Player.Equipment
     public class EquipmentHandler : SerializedMonoBehaviour
     {
         [OdinSerialize, Required] Equipments Equipments { get; set; }
+        [OdinSerialize, Required] UI.Window.EquipmentWindow EquipmentWindow { get; set; }
+        [OdinSerialize, Required] DB.Inventory.EquipmentInfoProvider EquipmentInfoProvider { get; set; }
 
         [Title("Buttons")]
         [Button("Equip")]
@@ -22,7 +24,15 @@ namespace EllGames.Istia3.GameSystem.Actor.Player.Equipment
             {
                 if (slot.CategoryID != equipmentInfo.EquipmentCategory.ID) continue;
                 if (!slot.IsEmpty()) continue;
+
+                var UISlot = EquipmentWindow.SearchSlot(slot.SlotID);
+                if (UISlot == null) throw new System.Exception("UISlotが見つかりません。");
+
+                var info = EquipmentInfoProvider.Provide(equipmentInfo.ID);
+                if (info == null) throw new System.Exception("EquipmentInfoがnullです。");
+
                 slot.SetContent(equipmentInfo.ID);
+                UISlot.Assign(info);
                 return true;
             }
 

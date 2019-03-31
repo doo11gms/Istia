@@ -15,5 +15,8 @@ namespace EllGames.Istia3.DB.Inventory
         [Title("Drop")]
         [OdinSerialize] public bool Droppable { get; private set; } = true;
         [OdinSerialize, EnableIf("Droppable")] public GameObject Model { get; private set; }
+
+        [Title("Graphic")]
+        [OdinSerialize] public Sprite IconSprite { get; private set; }
     }
 }
