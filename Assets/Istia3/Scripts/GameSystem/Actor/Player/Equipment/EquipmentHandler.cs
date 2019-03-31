@@ -23,7 +23,7 @@ namespace EllGames.Istia3.GameSystem.Actor.Player.Equipment
             foreach(var slot in Equipments.EquipmentSlots)
             {
                 if (slot.CategoryID != equipmentInfo.EquipmentCategory.ID) continue;
-                if (!slot.IsEmpty()) continue;
+                if (!slot.IsEmpty) continue;
 
                 var UISlot = EquipmentWindow.SearchSlot(slot.SlotID);
                 if (UISlot == null) throw new System.Exception("UISlotが見つかりません。");
@@ -79,7 +79,7 @@ namespace EllGames.Istia3.GameSystem.Actor.Player.Equipment
                 var uiSlot = EquipmentWindow.SearchSlot(slot.SlotID);
                 if (uiSlot == null) throw new System.Exception("対象のUIスロットが見つかりません。");
 
-                if (slot.IsEmpty())
+                if (slot.IsEmpty)
                 {
                     uiSlot.Unassign();
                     continue;

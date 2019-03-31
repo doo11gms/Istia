@@ -18,6 +18,7 @@ namespace EllGames.Istia3.GameSystem.Actor.Player.Equipment
             SaveHandler.Save(this, m_SlotID, nameof(m_SlotID));
             SaveHandler.Save(this, m_CategoryID, nameof(m_CategoryID));
             SaveHandler.Save(this, m_EquipmentInfoID, nameof(m_EquipmentInfoID));
+            SaveHandler.Save(this, m_IsEmpty, nameof(m_IsEmpty));
         }
 
         void ISavable.Load()
@@ -25,6 +26,7 @@ namespace EllGames.Istia3.GameSystem.Actor.Player.Equipment
             SaveHandler.Load(this, ref m_SlotID, nameof(m_SlotID));
             SaveHandler.Load(this, ref m_CategoryID, nameof(m_CategoryID));
             SaveHandler.Load(this, ref m_EquipmentInfoID, nameof(m_EquipmentInfoID));
+            SaveHandler.Load(this, ref m_IsEmpty, nameof(m_IsEmpty));
         }
 
         [OdinSerialize] int m_SlotID;
@@ -45,6 +47,12 @@ namespace EllGames.Istia3.GameSystem.Actor.Player.Equipment
             get { return m_EquipmentInfoID; }
         }
 
+        [OdinSerialize] bool m_IsEmpty = false;
+        public bool IsEmpty
+        {
+            get { return m_IsEmpty; }
+        }
+
         public EquipmentSlot(int slotID = 0, string categoryID = null, string equipmentInfoID = null)
         {
             m_SlotID = slotID;
@@ -52,16 +60,16 @@ namespace EllGames.Istia3.GameSystem.Actor.Player.Equipment
             m_EquipmentInfoID = equipmentInfoID;
         }
 
-        public bool IsEmpty() => m_EquipmentInfoID == "";
-
         public void SetContent(string equipmentInfoID)
         {
             m_EquipmentInfoID = equipmentInfoID;
+            m_IsEmpty = false;
         }
 
         public void Emptimize()
         {
             m_EquipmentInfoID = null;
+            m_IsEmpty = true;
         }
     }
 }
