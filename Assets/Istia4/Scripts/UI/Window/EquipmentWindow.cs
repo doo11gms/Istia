@@ -12,5 +12,16 @@ namespace EllGames.Istia4.UI.Window
 {
     public class EquipmentWindow : WindowBase
     {
+        [OdinSerialize] public List<Slot.EquipSlot> EquipSlots { get; set; } = new List<Slot.EquipSlot>();
+
+        public Slot.EquipSlot SearchSlot(int slotID)
+        {
+            foreach(var slot in EquipSlots)
+            {
+                if (slot.SlotID == slotID) return slot;
+            }
+
+            return null;
+        }
     }
 }

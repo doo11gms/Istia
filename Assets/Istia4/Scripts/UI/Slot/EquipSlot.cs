@@ -73,7 +73,7 @@ namespace EllGames.Istia4.UI.Slot
             IconImage.gameObject.SetActive(true);
             EquipText.gameObject.SetActive(true);
 
-            return false;
+            return true;
         }
 
         public DB.Inventory.EquipmentInfo Unequip()
@@ -92,6 +92,12 @@ namespace EllGames.Istia4.UI.Slot
 
         public void Refresh()
         {
+            if (string.IsNullOrEmpty(m_EquipmentInfoID))
+            {
+                Emptimize();
+                return;
+            }
+
             var info = EquipmentInfoProvider.Provide(m_EquipmentInfoID);
             if (info == null) throw new System.Exception("EquipmentInfoの取得に失敗しました。");
 

@@ -23,8 +23,12 @@ namespace EllGames.Istia4.Save
 
         public static void Save<T>(Object obj, T target, string name)
         {
-            if (target == null) return;
             var path = Path(obj, name);
+            if (target == null)
+            {
+                PlayerPrefs.SetString(path, null);
+                return;
+            }
             if (target.GetType() == typeof(int)) PlayerPrefs.SetInt(path, (int)((object)target));
             if (target.GetType() == typeof(string)) PlayerPrefs.SetString(path, (string)((object)(target)));
             if (target.GetType() == typeof(bool)) PlayerPrefs.SetInt(path, IntOfBool((bool)((object)target)));
