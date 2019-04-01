@@ -27,6 +27,12 @@ namespace EllGames.Istia4.GameSystem.Actor.Player
             return EquipWindow.SearchSlot(slotID).Unequip();
         }
 
+        [Button("Unequip All")]
+        public void UnequipAll()
+        {
+            EquipWindow.EquipSlots.ForEach(slot => slot.Emptimize());
+        }
+
         [Button("Refresh")]
         public void Refresh()
         {
