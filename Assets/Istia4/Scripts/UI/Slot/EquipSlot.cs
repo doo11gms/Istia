@@ -10,8 +10,38 @@ using Sirenix.Serialization;
 
 namespace EllGames.Istia4.UI.Slot
 {
-    public class EquipSlot : SlotBase, Save.ISavable
+    public class EquipSlot : SlotBase, Save.ISavable, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler
     {
+        void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
+        {
+            if (IsEmpty()) return;
+            HoverOverlay.gameObject.SetActive(true);
+        }
+
+        void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
+        {
+            HoverOverlay.gameObject.SetActive(false);
+        }
+
+        void IPointerDownHandler.OnPointerDown(PointerEventData eventData)
+        {
+            if (IsEmpty()) return;
+            if (UnityEngine.Input.GetMouseButton(Config.KeyConfig.EquipMouseButton))
+            {
+                EquipHandler.Unequip(SlotID);
+                return;
+            }
+            else
+            {
+                PressOverlay.gameObject.SetActive(true);
+            }
+        }
+
+        void IPointerUpHandler.OnPointerUp(PointerEventData eventData)
+        {
+            PressOverlay.gameObject.SetActive(false);
+        }
+
         void Save.ISavable.Save()
         {
             Save.SaveHandler.Save(this, m_EquipmentInfoID, nameof(m_EquipmentInfoID));
@@ -24,6 +54,7 @@ namespace EllGames.Istia4.UI.Slot
 
         [Title("Required")]
         [OdinSerialize, Required] public DB.Inventory.EquipmentInfoProvider EquipmentInfoProvider { get; private set; }
+        [OdinSerialize, Required] public GameSystem.Actor.Player.EquipHandler EquipHandler { get; private set; }
 
         [TitleGroup("Meta")]
         [OdinSerialize] public DB.Inventory.EquipmentCategory EquipmentCategory { get; private set; }
@@ -51,6 +82,8 @@ namespace EllGames.Istia4.UI.Slot
             IconImage.sprite = null;
             IconImage.gameObject.SetActive(false);
             EquipText.gameObject.SetActive(false);
+            HoverOverlay.gameObject.SetActive(false);
+            PressOverlay.gameObject.SetActive(false);
         }
 
         public bool Equip(DB.Inventory.EquipmentInfo equipmentInfo)

@@ -3299,6 +3299,7 @@ MonoBehaviour:
     SerializedBytes: 
     ReferencedUnityObjects:
     - {fileID: 11400000, guid: faa3fa1575e38b34faa03acb5c64ec1d, type: 2}
+    - {fileID: 262521000}
     - {fileID: 11400000, guid: a40ac600a8a7aa947a43fe2a186bd342, type: 2}
     - {fileID: 220956032}
     - {fileID: 69050862}
@@ -3315,24 +3316,27 @@ MonoBehaviour:
     - Name: EquipmentInfoProvider
       Entry: 10
       Data: 0
-    - Name: EquipmentCategory
+    - Name: EquipHandler
       Entry: 10
       Data: 1
+    - Name: EquipmentCategory
+      Entry: 10
+      Data: 2
     - Name: EquipmentInfo
       Entry: 6
       Data: 
     - Name: IconImage
       Entry: 10
-      Data: 2
+      Data: 3
     - Name: HoverOverlay
       Entry: 10
-      Data: 3
+      Data: 4
     - Name: PressOverlay
       Entry: 10
-      Data: 4
+      Data: 5
     - Name: EquipText
       Entry: 10
-      Data: 5
+      Data: 6
     - Name: m_EquipmentInfoID
       Entry: 6
       Data: 
