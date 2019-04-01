@@ -10,7 +10,7 @@ using Sirenix.Serialization;
 
 namespace EllGames.Istia4.DB
 {
-    [CreateAssetMenu(fileName = "Parameter", menuName = "Istia3/DB/Parameter")]
+    [CreateAssetMenu(fileName = "Parameter", menuName = "Istia4/DB/Parameter")]
     public class Parameter : SerializedScriptableObject
     {
         [Title("Basic")]
