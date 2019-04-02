@@ -45,7 +45,6 @@ namespace EllGames.Istia4.UI.Slot
             CountText.text = count.ToString();
         }
 
-        [Button("Emptimize")]
         public void Emptimize()
         {
             m_ItemInfoID = null;
@@ -65,7 +64,6 @@ namespace EllGames.Istia4.UI.Slot
             return ItemInfo == null;
         }
 
-        [Button("Push")]
         public bool Push(DB.Inventory.ItemInfo itemInfo)
         {
             if (itemInfo.ItemCategory != ItemCategory) return false;
@@ -81,7 +79,6 @@ namespace EllGames.Istia4.UI.Slot
             return true;
         }
 
-        [Button("Dispose")]
         public bool Dispose()
         {
             if (IsEmpty()) return false;
