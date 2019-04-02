@@ -68,9 +68,15 @@ namespace EllGames.Istia4.GameSystem.Actor.Player
         }
 
         [Button("Use")]
-        public bool Use()
+        public bool Use(UI.Slot.ItemSlot itemSlot)
         {
-            return true;
+            return itemSlot.Use();
+        }
+
+        [Button("Sort")]
+        public void Sort()
+        {
+            Debug.Log("TODO");
         }
     }
 }

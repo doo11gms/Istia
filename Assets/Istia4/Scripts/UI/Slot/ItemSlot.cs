@@ -10,11 +10,37 @@ using Sirenix.Serialization;
 
 namespace EllGames.Istia4.UI.Slot
 {
-    public class ItemSlot : InventorySlotBase
+    public class ItemSlot : InventorySlotBase, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler
     {
+        void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
+        {
+            if (IsEmpty()) return;
+            HoverOverlay.gameObject.SetActive(true);
+        }
+
+        void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
+        {
+            HoverOverlay.gameObject.SetActive(false);
+        }
+
+        void IPointerDownHandler.OnPointerDown(PointerEventData eventData)
+        {
+            if (IsEmpty()) return;
+            if (UnityEngine.Input.GetMouseButton(Config.KeyConfig.UseItemMouseButton))
+            {
+                InventoryHandler.Use(this);
+            }
+        }
+
+        void IPointerUpHandler.OnPointerUp(PointerEventData eventData)
+        {
+            PressOverlay.gameObject.SetActive(false);
+        }
+
         [Title("Required")]
         [OdinSerialize, Required] public DB.Inventory.ItemInfoProvider ItemInfoProvider { get; private set; }
         [OdinSerialize, Required] public GameSystem.Actor.Player.InventoryHandler InventoryHandler { get; private set; }
+        [OdinSerialize, Required] public GameSystem.Item.ItemCoolDownHandler ItemCoolDownHandler { get; private set; }
 
         [TitleGroup("Meta")]
         [OdinSerialize] public DB.Inventory.ItemCategory ItemCategory { get; private set; }
@@ -68,6 +94,7 @@ namespace EllGames.Istia4.UI.Slot
         {
             if (itemInfo.ItemCategory != ItemCategory) return false;
             if (Count + 1 > itemInfo.MaxStackCount) return false;
+            if (!IsEmpty() && itemInfo.ID != ItemInfo.ID) return false;
 
             m_ItemInfoID = itemInfo.ID;
             ItemInfo = itemInfo;
@@ -95,6 +122,44 @@ namespace EllGames.Istia4.UI.Slot
             }
 
             return true;
+        }
+
+        public bool Use()
+        {
+            if (IsEmpty()) throw new System.Exception("スロットが空であるため、使用できません。");
+            if (!ItemInfo.Usable) throw new System.Exception("使用できないアイテムです。");
+
+            if (ItemInfo.UsingCoolTime)
+            {
+                if (!ItemCoolDownHandler.CoolTimeFinished(ItemInfo))
+                {
+                    Debug.Log("クールタイム中のため、使用できません。");
+                    return false;
+                }
+
+                ItemCoolDownHandler.Assign(ItemInfo);
+            }
+
+            if (ItemInfo.ItemUsingEffects != null)
+            {
+                foreach(var effect in ItemInfo.ItemUsingEffects)
+                {
+                    Instantiate(effect);
+                }
+            }
+
+            return Dispose();
+        }
+
+        private void Update()
+        {
+            if (IsEmpty()) return;
+
+            if (ItemInfo.UsingCoolTime)
+            {
+                CoolDownOverlay.fillAmount = ItemCoolDownHandler.CoolTimeRemain(ItemInfo) / ItemInfo.CoolTime;
+                CoolDownOverlay.gameObject.SetActive(!ItemCoolDownHandler.CoolTimeFinished(ItemInfo));
+            }
         }
     }
 }
