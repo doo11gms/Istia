@@ -12,22 +12,44 @@ namespace EllGames.Istia4.GameSystem.Actor.Player
 {
     public class InventoryHandler : SerializedMonoBehaviour
     {
+        // TODO: ItemInfo,Equipinfoを受け取るんじゃなくてInventoryItemBaseをキャストして使って下さい
+        // TODO:manage getTabID method
+
         [Title("Required")]
         [OdinSerialize, Required] UI.Window.InventoryWindow InventoryWindow;
+        [OdinSerialize, Required] EquipHandler EquipHandler;
 
-        int GetTabID(DB.Inventory.ItemInfo itemInfo)
+        int GetTabID(DB.Inventory.InventoryItemInfoBase inventoryItemInfo)
         {
-            if (itemInfo.ItemCategory.ID == "消耗品") return 0;
+            if (inventoryItemInfo is DB.Inventory.ItemInfo)
+            {
+                var info = inventoryItemInfo as DB.Inventory.ItemInfo;
+                if (info.ItemCategory.ID == "消耗品") return 0;
+            }
+            else if (inventoryItemInfo is DB.Inventory.EquipmentInfo)
+            {
+                return 1;
+            }
 
             throw new System.Exception("該当するタブが見つかりません。");
         }
 
         [Button("Push")]
-        public bool Push(DB.Inventory.ItemInfo itemInfo)
+        public bool Push(DB.Inventory.InventoryItemInfoBase inventoryItemInfo)
         {
-            foreach(var slot in InventoryWindow.SearchTab(GetTabID(itemInfo)).Slots)
+            if (inventoryItemInfo is DB.Inventory.ItemInfo)
             {
-                if ((slot as UI.Slot.ItemSlot).Push(itemInfo)) return true;
+                foreach (var slot in InventoryWindow.SearchTab(GetTabID(inventoryItemInfo)).Slots)
+                {
+                    if ((slot as UI.Slot.ItemSlot).Push(inventoryItemInfo as DB.Inventory.ItemInfo)) return true;
+                }
+            }
+            else if (inventoryItemInfo is DB.Inventory.EquipmentInfo)
+            {
+                foreach (var slot in InventoryWindow.SearchTab(GetTabID(inventoryItemInfo)).Slots)
+                {
+                    if ((slot as UI.Slot.EquipmentSlot).Push(inventoryItemInfo as DB.Inventory.EquipmentInfo)) return true;
+                }
             }
 
             return false;

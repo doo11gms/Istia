@@ -13,15 +13,26 @@ namespace EllGames.Istia4.GameSystem.Actor.Player
 {
     public class EquipHandler : SerializedMonoBehaviour
     {
-        [OdinSerialize] UI.Window.EquipmentWindow EquipWindow { get; set; }
+        [Title("Required")]
+        [OdinSerialize, Required] UI.Window.EquipmentWindow EquipWindow { get; set; }
+        [OdinSerialize, Required] InventoryHandler InventoryHandler { get; set; }
 
         /// <summary>
         /// 対象を装備します。
         /// </summary>
-        /// <param name="slotID"></param>
         /// <param name="equipmentInfo"></param>
         /// <returns></returns>
         [Button("Equip")]
+        public bool Equip(DB.Inventory.EquipmentInfo equipmentInfo)
+        {
+            foreach(var slot in EquipWindow.EquipSlots)
+            {
+                if (slot.Equip(equipmentInfo)) return true;
+            }
+
+            return false;
+        }
+
         public bool Equip(int slotID, DB.Inventory.EquipmentInfo equipmentInfo)
         {
             return EquipWindow.SearchSlot(slotID).Equip(equipmentInfo);
@@ -35,6 +46,7 @@ namespace EllGames.Istia4.GameSystem.Actor.Player
         [Button("Unequip")]
         public bool Unequip(int slotID)
         {
+            if (!InventoryHandler.Push(EquipWindow.SearchSlot(slotID).EquipmentInfo)) return false;
             return EquipWindow.SearchSlot(slotID).Unequip();
         }
 
