@@ -18,7 +18,7 @@ namespace EllGames.Istia4.Config
         [Title("Inventory")]
         public static int UseItemMouseButton = 0;
         public static KeyCode DisposeItemAllKey = KeyCode.LeftAlt;
-        public static int DisposeItemAllMouseButton = 0;
+        public static int DisposeItemAllMouseButton = 1;
         public static int EquipMouseButton = 1;
 
         [Title("Player Move")]

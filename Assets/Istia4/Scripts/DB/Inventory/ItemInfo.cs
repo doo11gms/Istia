@@ -32,7 +32,8 @@ namespace EllGames.Istia4.DB.Inventory
 
         [Title("Usage")]
         [OdinSerialize, PropertyOrder(3)] public bool Usable { get; set; } = true;
-        [OdinSerialize, PropertyOrder(3)] public bool Consumable { get; set; } = true;
+        [OdinSerialize, PropertyOrder(3), EnableIf("Usable")] public bool Consumable { get; set; } = true;
+        [OdinSerialize, PropertyOrder(3), EnableIf("Usable")] public List<GameSystem.Item.ItemUsingEffectBase> ItemUsingEffects = new List<GameSystem.Item.ItemUsingEffectBase>();
 
         [Title("Trade")]
         [OdinSerialize, PropertyOrder(3)] public bool Sellable { get; set; } = true;

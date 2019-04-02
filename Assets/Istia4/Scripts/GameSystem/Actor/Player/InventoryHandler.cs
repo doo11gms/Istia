@@ -48,6 +48,11 @@ namespace EllGames.Istia4.GameSystem.Actor.Player
             return slot.Dispose();
         }
 
+        public bool DisposeAll(UI.Slot.ItemSlot itemSlot)
+        {
+            return itemSlot.DisposeAll();
+        }
+
         [Button("Emptimize")]
         public void Emptimize()
         {
@@ -68,9 +73,33 @@ namespace EllGames.Istia4.GameSystem.Actor.Player
         }
 
         [Button("Use")]
-        public bool Use()
+        public bool Use(UI.Slot.ItemSlot itemSlot)
         {
-            return true;
+            return itemSlot.Use();
+        }
+
+        [Button("Sort")]
+        public void Sort()
+        {
+            Debug.Log("TODO");
+        }
+
+        [Button("Save")]
+        public void Save()
+        {
+            InventoryWindow.Tabs.ForEach(tab => tab.Slots.ForEach(slot => ((Save.ISavable)slot).Save()));
+        }
+
+        [Button("Load")]
+        public void Load()
+        {
+            InventoryWindow.Tabs.ForEach(tab => tab.Slots.ForEach(slot => ((Save.ISavable)slot).Load()));
+        }
+
+        [Button("Refresh")]
+        public void Refresh()
+        {
+            InventoryWindow.Tabs.ForEach(tab => tab.Slots.ForEach(slot => (slot as UI.Slot.ItemSlot).Refresh()));
         }
     }
 }

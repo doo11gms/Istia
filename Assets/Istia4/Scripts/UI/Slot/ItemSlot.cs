@@ -10,11 +10,60 @@ using Sirenix.Serialization;
 
 namespace EllGames.Istia4.UI.Slot
 {
-    public class ItemSlot : InventorySlotBase
+    public class ItemSlot : InventorySlotBase, Save.ISavable, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler
     {
+        void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
+        {
+            if (IsEmpty()) return;
+            HoverOverlay.gameObject.SetActive(true);
+        }
+
+        void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
+        {
+            HoverOverlay.gameObject.SetActive(false);
+        }
+
+        void IPointerDownHandler.OnPointerDown(PointerEventData eventData)
+        {
+            if (IsEmpty()) return;
+            if (UnityEngine.Input.GetMouseButton(Config.KeyConfig.UseItemMouseButton))
+            {
+                InventoryHandler.Use(this);
+            }
+            else
+            {
+                if (ItemInfo.Disposable)
+                {
+                    if (UnityEngine.Input.GetMouseButton(Config.KeyConfig.DisposeItemAllMouseButton) &&
+                        UnityEngine.Input.GetKey(Config.KeyConfig.DisposeItemAllKey))
+                    {
+                        InventoryHandler.DisposeAll(this);
+                    }
+                }
+            }
+        }
+
+        void IPointerUpHandler.OnPointerUp(PointerEventData eventData)
+        {
+            PressOverlay.gameObject.SetActive(false);
+        }
+
+        void Save.ISavable.Save()
+        {
+            Save.SaveHandler.Save(this, m_ItemInfoID, nameof(m_ItemInfoID));
+            Save.SaveHandler.Save(this, m_Count, nameof(m_Count));
+        }
+
+        void Save.ISavable.Load()
+        {
+            Save.SaveHandler.Load(this, ref m_ItemInfoID, nameof(m_ItemInfoID));
+            Save.SaveHandler.Load(this, ref m_Count, nameof(m_Count));
+        }
+
         [Title("Required")]
         [OdinSerialize, Required] public DB.Inventory.ItemInfoProvider ItemInfoProvider { get; private set; }
         [OdinSerialize, Required] public GameSystem.Actor.Player.InventoryHandler InventoryHandler { get; private set; }
+        [OdinSerialize, Required] public GameSystem.Item.ItemCoolDownHandler ItemCoolDownHandler { get; private set; }
 
         [TitleGroup("Meta")]
         [OdinSerialize] public DB.Inventory.ItemCategory ItemCategory { get; private set; }
@@ -30,7 +79,11 @@ namespace EllGames.Istia4.UI.Slot
         [OdinSerialize, ReadOnly] public DB.Inventory.ItemInfo ItemInfo { get; private set; }
 
         [TitleGroup("Content")]
-        [OdinSerialize, ReadOnly] public int Count { get; private set; }
+        [OdinSerialize, ReadOnly] int m_Count;
+        public int Count
+        {
+            get { return m_Count; }
+        }
 
         [Title("UI Reference")]
         [OdinSerialize] Image IconImage { get; set; }
@@ -41,7 +94,7 @@ namespace EllGames.Istia4.UI.Slot
 
         void SetCount(int count)
         {
-            Count = count;
+            m_Count = count;
             CountText.text = count.ToString();
         }
 
@@ -68,6 +121,7 @@ namespace EllGames.Istia4.UI.Slot
         {
             if (itemInfo.ItemCategory != ItemCategory) return false;
             if (Count + 1 > itemInfo.MaxStackCount) return false;
+            if (!IsEmpty() && itemInfo.ID != ItemInfo.ID) return false;
 
             m_ItemInfoID = itemInfo.ID;
             ItemInfo = itemInfo;
@@ -95,6 +149,67 @@ namespace EllGames.Istia4.UI.Slot
             }
 
             return true;
+        }
+
+        public bool DisposeAll()
+        {
+            if (IsEmpty()) return false;
+
+            Emptimize();
+
+            return true;
+        }
+
+        public bool Use()
+        {
+            if (IsEmpty()) throw new System.Exception("スロットが空であるため、使用できません。");
+            if (!ItemInfo.Usable) throw new System.Exception("使用できないアイテムです。");
+
+            if (ItemInfo.UsingCoolTime)
+            {
+                if (!ItemCoolDownHandler.CoolTimeFinished(ItemInfo))
+                {
+                    Debug.Log("クールタイム中のため、使用できません。");
+                    return false;
+                }
+
+                ItemCoolDownHandler.Assign(ItemInfo);
+            }
+
+            if (ItemInfo.ItemUsingEffects != null)
+            {
+                foreach(var effect in ItemInfo.ItemUsingEffects)
+                {
+                    Instantiate(effect);
+                }
+            }
+
+            return Dispose();
+        }
+
+        public void Refresh()
+        {
+            var cnt = Count;
+            Emptimize();
+
+            if (string.IsNullOrEmpty(ItemInfoID)) return;
+
+            var info = ItemInfoProvider.Provide(ItemInfoID);
+            if (info == null) throw new System.Exception("ItemInfoIDに対応するItemInfoが見つかりません。");
+
+            Push(info);
+            SetCount(cnt);
+        }
+
+        private void Update()
+        {
+            if (IsEmpty()) return;
+
+            if (ItemInfo.UsingCoolTime)
+            {
+                CoolDownOverlay.fillAmount = ItemCoolDownHandler.CoolTimeRemain(ItemInfo) / ItemInfo.CoolTime;
+                CoolDownOverlay.gameObject.SetActive(!ItemCoolDownHandler.CoolTimeFinished(ItemInfo));
+            }
         }
     }
 }
