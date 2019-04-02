@@ -30,6 +30,17 @@ namespace EllGames.Istia4.UI.Slot
             {
                 InventoryHandler.Use(this);
             }
+            else
+            {
+                if (ItemInfo.Disposable)
+                {
+                    if (UnityEngine.Input.GetMouseButton(Config.KeyConfig.DisposeItemAllMouseButton) &&
+                        UnityEngine.Input.GetKey(Config.KeyConfig.DisposeItemAllKey))
+                    {
+                        InventoryHandler.DisposeAll(this);
+                    }
+                }
+            }
         }
 
         void IPointerUpHandler.OnPointerUp(PointerEventData eventData)
@@ -120,6 +131,15 @@ namespace EllGames.Istia4.UI.Slot
             {
                 CountText.gameObject.SetActive(false);
             }
+
+            return true;
+        }
+
+        public bool DisposeAll()
+        {
+            if (IsEmpty()) return false;
+
+            Emptimize();
 
             return true;
         }

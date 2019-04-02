@@ -61,7 +61,7 @@ MonoBehaviour:
       Data: 100
     - Name: Disposable
       Entry: 5
-      Data: true
+      Data: false
     - Name: UsingHotKey
       Entry: 5
       Data: false

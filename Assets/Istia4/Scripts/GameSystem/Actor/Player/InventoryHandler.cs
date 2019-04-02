@@ -48,6 +48,11 @@ namespace EllGames.Istia4.GameSystem.Actor.Player
             return slot.Dispose();
         }
 
+        public bool DisposeAll(UI.Slot.ItemSlot itemSlot)
+        {
+            return itemSlot.DisposeAll();
+        }
+
         [Button("Emptimize")]
         public void Emptimize()
         {
