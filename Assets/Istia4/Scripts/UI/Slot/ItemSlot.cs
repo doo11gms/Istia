@@ -51,11 +51,13 @@ namespace EllGames.Istia4.UI.Slot
         void Save.ISavable.Save()
         {
             Save.SaveHandler.Save(this, m_ItemInfoID, nameof(m_ItemInfoID));
+            Save.SaveHandler.Save(this, m_Count, nameof(m_Count));
         }
 
         void Save.ISavable.Load()
         {
             Save.SaveHandler.Load(this, ref m_ItemInfoID, nameof(m_ItemInfoID));
+            Save.SaveHandler.Load(this, ref m_Count, nameof(m_Count));
         }
 
         [Title("Required")]
@@ -77,7 +79,11 @@ namespace EllGames.Istia4.UI.Slot
         [OdinSerialize, ReadOnly] public DB.Inventory.ItemInfo ItemInfo { get; private set; }
 
         [TitleGroup("Content")]
-        [OdinSerialize, ReadOnly] public int Count { get; private set; }
+        [OdinSerialize, ReadOnly] int m_Count;
+        public int Count
+        {
+            get { return m_Count; }
+        }
 
         [Title("UI Reference")]
         [OdinSerialize] Image IconImage { get; set; }
@@ -88,7 +94,7 @@ namespace EllGames.Istia4.UI.Slot
 
         void SetCount(int count)
         {
-            Count = count;
+            m_Count = count;
             CountText.text = count.ToString();
         }
 
@@ -179,6 +185,20 @@ namespace EllGames.Istia4.UI.Slot
             }
 
             return Dispose();
+        }
+
+        public void Refresh()
+        {
+            var cnt = Count;
+            Emptimize();
+
+            if (string.IsNullOrEmpty(ItemInfoID)) return;
+
+            var info = ItemInfoProvider.Provide(ItemInfoID);
+            if (info == null) throw new System.Exception("ItemInfoIDに対応するItemInfoが見つかりません。");
+
+            Push(info);
+            SetCount(cnt);
         }
 
         private void Update()

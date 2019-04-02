@@ -83,5 +83,23 @@ namespace EllGames.Istia4.GameSystem.Actor.Player
         {
             Debug.Log("TODO");
         }
+
+        [Button("Save")]
+        public void Save()
+        {
+            InventoryWindow.Tabs.ForEach(tab => tab.Slots.ForEach(slot => ((Save.ISavable)slot).Save()));
+        }
+
+        [Button("Load")]
+        public void Load()
+        {
+            InventoryWindow.Tabs.ForEach(tab => tab.Slots.ForEach(slot => ((Save.ISavable)slot).Load()));
+        }
+
+        [Button("Refresh")]
+        public void Refresh()
+        {
+            InventoryWindow.Tabs.ForEach(tab => tab.Slots.ForEach(slot => (slot as UI.Slot.ItemSlot).Refresh()));
+        }
     }
 }
