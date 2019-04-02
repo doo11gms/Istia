@@ -10,7 +10,7 @@ using Sirenix.Serialization;
 
 namespace EllGames.Istia4.UI.Slot
 {
-    public class ItemSlot : InventorySlotBase, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler
+    public class ItemSlot : InventorySlotBase, Save.ISavable, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler
     {
         void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
         {
@@ -46,6 +46,16 @@ namespace EllGames.Istia4.UI.Slot
         void IPointerUpHandler.OnPointerUp(PointerEventData eventData)
         {
             PressOverlay.gameObject.SetActive(false);
+        }
+
+        void Save.ISavable.Save()
+        {
+            Save.SaveHandler.Save(this, m_ItemInfoID, nameof(m_ItemInfoID));
+        }
+
+        void Save.ISavable.Load()
+        {
+            Save.SaveHandler.Load(this, ref m_ItemInfoID, nameof(m_ItemInfoID));
         }
 
         [Title("Required")]
