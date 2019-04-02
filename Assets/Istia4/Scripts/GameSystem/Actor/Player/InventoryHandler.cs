@@ -12,8 +12,11 @@ namespace EllGames.Istia4.GameSystem.Actor.Player
 {
     public class InventoryHandler : SerializedMonoBehaviour
     {
+        // TODO: ItemInfo,Equipinfoを受け取るんじゃなくてInventoryItemBaseをキャストして使って下さい
+
         [Title("Required")]
         [OdinSerialize, Required] UI.Window.InventoryWindow InventoryWindow;
+        [OdinSerialize, Required] EquipHandler EquipHandler;
 
         int GetTabID(DB.Inventory.ItemInfo itemInfo)
         {
@@ -22,12 +25,28 @@ namespace EllGames.Istia4.GameSystem.Actor.Player
             throw new System.Exception("該当するタブが見つかりません。");
         }
 
+        int GetTabID(DB.Inventory.EquipmentInfo equipmentInfo)
+        {
+            return 1;
+        }
+
         [Button("Push")]
         public bool Push(DB.Inventory.ItemInfo itemInfo)
         {
             foreach(var slot in InventoryWindow.SearchTab(GetTabID(itemInfo)).Slots)
             {
                 if ((slot as UI.Slot.ItemSlot).Push(itemInfo)) return true;
+            }
+
+            return false;
+        }
+
+        [Button("PushEquipment")]
+        public bool PushEquipment(DB.Inventory.EquipmentInfo equipmentInfo)
+        {
+            foreach(var slot in InventoryWindow.SearchTab(GetTabID(equipmentInfo)).Slots)
+            {
+                if ((slot as UI.Slot.EquipmentSlot).Push(equipmentInfo)) return true;
             }
 
             return false;
