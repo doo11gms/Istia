@@ -68,7 +68,6 @@ namespace EllGames.Istia4.UI.Slot
         [Button("Push")]
         public bool Push(DB.Inventory.ItemInfo itemInfo)
         {
-            if (!IsEmpty()) return false;
             if (itemInfo.ItemCategory != ItemCategory) return false;
             if (Count + 1 > itemInfo.MaxStackCount) return false;
 
@@ -82,6 +81,23 @@ namespace EllGames.Istia4.UI.Slot
             return true;
         }
 
+        [Button("Dispose")]
+        public bool Dispose()
+        {
+            if (IsEmpty()) return false;
 
+            SetCount(Count - 1);
+
+            if (Count == 0)
+            {
+                Emptimize();
+            }
+            else if (Count == 1)
+            {
+                CountText.gameObject.SetActive(false);
+            }
+
+            return true;
+        }
     }
 }

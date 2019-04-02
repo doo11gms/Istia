@@ -15,15 +15,29 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects: []
+    ReferencedUnityObjects:
+    - {fileID: 21300000, guid: 3e7148ca3b5e7394597a7f6947d7e5b9, type: 3}
+    - {fileID: 11400000, guid: 75ba82b2b31fe2f4784a1a514cfb15b7, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes:
+    - Name: Droppable
+      Entry: 5
+      Data: true
+    - Name: Model
+      Entry: 6
+      Data: 
+    - Name: IconSprite
+      Entry: 10
+      Data: 0
     - Name: ID
       Entry: 1
       Data: "\u30C6\u30B9\u30C8\u7528\u6D88\u8CBB\u30A2\u30A4\u30C6\u30E0A"
+    - Name: ItemCategory
+      Entry: 10
+      Data: 1
     - Name: ItemName
       Entry: 1
       Data: "\u30C6\u30B9\u30C8\u7528\u6D88\u8CBB\u30A2\u30A4\u30C6\u30E0A"
