@@ -26,9 +26,19 @@ namespace EllGames.Istia4.UI.Slot
         void IPointerDownHandler.OnPointerDown(PointerEventData eventData)
         {
             if (IsEmpty()) return;
-            if (UnityEngine.Input.GetMouseButton(Config.KeyConfig.EquipMouseButton))
+            PressOverlay.gameObject.SetActive(true);
+
+            if (UnityEngine.Input.GetMouseButton(Config.KeyConfig.DisposeItemAllMouseButton) && UnityEngine.Input.GetKey(Config.KeyConfig.DisposeItemAllKey))
             {
-                PressOverlay.gameObject.SetActive(true);
+                if (!EquipmentInfo.Droppable)
+                {
+                    Debug.Log("この装備品は捨てられません。");
+                    return;
+                }
+                Emptimize();
+            }
+            else if (UnityEngine.Input.GetMouseButton(Config.KeyConfig.EquipMouseButton))
+            {
                 if (!EquipHandler.Equip(EquipmentInfo)) return;
                 Emptimize();
             }

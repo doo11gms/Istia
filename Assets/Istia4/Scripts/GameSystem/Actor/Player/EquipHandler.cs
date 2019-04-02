@@ -46,7 +46,7 @@ namespace EllGames.Istia4.GameSystem.Actor.Player
         [Button("Unequip")]
         public bool Unequip(int slotID)
         {
-            if (!InventoryHandler.PushEquipment(EquipWindow.SearchSlot(slotID).EquipmentInfo)) return false;
+            if (!InventoryHandler.Push(EquipWindow.SearchSlot(slotID).EquipmentInfo)) return false;
             return EquipWindow.SearchSlot(slotID).Unequip();
         }
 
