@@ -26,5 +26,10 @@ namespace EllGames.Istia4.GameSystem.Actor.Player
         {
             return true;
         }
+
+        public bool Use()
+        {
+            return true;
+        }
     }
 }
