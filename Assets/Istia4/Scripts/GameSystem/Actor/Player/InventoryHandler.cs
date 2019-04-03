@@ -82,7 +82,8 @@ namespace EllGames.Istia4.GameSystem.Actor.Player
             {
                 foreach(var slot in tab.Slots)
                 {
-                    (slot as UI.Slot.ItemSlot).Emptimize();
+                    if (slot is UI.Slot.ItemSlot) (slot as UI.Slot.ItemSlot).Emptimize();
+                    if (slot is UI.Slot.EquipmentSlot) (slot as UI.Slot.EquipmentSlot).Emptimize();
                 }
             }
         }
@@ -121,7 +122,11 @@ namespace EllGames.Istia4.GameSystem.Actor.Player
         [Button("Refresh")]
         public void Refresh()
         {
-            InventoryWindow.Tabs.ForEach(tab => tab.Slots.ForEach(slot => (slot as UI.Slot.ItemSlot).Refresh()));
+            InventoryWindow.Tabs.ForEach(tab => tab.Slots.ForEach(slot =>
+            {
+                if (slot is UI.Slot.ItemSlot) (slot as UI.Slot.ItemSlot).Refresh();
+                if (slot is UI.Slot.EquipmentSlot) (slot as UI.Slot.EquipmentSlot).Refresh();
+            }));
         }
     }
 }

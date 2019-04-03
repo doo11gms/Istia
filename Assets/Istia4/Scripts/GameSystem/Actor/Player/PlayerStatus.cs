@@ -10,7 +10,7 @@ using Sirenix.Serialization;
 
 namespace EllGames.Istia4.GameSystem.Actor.Player
 {
-    public class PlayerStatus : ActorStatusBase, Save.ISavable
+    public class PlayerStatus : StatusBase, Save.ISavable
     {
         void Save.ISavable.Save()
         {
@@ -30,5 +30,26 @@ namespace EllGames.Istia4.GameSystem.Actor.Player
         /// 死亡時に復活する場所です。
         /// </summary>
         [OdinSerialize, InfoBox("Please set respawn location when died.")] public Meta.Location RessurectionLocation { get; set; }
+
+        [TitleGroup("Required")]
+        [OdinSerialize, Required] EquipHandler EquipHandler;
+
+        void StatusCorrectByEquipments()
+        {
+            foreach (var equipment in EquipHandler.Equipments())
+            {
+                foreach (var key in equipment.ParameterValues.Keys)
+                {
+                    if (!CurrentParameterValues.ContainsKey(key)) throw new System.Exception("対象のパラメータが見つかりません。");
+                    CurrentParameterValues[key] += equipment.ParameterValues[key];
+                }
+            }
+        }
+
+        protected override void Update()
+        {
+            base.Update();
+            StatusCorrectByEquipments();
+        }
     }
 }

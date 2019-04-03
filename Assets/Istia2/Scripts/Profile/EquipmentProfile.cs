@@ -44,7 +44,9 @@ namespace EllGames.Istia2.Profile
         void NewSlot(DB.Inventory.EquipmentCategory equipmentCategory)
         {
             EquipmentSlots.Add(new EquipmentSlot(EquipmentSlots.Count, equipmentCategory.ID));
+#if UNITY_EDITOR
             UnityEditor.AssetDatabase.SaveAssets();
+#endif
         }
 
         #region EquipmentSlot class

@@ -20,6 +20,9 @@ namespace EllGames.Istia4.DB.Inventory
         [OdinSerialize] public EquipmentCategory EquipmentCategory { get; set; }
 
         [Title("Spec")]
-        [OdinSerialize] public Dictionary<Parameter, int> ParameterValues { get; set; } = new Dictionary<Parameter, int>();
+        [OdinSerialize] public Dictionary<Parameter, long> ParameterValues { get; set; } = new Dictionary<Parameter, long>();
+
+        [Title("Constraints")]
+        [OdinSerialize] public Dictionary<Parameter, long> Constraints { get; set; } = new Dictionary<Parameter, long>();
     }
 }

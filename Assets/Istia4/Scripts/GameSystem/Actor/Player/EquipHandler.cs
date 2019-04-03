@@ -14,8 +14,19 @@ namespace EllGames.Istia4.GameSystem.Actor.Player
     public class EquipHandler : SerializedMonoBehaviour
     {
         [Title("Required")]
+        [OdinSerialize, Required] PlayerStatus PlayerStatus { get; set; }
         [OdinSerialize, Required] UI.Window.EquipmentWindow EquipWindow { get; set; }
         [OdinSerialize, Required] InventoryHandler InventoryHandler { get; set; }
+
+        public List<DB.Inventory.EquipmentInfo> Equipments()
+        {
+            var equipments = new List<DB.Inventory.EquipmentInfo>();
+            foreach(var slot in EquipWindow.EquipSlots)
+            {
+                if (!slot.IsEmpty()) equipments.Add(slot.EquipmentInfo);
+            }
+            return equipments;
+        }
 
         /// <summary>
         /// 対象を装備します。
@@ -25,6 +36,15 @@ namespace EllGames.Istia4.GameSystem.Actor.Player
         [Button("Equip")]
         public bool Equip(DB.Inventory.EquipmentInfo equipmentInfo)
         {
+            foreach(var key in equipmentInfo.Constraints.Keys)
+            {
+                if (PlayerStatus.CurrentParameterValues[key] < equipmentInfo.Constraints[key])
+                {
+                    Debug.Log("レベルが足りないため、装備することができません。");
+                    return false;
+                }
+            }
+
             foreach(var slot in EquipWindow.EquipSlots)
             {
                 if (slot.Equip(equipmentInfo)) return true;
