@@ -19,6 +19,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 2f104c68ab739f94e9cbe85f22f15cf3, type: 3}
     - {fileID: 11400000, guid: a40ac600a8a7aa947a43fe2a186bd342, type: 2}
     - {fileID: 11400000, guid: 868bf170a3591344897c20135ba42628, type: 2}
+    - {fileID: 11400000, guid: afed3c1378920314d8a92abad22b23c3, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -42,7 +43,7 @@ MonoBehaviour:
     - Name: ParameterValues
       Entry: 7
       Data: 0|System.Collections.Generic.Dictionary`2[[EllGames.Istia4.DB.Parameter,
-        Assembly-CSharp],[System.Int32, mscorlib]], mscorlib
+        Assembly-CSharp],[System.Int64, mscorlib]], mscorlib
     - Name: comparer
       Entry: 7
       Data: 1|System.Collections.Generic.ObjectEqualityComparer`1[[EllGames.Istia4.DB.Parameter,
@@ -61,7 +62,35 @@ MonoBehaviour:
       Data: 2
     - Name: 
       Entry: 3
-      Data: 200
+      Data: 100
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: Constraints
+      Entry: 7
+      Data: 2|System.Collections.Generic.Dictionary`2[[EllGames.Istia4.DB.Parameter,
+        Assembly-CSharp],[System.Int64, mscorlib]], mscorlib
+    - Name: comparer
+      Entry: 9
+      Data: 1
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: 
+      Entry: 10
+      Data: 3
+    - Name: 
+      Entry: 3
+      Data: 3
     - Name: 
       Entry: 8
       Data: 

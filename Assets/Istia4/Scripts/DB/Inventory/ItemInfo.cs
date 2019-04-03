@@ -30,11 +30,6 @@ namespace EllGames.Istia4.DB.Inventory
         [Title("Stack")]
         [OdinSerialize, PropertyOrder(3)] public int MaxStackCount { get; set; } = 99;
 
-        [Title("Usage")]
-        [OdinSerialize, PropertyOrder(3)] public bool Usable { get; set; } = true;
-        [OdinSerialize, PropertyOrder(3), EnableIf("Usable")] public bool Consumable { get; set; } = true;
-        [OdinSerialize, PropertyOrder(3), EnableIf("Usable")] public List<GameSystem.Item.ItemUsingEffectBase> ItemUsingEffects = new List<GameSystem.Item.ItemUsingEffectBase>();
-
         [Title("Trade")]
         [OdinSerialize, PropertyOrder(3)] public bool Sellable { get; set; } = true;
         [OdinSerialize, PropertyOrder(3)] public uint BuyingPrice { get; set; } = 10;
@@ -50,5 +45,10 @@ namespace EllGames.Istia4.DB.Inventory
         [Title("Cool Time")]
         [OdinSerialize, PropertyOrder(3)] public bool UsingCoolTime { get; set; } = false;
         [OdinSerialize, EnableIf("UsingCoolTime"), PropertyOrder(3)] public float CoolTime { get; set; }
+
+        [Title("Usage")]
+        [OdinSerialize, PropertyOrder(4)] public bool Usable { get; set; } = true;
+        [OdinSerialize, PropertyOrder(4), EnableIf("Usable")] public bool Consumable { get; set; } = true;
+        [SerializeField, PropertyOrder(5), EnableIf("Usable")] public List<GameSystem.Item.ItemUsingEffectBase> ItemUsingEffects = new List<GameSystem.Item.ItemUsingEffectBase>();
     }
 }
