@@ -16,5 +16,7 @@ namespace EllGames.Istia4.DB
         [Title("Settings")]
         [OdinSerialize] public string Name { get; set; }
         [OdinSerialize] public Meta.Location Location { get; set; }
+        [OdinSerialize] public Vector3 SpawnPositionOffset { get; set; }
+        [OdinSerialize] public Vector3 SpawnEulerAnglesOffset { get; set; }
     }
 }

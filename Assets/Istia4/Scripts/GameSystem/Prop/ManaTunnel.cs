@@ -7,7 +7,6 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
-using SceneManager = UnityEngine.SceneManagement.SceneManager;
 
 namespace EllGames.Istia4.GameSystem.Prop
 {
@@ -34,7 +33,10 @@ namespace EllGames.Istia4.GameSystem.Prop
             if (!ManaTunnelManager.IsActive(SelfInfo)) return false;
 
             var playerStatus = (Actor.Player.PlayerStatus)FindObjectOfType(typeof(Actor.Player.PlayerStatus));
-            playerStatus.StartLocation = DestinationInfo.Location;
+            var location = DestinationInfo.Location;
+            location.position += DestinationInfo.SpawnPositionOffset;
+            location.eulerAngles += DestinationInfo.SpawnEulerAnglesOffset;
+            playerStatus.StartLocation = location;
             Instantiate(RetransferEventPrefab).gameObject.SetActive(true);
 
             return true;
