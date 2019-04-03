@@ -20,6 +20,7 @@ namespace EllGames.Istia4.Config
         public static KeyCode DisposeItemAllKey = KeyCode.LeftAlt;
         public static int DisposeItemAllMouseButton = 1;
         public static int EquipMouseButton = 1;
+        public static KeyCode DropItemLootingKey = KeyCode.Space;
 
         [Title("Player Move")]
         public static int PlayerMoveMouseButton = 0;
