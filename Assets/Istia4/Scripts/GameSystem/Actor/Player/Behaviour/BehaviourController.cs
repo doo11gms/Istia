@@ -17,29 +17,25 @@ namespace EllGames.Istia4.GameSystem.Actor.Player.Behaviour
     {
         [Title("Required")]
         [OdinSerialize, Required] Transform m_Player;
-        //[OdinSerialize, Required] WayPointMove m_WayPointMove;
+        [OdinSerialize, Required] WayPointMove m_WayPointMove;
         //[OdinSerialize, Required] Die m_Die;
         //[OdinSerialize, Required] Ressurect m_Ressurect;
 
         public void Stop()
         {
-            //m_WayPointMove.Stop();
+            m_WayPointMove.Stop();
         }
 
-        [Title("Buttons")]
-        [Button("Allow Move")]
         public void AllowMove()
         {
-            //m_WayPointMove.gameObject.SetActive(true);
+            m_WayPointMove.gameObject.SetActive(true);
         }
 
-        [Button("Disallow Move")]
         public void DisallowMove()
         {
-            //m_WayPointMove.gameObject.SetActive(false);
+            m_WayPointMove.gameObject.SetActive(false);
         }
 
-        [Button("Teleport")]
         public void Teleport(Vector3? position = null, Vector3? eulerAngles = null)
         {
             if (position != null) m_Player.position = (Vector3)position;
@@ -47,6 +43,7 @@ namespace EllGames.Istia4.GameSystem.Actor.Player.Behaviour
             Stop();
         }
 
+        [Title("Buttons")]
         [Button("Die")]
         public void Die()
         {

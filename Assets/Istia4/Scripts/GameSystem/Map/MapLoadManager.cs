@@ -18,6 +18,8 @@ namespace EllGames.Istia4.GameSystem
         [OdinSerialize] Slider Slider { get; set; }
         [OdinSerialize] Text Text { get; set; }
 
+        Actor.Player.PlayerStatus PlayerStatus { get; set; }
+
         void AdjustPlayerLocation(Actor.Player.PlayerStatus playerStatus)
         {
             var controller = (Behaviour.BehaviourController)FindObjectOfType(typeof(Behaviour.BehaviourController));
@@ -34,9 +36,8 @@ namespace EllGames.Istia4.GameSystem
 
         private void Start()
         {
-            var playerStatus = (GameSystem.Actor.Player.PlayerStatus)FindObjectOfType(typeof(GameSystem.Actor.Player.PlayerStatus));
-            AdjustPlayerLocation(playerStatus);
-            StartCoroutine(LoadSceneAsyncCoroutine(playerStatus.StartLocation.scene));
+            PlayerStatus = (GameSystem.Actor.Player.PlayerStatus)FindObjectOfType(typeof(GameSystem.Actor.Player.PlayerStatus));
+            StartCoroutine(LoadSceneAsyncCoroutine(PlayerStatus.StartLocation.scene));
         }
 
         IEnumerator LoadSceneAsyncCoroutine(string scene)
@@ -56,6 +57,7 @@ namespace EllGames.Istia4.GameSystem
                     {
                         async.allowSceneActivation = true;
                         GUI.FadeManager.Instance.FadeIn();
+                        AdjustPlayerLocation(PlayerStatus);
                         yield return async;
                     }
                 }
