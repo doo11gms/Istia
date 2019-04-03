@@ -17,6 +17,16 @@ namespace EllGames.Istia4.GameSystem.Actor.Player
         [OdinSerialize, Required] UI.Window.EquipmentWindow EquipWindow { get; set; }
         [OdinSerialize, Required] InventoryHandler InventoryHandler { get; set; }
 
+        public List<DB.Inventory.EquipmentInfo> Equipments()
+        {
+            var equipments = new List<DB.Inventory.EquipmentInfo>();
+            foreach(var slot in EquipWindow.EquipSlots)
+            {
+                if (!slot.IsEmpty()) equipments.Add(slot.EquipmentInfo);
+            }
+            return equipments;
+        }
+
         /// <summary>
         /// 対象を装備します。
         /// </summary>

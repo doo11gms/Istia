@@ -46,7 +46,7 @@ namespace EllGames.Istia4.GameSystem.Actor.Player.Behaviour
         }
 
         Vector3 MoveDirection() => ((Destination - CharacterController.transform.position)).normalized;
-        float Speed() => PlayerStatus.ParameterValues[SpeedParameter] * SpeedMag;
+        float Speed() => PlayerStatus.CurrentParameterValues[SpeedParameter] * SpeedMag;
         Vector3 CurrentPoint() => CharacterController.transform.position;
         float StoppingDistance() => StoppingDistanceRate * Speed();
         float AnimationSpeed() => AnimationSpeedMag * Speed();

@@ -12,7 +12,7 @@ namespace EllGames.Istia4.GameSystem.Actor
 {
     public class AvatorManager : SerializedMonoBehaviour
     {
-        [OdinSerialize, Required] ActorStatusBase ActorStatus { get; set; } 
+        [OdinSerialize, Required] StatusBase Status { get; set; } 
 
         DB.Avator CurrentAvatar { get; set; }
         GameObject CurrentModel { get; set; }
@@ -20,7 +20,7 @@ namespace EllGames.Istia4.GameSystem.Actor
 
         private void Update()
         {
-            var nextAvatar = ActorStatus.Avator;
+            var nextAvatar = Status.Avator;
 
             if (CurrentAvatar != nextAvatar)
             {
