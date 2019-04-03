@@ -30,6 +30,9 @@ EditorBuildSettings:
     path: Assets/Istia4/Scenes/Maps/SystemMap_MapLoad.unity
     guid: 753e41cba892f92438bc5a892ac7d6c2
   - enabled: 1
-    path: Assets/Istia4/Scenes/Maps/Map_TestField.unity
+    path: Assets/Istia4/Scenes/Maps/Map_TestField1.unity
     guid: 25df6488b62a9d74097202f62580d9f8
+  - enabled: 1
+    path: Assets/Istia4/Scenes/Maps/Map_TestField2.unity
+    guid: ba640325bec7bbe4eafad500ea6f9712
   m_configObjects: {}

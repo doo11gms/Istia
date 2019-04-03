@@ -14,5 +14,6 @@ namespace EllGames.Istia4.Profile
     public class SystemProfile : SerializedScriptableObject
     {
         [SerializeField] public List<string> MapScenePrefixes { get; set; } = new List<string> { "Map_", "SystemMap_", };
+        [SerializeField] public string MapLoadScene { get; set; } = "SystemMap_MapLoad";
     }
 }
