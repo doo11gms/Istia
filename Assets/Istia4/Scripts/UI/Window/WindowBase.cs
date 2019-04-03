@@ -12,9 +12,6 @@ namespace EllGames.Istia4.UI.Window
 {
     public abstract class WindowBase : SerializedMonoBehaviour
     {
-        [Title("Settings")]
-        [OdinSerialize] bool CloseOnAwake { get; set; } = true;
-
         [Button("Open")]
         public void Open()
         {
@@ -30,11 +27,6 @@ namespace EllGames.Istia4.UI.Window
         public void FlipOpen()
         {
             gameObject.SetActive(!gameObject.activeSelf);
-        }
-
-        protected virtual void Awake()
-        {
-            if (CloseOnAwake) Close();
         }
     }
 }

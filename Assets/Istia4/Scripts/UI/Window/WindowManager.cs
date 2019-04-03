@@ -16,6 +16,20 @@ namespace EllGames.Istia4.UI.Window
         [OdinSerialize, Required] InventoryWindow InventoryWindow { get; set; }
         [OdinSerialize, Required] EquipmentWindow EquipmentWindow { get; set; }
 
+        [Title("Settings")]
+        [OdinSerialize] bool CloseAllWindowsOnAwake { get; set; } = true;
+
+        void CloseAllWindows()
+        {
+            InventoryWindow.Close();
+            EquipmentWindow.Close();
+        }
+
+        private void Awake()
+        {
+            if (CloseAllWindowsOnAwake) CloseAllWindows();
+        }
+
         private void Update()
         {
             if (Input.GetKeyDown(Config.KeyConfig.InventoryWindowKey))
@@ -30,8 +44,7 @@ namespace EllGames.Istia4.UI.Window
 
             if (Input.GetKeyDown(Config.KeyConfig.CancelKey))
             {
-                InventoryWindow.Close();
-                EquipmentWindow.Close();
+                CloseAllWindows();
             }
         }
     }
