@@ -40,6 +40,21 @@ namespace EllGames.Istia4.GameSystem.Actor.Player
             m_RessurectionLocation = ressurectionLocation;
         }
 
+        [Title("Level")]
+        [OdinSerialize] int m_Level = 1;
+        public int Level
+        {
+            get { return m_Level; }
+            set { m_Level = value; }
+        }
+
+        [OdinSerialize] long m_Exp;
+        public long Exp
+        {
+            get { return m_Exp; }
+            set { m_Exp = value; }
+        }
+
         /// <summary>
         /// マップロード時に転送される場所です。
         /// </summary>
