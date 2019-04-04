@@ -23,8 +23,8 @@ namespace EllGames.Istia4.DB
         [OdinSerialize, EnableIf("EnableParameterEditing")] int LevelGap { get; set; } = 100;
         [OdinSerialize, EnableIf("EnableParameterEditing")] AnimationCurve AnimationCurve { get; set; }
 
-        // 下記のメソッドを使って累積経験値を一発で計算しようとすると、StackOverFlowが発生します。
-        // これを回避するために回りくどい処理を行っています。
+        // 下記のように再帰を使って累積経験値を一発で計算しようとすると、StackOverFlowが発生します。
+        // これを回避するためにメソッドが分割されています。
         //long CalculateAccExp(int level)
         //{
         //    if (level < 1) throw new System.Exception();

@@ -12,8 +12,12 @@ namespace EllGames.Istia4.GameSystem.Actor.Player
 {
     public class PlayerStatus : StatusBase, Save.ISavable
     {
+        #region Save and Load
+
         void Save.ISavable.Save()
         {
+            ES2.Save(m_AccExp, GetInstanceID() + nameof(m_AccExp));
+
             m_StartLocation = new Meta.Location(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name, transform.position, transform.eulerAngles);
 
             Save.SaveHandler.Save(this, m_StartLocation.scene,　nameof(m_StartLocation) + nameof(m_StartLocation.scene));
@@ -27,6 +31,8 @@ namespace EllGames.Istia4.GameSystem.Actor.Player
 
         void Save.ISavable.Load()
         {
+            m_AccExp = ES2.Load<long>(GetInstanceID() + nameof(m_AccExp));
+
             var startLocation = new Meta.Location();
             Save.SaveHandler.Load(this, ref startLocation.scene, nameof(m_StartLocation) + nameof(m_StartLocation.scene));
             Save.SaveHandler.Load(this, ref startLocation.position, nameof(m_StartLocation) + nameof(m_StartLocation.position));
@@ -40,26 +46,29 @@ namespace EllGames.Istia4.GameSystem.Actor.Player
             m_RessurectionLocation = ressurectionLocation;
         }
 
-        [Title("Level")]
-        [OdinSerialize] int m_Level = 1;
-        public int Level
-        {
-            get { return m_Level; }
-            set { m_Level = value; }
-        }
+        #endregion
 
-        [OdinSerialize] long m_Exp;
-        public long Exp
+        [TitleGroup("Required")]
+        [OdinSerialize, Required, PropertyOrder(0)] EquipHandler EquipHandler { get; set; }
+
+        [TitleGroup("Required"), PropertyOrder(0)]
+        [OdinSerialize, Required] DB.ExpTableProvider ExpTableProvider { get; set; }
+
+        [TitleGroup("Level"), PropertyOrder(10) ]
+        [OdinSerialize, InfoBox("This value is automatically corrected depending on AccExp.")] DB.Parameter LevelParameter { get; set; }
+
+        [TitleGroup("Level"), PropertyOrder(11)]
+        [OdinSerialize] long m_AccExp;
+        public long AccExp
         {
-            get { return m_Exp; }
-            set { m_Exp = value; }
+            get { return m_AccExp; }
         }
 
         /// <summary>
         /// マップロード時に転送される場所です。
         /// </summary>
         [Title("Location")]
-        [OdinSerialize, InfoBox("Please set transferred location when map loaded.")] Meta.Location m_StartLocation;
+        [OdinSerialize, InfoBox("Please set transferred location when map loaded."), PropertyOrder(12)] Meta.Location m_StartLocation;
         public Meta.Location StartLocation
         {
             get { return m_StartLocation; }
@@ -69,15 +78,12 @@ namespace EllGames.Istia4.GameSystem.Actor.Player
         /// <summary>
         /// 死亡時に復活する場所です。
         /// </summary>
-        [OdinSerialize, InfoBox("Please set respawn location when died.")] Meta.Location m_RessurectionLocation;
+        [OdinSerialize, InfoBox("Please set respawn location when died."), PropertyOrder(13)] Meta.Location m_RessurectionLocation;
         public Meta.Location RessurectionLocation
         {
             get { return m_RessurectionLocation; }
             set { m_RessurectionLocation = value; }
         }
-
-        [TitleGroup("Required")]
-        [OdinSerialize, Required] EquipHandler EquipHandler;
 
         void StatusCorrectByEquipments()
         {
@@ -91,10 +97,30 @@ namespace EllGames.Istia4.GameSystem.Actor.Player
             }
         }
 
+        void StatusCorrectByExp()
+        {
+            int currentLevel = 1;
+            for (int level = 1; level < Config.GameConfig.LevelCap; level++)
+            {
+                if (m_AccExp >= ExpTableProvider.Provide()[level]) currentLevel = level;
+                else break;
+            }
+
+            CurrentParameterValues[LevelParameter] = currentLevel;
+        }
+
         protected override void Update()
         {
             base.Update();
+            StatusCorrectByExp();
             StatusCorrectByEquipments();
+        }
+
+        [Title("Buttons")]
+        [Button("Add Exp"), PropertyOrder(101)]
+        public void AddExp(long exp)
+        {
+            m_AccExp += exp;
         }
     }
 }
