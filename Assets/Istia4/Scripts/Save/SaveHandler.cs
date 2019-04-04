@@ -28,10 +28,15 @@ namespace EllGames.Istia4.Save
             if (target == null)
             {
                 PlayerPrefs.SetString(path, null);
+                PlayerPrefs.Save();
                 return;
             }
             if (target.GetType() == typeof(int)) PlayerPrefs.SetInt(path, (int)((object)target));
-            if (target.GetType() == typeof(string)) PlayerPrefs.SetString(path, (string)((object)(target)));
+            if (target.GetType() == typeof(string))
+            {
+                PlayerPrefs.SetString(path, (string)((object)(target)));
+                Debug.Log("[Saved]" + (string)((object)(target)) + " / " + name);
+            }
             if (target.GetType() == typeof(bool)) PlayerPrefs.SetInt(path, IntOfBool((bool)((object)target)));
             if (target.GetType() == typeof(Vector3))
             {

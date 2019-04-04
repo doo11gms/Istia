@@ -12723,7 +12723,7 @@ MonoBehaviour:
     - Name: m_Name
       Entry: 1
       Data: "\u7121\u540D\u306E\u30D7\u30EC\u30A4\u30E4\u30FC"
-    - Name: StartLocation
+    - Name: m_StartLocation
       Entry: 7
       Data: EllGames.Istia4.Meta.Location, Assembly-CSharp
     - Name: scene
@@ -12740,7 +12740,7 @@ MonoBehaviour:
       Data: 0
     - Name: 
       Entry: 4
-      Data: 207
+      Data: 200
     - Name: 
       Entry: 8
       Data: 
@@ -12762,7 +12762,7 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-    - Name: RessurectionLocation
+    - Name: m_RessurectionLocation
       Entry: 7
       Data: EllGames.Istia4.Meta.Location, Assembly-CSharp
     - Name: scene
@@ -12830,7 +12830,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1350935542}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 323, y: 0, z: 200}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1895973037}
@@ -13975,7 +13975,7 @@ MonoBehaviour:
       Data: 1
     - Name: 
       Entry: 5
-      Data: true
+      Data: false
     - Name: 
       Entry: 8
       Data: 
@@ -14345,7 +14345,7 @@ MonoBehaviour:
     - {fileID: 1429067970}
     - {fileID: 531456994}
     - {fileID: 1895973036}
-    - {fileID: 0}
+    - {fileID: 1350935543}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
