@@ -12,23 +12,24 @@ namespace EllGames.Istia4.GameSystem.Actor
 {
     public class AvatorManager : SerializedMonoBehaviour
     {
+        [OdinSerialize, Required] DB.AvatorProvider AvatorProvider { get; set; }
         [OdinSerialize, Required] StatusBase Status { get; set; } 
 
-        DB.Avator CurrentAvatar { get; set; }
+        string CurrentAvatorID { get; set; }
         GameObject CurrentModel { get; set; }
         public Animator Animator { get; private set; }
 
         private void Update()
         {
-            var nextAvatar = Status.Avator;
+            var nextAvatorID = Status.AvatorID;
 
-            if (CurrentAvatar != nextAvatar)
+            if (CurrentAvatorID != nextAvatorID)
             {
-                var buffer = CurrentModel;
-                CurrentAvatar = nextAvatar;
-                CurrentModel = Instantiate(nextAvatar.Model, transform);
+                var destroyTarget = CurrentModel;
+                CurrentAvatorID = nextAvatorID;
+                CurrentModel = Instantiate(AvatorProvider.Provide(nextAvatorID).Model, transform);
                 Animator = CurrentModel.GetComponent<Animator>();
-                Destroy(buffer);
+                Destroy(destroyTarget);
             }
         }
     }

@@ -102,10 +102,12 @@ namespace EllGames.Istia4.GameSystem.Actor.Player
             int currentLevel = 1;
             for (int level = 1; level < Config.GameConfig.LevelCap; level++)
             {
+                if (!ExpTableProvider.Provide().ContainsKey(level)) throw new System.Exception("レベルに対応する必要経験値がEXPテーブルに存在しません。");
                 if (m_AccExp >= ExpTableProvider.Provide()[level]) currentLevel = level;
                 else break;
             }
 
+            if (!CurrentParameterValues.ContainsKey(LevelParameter)) throw new System.Exception("パラメータが見つかりません。");
             CurrentParameterValues[LevelParameter] = currentLevel;
         }
 

@@ -15,11 +15,13 @@ namespace EllGames.Istia4.GameSystem.Actor
         void Save.ISavable.Save()
         {
             Save.SaveHandler.Save(this, m_Name, nameof(m_Name));
+            Save.SaveHandler.Save(this, m_AvatorID, nameof(m_AvatorID));
         }
 
         void Save.ISavable.Load()
         {
             Save.SaveHandler.Load(this, ref m_Name, nameof(m_Name));
+            Save.SaveHandler.Load(this, ref m_AvatorID, nameof(m_AvatorID));
         }
 
         [TitleGroup("Basic")]
@@ -33,7 +35,11 @@ namespace EllGames.Istia4.GameSystem.Actor
         }
 
         [Title("Avator")]
-        [OdinSerialize] public DB.Avator Avator { get; private set; }
+        [OdinSerialize] string m_AvatorID;
+        public string AvatorID
+        {
+            get { return m_AvatorID; }
+        }
 
         [OdinSerialize, HideInEditorMode, InfoBox("These values will be automatically updated per frame, so your editing them by the inspector is no meaning.")] public Dictionary<DB.Parameter, long> CurrentParameterValues { get; protected set; } = new Dictionary<DB.Parameter, long>();
 
