@@ -96,6 +96,7 @@ namespace EllGames.Istia4.UI.Slot
         {
             m_Count = count;
             CountText.text = count.ToString();
+            CountText.gameObject.SetActive(count > 1);
         }
 
         public void Emptimize()
@@ -109,7 +110,6 @@ namespace EllGames.Istia4.UI.Slot
             HoverOverlay.gameObject.SetActive(false);
             PressOverlay.gameObject.SetActive(false);
             SetCount(0);
-            CountText.gameObject.SetActive(false);
         }
 
         public bool IsEmpty()
@@ -128,7 +128,6 @@ namespace EllGames.Istia4.UI.Slot
             IconImage.sprite = itemInfo.IconSprite;
             IconImage.gameObject.SetActive(true);
             SetCount(Count + 1);
-            if (Count > 1) CountText.gameObject.SetActive(true);
 
             return true;
         }
@@ -136,27 +135,15 @@ namespace EllGames.Istia4.UI.Slot
         public bool Dispose()
         {
             if (IsEmpty()) return false;
-
             SetCount(Count - 1);
-
-            if (Count == 0)
-            {
-                Emptimize();
-            }
-            else if (Count == 1)
-            {
-                CountText.gameObject.SetActive(false);
-            }
-
+            if (Count == 0) Emptimize();
             return true;
         }
 
         public bool DisposeAll()
         {
             if (IsEmpty()) return false;
-
             Emptimize();
-
             return true;
         }
 
@@ -189,13 +176,17 @@ namespace EllGames.Istia4.UI.Slot
 
         public void Refresh()
         {
-            var cnt = Count;
-            Emptimize();
-
-            if (string.IsNullOrEmpty(ItemInfoID)) return;
+            if (string.IsNullOrEmpty(ItemInfoID))
+            {
+                Emptimize();
+                return;
+            }
 
             var info = ItemInfoProvider.Provide(ItemInfoID);
             if (info == null) throw new System.Exception("ItemInfoIDに対応するItemInfoが見つかりません。");
+            var cnt = Count;
+
+            Emptimize();
 
             Push(info);
             SetCount(cnt);
@@ -204,7 +195,6 @@ namespace EllGames.Istia4.UI.Slot
         private void Update()
         {
             if (IsEmpty()) return;
-
             if (ItemInfo.UsingCoolTime)
             {
                 CoolDownOverlay.fillAmount = ItemCoolDownHandler.CoolTimeRemain(ItemInfo) / ItemInfo.CoolTime;

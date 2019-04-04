@@ -17,7 +17,6 @@ namespace EllGames.Istia4.GameSystem.Prop
             if (m_ActiveStates == null) return;
             foreach (var key in m_ActiveStates.Keys)
             {
-                Debug.Log(key.name);
                 Save.SaveHandler.Save(this, m_ActiveStates[key], key.name);
             }
         }
