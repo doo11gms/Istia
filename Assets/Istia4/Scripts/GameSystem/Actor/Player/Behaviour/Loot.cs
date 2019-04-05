@@ -9,26 +9,27 @@ using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 using System.Linq;
 
-namespace EllGames.Istia4.GameSystem.Item
+namespace EllGames.Istia4.GameSystem.Actor.Player.Behaviour
 {
-    public class DropItemLooter : SerializedMonoBehaviour
+    public class Loot : SerializedMonoBehaviour
     {
-        [OdinSerialize, Required] Actor.Player.InventoryHandler InventoryHandler { get; set; }
+        [Title("Required")]
+        [OdinSerialize, Required] InventoryHandler InventoryHandler { get; set; }
 
+        [Title("Settings")]
         [OdinSerialize] float LootingDistance { get; set; } = 5f;
-
-
-        // TODO: refactering
 
         /// <summary>
         /// 近くのドロップアイテムを拾います。
         /// </summary>
-        void Loot()
+        public void Execute()
         {
             Collider[] hitColliders = Physics.OverlapSphere(transform.position, LootingDistance);
+            if (hitColliders.Count() == 0) return;
+
             List<GameObject> hitObjects = hitColliders.Select(collider => collider.gameObject).ToList();
             List<Prop.DropItem> dropItems = new List<Prop.DropItem>();
-            foreach(var obj in hitObjects)
+            foreach (var obj in hitObjects)
             {
                 var component = obj.GetComponent<Prop.DropItem>();
                 if (component != null) dropItems.Add(component);
@@ -43,8 +44,6 @@ namespace EllGames.Istia4.GameSystem.Item
                 nearest = item;
                 nearestDistance = distance;
             });
-            Debug.Log(dropItems.Count());
-            if (nearest == null) return;
 
             InventoryHandler.Push(nearest.InventoryItemInfo);
             Destroy(nearest.gameObject);
@@ -52,10 +51,7 @@ namespace EllGames.Istia4.GameSystem.Item
 
         private void Update()
         {
-            if (Input.GetKeyDown(Config.KeyConfig.DropItemLootingKey))
-            {
-                Loot();
-            }
+            if (Input.GetKeyDown(Config.KeyConfig.ItemLootingKey)) Execute();
         }
     }
 }
