@@ -96,7 +96,7 @@ namespace EllGames.Istia4.Save
         }
         
         [Button("Delete")]
-        public static void Delete()
+        public void Delete()
         {
             PlayerPrefs.DeleteAll();
             Debug.Log("Deleted.");

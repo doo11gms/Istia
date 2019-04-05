@@ -52,6 +52,16 @@ namespace EllGames.Istia4.GameSystem
 
             DontDestroyOnLoad(gameObject);
             DontDestroysInMapScene.ForEach(obj => DontDestroyOnLoad(obj));
+
+            try
+            {
+                FindObjectOfType<Save.SaveHandler>().Load();
+            }
+            catch
+            {
+                FindObjectOfType<Save.SaveHandler>().Save();
+                Debug.Log("ロードに失敗したため、セーブデータを新規作成しました。");
+            }
         }
 
         private void OnDestroy()
