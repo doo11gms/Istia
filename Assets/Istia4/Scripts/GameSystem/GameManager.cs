@@ -47,21 +47,20 @@ namespace EllGames.Istia4.GameSystem
 
         private void Awake()
         {
-            SceneManager.sceneLoaded += OnSceneLoaded;
-            SceneManager.sceneUnloaded += OnSceneUnloaded;
-
-            DontDestroyOnLoad(gameObject);
-            DontDestroysInMapScene.ForEach(obj => DontDestroyOnLoad(obj));
-
             try
             {
                 FindObjectOfType<Save.SaveHandler>().Load();
             }
             catch
             {
-                FindObjectOfType<Save.SaveHandler>().Save();
-                Debug.Log("ロードに失敗したため、セーブデータを新規作成しました。");
+                Debug.Log("セーブデータのロードに失敗したため、初期データで実行されます。");
             }
+
+            SceneManager.sceneLoaded += OnSceneLoaded;
+            SceneManager.sceneUnloaded += OnSceneUnloaded;
+
+            DontDestroyOnLoad(gameObject);
+            DontDestroysInMapScene.ForEach(obj => DontDestroyOnLoad(obj));
         }
 
         private void OnDestroy()
