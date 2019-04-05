@@ -27,6 +27,9 @@ namespace EllGames.Istia4.DB
             if (ExpTableFactory == null) throw new System.Exception();
             if (ExpTableFactory == null) throw new System.Exception();
             ExpTableProvider.ExpTable = ExpTableFactory.CreateExpTable(MaxLevel);
+
+            UnityEditor.EditorUtility.SetDirty(ExpTableProvider);
+            UnityEditor.AssetDatabase.SaveAssets();
         }
 
         [Button("Clear ExpTable")]
