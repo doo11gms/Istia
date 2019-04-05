@@ -25,10 +25,11 @@ namespace EllGames.Istia4.GameSystem.Actor.Player.Behaviour
         public void Execute()
         {
             Collider[] hitColliders = Physics.OverlapSphere(transform.position, LootingDistance);
-            if (hitColliders.Count() == 0) return;
-
             List<GameObject> hitObjects = hitColliders.Select(collider => collider.gameObject).ToList();
             List<Prop.DropItem> dropItems = new List<Prop.DropItem>();
+
+            if (dropItems.Count() == 0) return;
+
             foreach (var obj in hitObjects)
             {
                 var component = obj.GetComponent<Prop.DropItem>();

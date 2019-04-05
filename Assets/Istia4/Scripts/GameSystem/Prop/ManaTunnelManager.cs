@@ -58,5 +58,14 @@ namespace EllGames.Istia4.GameSystem.Prop
         {
             m_ActiveStates[manaTunnelInfo] = false;
         }
+
+        private void Update()
+        {
+            Debug.LogError("---------");
+            foreach(var key in m_ActiveStates.Keys)
+            {
+                Debug.LogError(m_ActiveStates[key]);
+            }
+        }
     }
 }
