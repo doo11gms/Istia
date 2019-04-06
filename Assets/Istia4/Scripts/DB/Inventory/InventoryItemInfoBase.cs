@@ -12,14 +12,23 @@ namespace EllGames.Istia4.DB.Inventory
 {
     public abstract class InventoryItemInfoBase : SerializedScriptableObject
     {
-        [Title("Drop")]
-        [OdinSerialize] public bool Droppable { get; private set; } = true;
-        [OdinSerialize, EnableIf("Droppable")] public GameObject Model { get; private set; }
-
         [Title("Graphic")]
-        [OdinSerialize] public Sprite IconSprite { get; private set; }
+        [PropertyOrder(10)]
+        [OdinSerialize, PreviewField] public Sprite IconSprite { get; private set; }
+
+        [Title("Meta")]
+        [PropertyOrder(11)]
+        [OdinSerialize] public string ID { get; set; }
 
         [TitleGroup("Basic")]
-        [OdinSerialize, PropertyOrder(1)] public string Name { get; set; }
+        [PropertyOrder(12)]
+        [OdinSerialize] public string Name { get; set; }
+
+        [Title("Disposal")]
+        [PropertyOrder(30)]
+        [OdinSerialize] public bool Disposable { get; private set; } = true;
+
+        [PropertyOrder(31)]
+        [OdinSerialize, EnableIf("Disposable"), PreviewField] public GameObject Model { get; private set; }
     }
 }

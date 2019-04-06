@@ -23,21 +23,21 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes:
-    - Name: Droppable
-      Entry: 5
-      Data: true
-    - Name: Model
-      Entry: 6
-      Data: 
     - Name: IconSprite
       Entry: 10
       Data: 0
-    - Name: Name
-      Entry: 1
-      Data: "\u30C6\u30B9\u30C8\u7528\u6D88\u8CBB\u30A2\u30A4\u30C6\u30E0B"
     - Name: ID
       Entry: 1
       Data: "\u30C6\u30B9\u30C8\u7528\u6D88\u8CBB\u30A2\u30A4\u30C6\u30E0B"
+    - Name: Name
+      Entry: 1
+      Data: "\u30C6\u30B9\u30C8\u7528\u6D88\u8CBB\u30A2\u30A4\u30C6\u30E0B"
+    - Name: Disposable
+      Entry: 5
+      Data: false
+    - Name: Model
+      Entry: 6
+      Data: 
     - Name: ItemCategory
       Entry: 10
       Data: 1
@@ -53,15 +53,6 @@ MonoBehaviour:
     - Name: SellingPrice
       Entry: 3
       Data: 100
-    - Name: Disposable
-      Entry: 5
-      Data: false
-    - Name: UsingHotKey
-      Entry: 5
-      Data: false
-    - Name: HotKey
-      Entry: 3
-      Data: 0
     - Name: Usable
       Entry: 5
       Data: true

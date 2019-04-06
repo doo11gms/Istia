@@ -30,7 +30,7 @@ namespace EllGames.Istia4.UI.Slot
 
             if (UnityEngine.Input.GetMouseButton(Config.KeyConfig.DisposeItemAllMouseButton) && UnityEngine.Input.GetKey(Config.KeyConfig.DisposeItemAllKey))
             {
-                if (!EquipmentInfo.Droppable)
+                if (!EquipmentInfo.Disposable)
                 {
                     Debug.Log("この装備品は捨てられません。");
                     return;
