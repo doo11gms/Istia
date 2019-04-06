@@ -15,30 +15,36 @@ namespace EllGames.Istia4.GameSystem.Actor.Player.Behaviour
     {
         [Title("Required")]
         [OdinSerialize, Required] InventoryHandler InventoryHandler { get; set; }
+        [OdinSerialize, Required] PlayerStatus PlayerStatus { get; set; }
 
         [Title("Settings")]
-        [OdinSerialize] float LootingDistance { get; set; } = 5f;
+        [OdinSerialize] DB.Parameter ItemLootingDistanceParameter { get; set; }
+
+        List<Prop.DropItem> Lootables()
+        {
+            Collider[] hitColliders = Physics.OverlapSphere(transform.position, PlayerStatus.CurrentParameterValues[ItemLootingDistanceParameter]);
+            List<GameObject> hitObjects = hitColliders.Select(collider => collider.gameObject).ToList();
+            List<Prop.DropItem> dropItems = new List<Prop.DropItem>();
+            foreach (var obj in hitObjects)
+            {
+                var component = obj.GetComponent<Prop.DropItem>();
+                if (component != null) dropItems.Add(component);
+            }
+            return dropItems;
+        }
 
         /// <summary>
         /// 近くのドロップアイテムを拾います。
         /// </summary>
         public void Execute()
         {
-            Collider[] hitColliders = Physics.OverlapSphere(transform.position, LootingDistance);
-            List<GameObject> hitObjects = hitColliders.Select(collider => collider.gameObject).ToList();
-            List<Prop.DropItem> dropItems = new List<Prop.DropItem>();
-
-            if (dropItems.Count() == 0) return;
-
-            foreach (var obj in hitObjects)
-            {
-                var component = obj.GetComponent<Prop.DropItem>();
-                if (component != null) dropItems.Add(component);
-            }
+            var lootables = Lootables();
+            if (lootables == null) return;
+            if (lootables.Count == 0) return;
 
             Prop.DropItem nearest = null;
             float nearestDistance = Mathf.Infinity;
-            dropItems.ForEach(item =>
+            Lootables().ForEach(item =>
             {
                 var distance = Vector3.Distance(transform.position, item.transform.position);
                 if (distance > nearestDistance) return;

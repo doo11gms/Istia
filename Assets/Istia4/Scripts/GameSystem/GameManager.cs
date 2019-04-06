@@ -53,7 +53,7 @@ namespace EllGames.Istia4.GameSystem
             }
             catch
             {
-                Debug.Log("セーブデータのロードに失敗したため、初期データで実行されます。");
+                Debug.Log("ロード可能なセーブデータが見つからなかったため、初期データで実行します。");
             }
 
             SceneManager.sceneLoaded += OnSceneLoaded;
