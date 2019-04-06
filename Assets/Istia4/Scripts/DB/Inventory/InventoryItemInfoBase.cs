@@ -18,5 +18,8 @@ namespace EllGames.Istia4.DB.Inventory
 
         [Title("Graphic")]
         [OdinSerialize] public Sprite IconSprite { get; private set; }
+
+        [TitleGroup("Basic")]
+        [OdinSerialize, PropertyOrder(1)] public string Name { get; set; }
     }
 }

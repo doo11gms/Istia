@@ -32,15 +32,15 @@ MonoBehaviour:
     - Name: IconSprite
       Entry: 10
       Data: 0
+    - Name: Name
+      Entry: 1
+      Data: "\u30C6\u30B9\u30C8\u7528\u6D88\u8CBB\u30A2\u30A4\u30C6\u30E0A"
     - Name: ID
       Entry: 1
       Data: "\u30C6\u30B9\u30C8\u7528\u6D88\u8CBB\u30A2\u30A4\u30C6\u30E0A"
     - Name: ItemCategory
       Entry: 10
       Data: 1
-    - Name: ItemName
-      Entry: 1
-      Data: "\u30C6\u30B9\u30C8\u7528\u6D88\u8CBB\u30A2\u30A4\u30C6\u30E0A"
     - Name: MaxStackCount
       Entry: 3
       Data: 5
@@ -62,18 +62,18 @@ MonoBehaviour:
     - Name: HotKey
       Entry: 3
       Data: 0
-    - Name: UsingCoolTime
-      Entry: 5
-      Data: true
-    - Name: CoolTime
-      Entry: 4
-      Data: 1
     - Name: Usable
       Entry: 5
       Data: true
     - Name: Consumable
       Entry: 5
       Data: true
+    - Name: UsingCoolTime
+      Entry: 5
+      Data: true
+    - Name: CoolTime
+      Entry: 4
+      Data: 1
     - Name: m_Description
       Entry: 1
       Data: "\u3053\u308C\u306F\u30C6\u30B9\u30C8\u7528\u306E\u30A2\u30A4\u30C6\u30E0\u3067\u3059\u3002"

@@ -20,17 +20,17 @@ namespace EllGames.Istia4.GameSystem.Actor.Player.Behaviour
         [Title("Settings")]
         [OdinSerialize] DB.Parameter ItemLootingDistanceParameter { get; set; }
 
-        List<Prop.DropItem> Lootables()
+        List<Prop.Lootable> Lootables()
         {
             Collider[] hitColliders = Physics.OverlapSphere(transform.position, PlayerStatus.CurrentParameterValues[ItemLootingDistanceParameter]);
             List<GameObject> hitObjects = hitColliders.Select(collider => collider.gameObject).ToList();
-            List<Prop.DropItem> dropItems = new List<Prop.DropItem>();
+            List<Prop.Lootable> lootables = new List<Prop.Lootable>();
             foreach (var obj in hitObjects)
             {
-                var component = obj.GetComponent<Prop.DropItem>();
-                if (component != null) dropItems.Add(component);
+                var component = obj.GetComponent<Prop.Lootable>();
+                if (component != null) lootables.Add(component);
             }
-            return dropItems;
+            return lootables;
         }
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace EllGames.Istia4.GameSystem.Actor.Player.Behaviour
             if (lootables == null) return;
             if (lootables.Count == 0) return;
 
-            Prop.DropItem nearest = null;
+            Prop.Lootable nearest = null;
             float nearestDistance = Mathf.Infinity;
             Lootables().ForEach(item =>
             {
@@ -52,7 +52,18 @@ namespace EllGames.Istia4.GameSystem.Actor.Player.Behaviour
                 nearestDistance = distance;
             });
 
-            InventoryHandler.Push(nearest.InventoryItemInfo);
+            for (int i = 0; i < nearest.Count; i++)
+            {
+                if (InventoryHandler.Push(nearest.InventoryItemInfo))
+                {
+                    nearest.Loot();
+                }
+                else
+                {
+                    Debug.Log("インベントリが一杯であるため、これ以上拾得できません。");
+                    break;
+                }
+            }
             Destroy(nearest.gameObject);
         }
 

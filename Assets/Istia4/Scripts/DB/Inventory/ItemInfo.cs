@@ -19,8 +19,7 @@ namespace EllGames.Istia4.DB.Inventory
         [Title("Category")]
         [OdinSerialize, PropertyOrder(1)] public DB.Inventory.ItemCategory ItemCategory { get; set; }
 
-        [Title("Basic")]
-        [OdinSerialize, PropertyOrder(1)] public string ItemName { get; set; }
+        [TitleGroup("Basic")]
         [OdinSerialize, TextArea(2, 2), PropertyOrder(2)] string m_Description;
         public string Description
         {
