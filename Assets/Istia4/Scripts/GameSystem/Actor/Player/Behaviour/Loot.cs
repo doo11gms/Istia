@@ -52,7 +52,7 @@ namespace EllGames.Istia4.GameSystem.Actor.Player.Behaviour
                 nearestDistance = distance;
             });
 
-            for (int i = 0; i < nearest.Count; i++)
+            while (nearest.Count > 0)
             {
                 if (InventoryHandler.Push(nearest.InventoryItemInfo))
                 {

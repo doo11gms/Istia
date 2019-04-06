@@ -26,6 +26,7 @@ namespace EllGames.Istia4.GameSystem.Actor.Player
         [Title("Required")]
         [OdinSerialize, Required] UI.Window.InventoryWindow InventoryWindow;
         [OdinSerialize, Required] EquipHandler EquipHandler;
+        [OdinSerialize, Required] Prop.DropHandler DropHandler;
 
         int GetTabID(DB.Inventory.InventoryItemInfoBase inventoryItemInfo)
         {
@@ -43,6 +44,17 @@ namespace EllGames.Istia4.GameSystem.Actor.Player
         }
 
         [Title("Buttons")]
+        [Button("Drop")]
+        public bool Drop(int tabID, int slotID)
+        {
+            var slot = InventoryWindow.SearchSlot(tabID, slotID);
+            if (slot == null) throw new System.Exception("対象のスロットが見つかりません。");
+            if (slot.IsEmpty()) throw new System.Exception("スロットが空であるため、ドロップできません。");
+            DropHandler.Drop(transform.position, slot.ItemInfo, slot.Count);
+            slot.DisposeAll();
+            return true;
+        }
+
         [Button("Push")]
         public bool Push(DB.Inventory.InventoryItemInfoBase inventoryItemInfo)
         {
