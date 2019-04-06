@@ -42,13 +42,13 @@ namespace EllGames.Istia4.DB.Inventory
         [OdinSerialize, PropertyOrder(3)] public bool UsingHotKey { get; set; } = false;
         [OdinSerialize, EnableIf("UsingHotKey"), PropertyOrder(3)] public KeyCode HotKey { get; set; } = KeyCode.None;
 
-        [Title("Cool Time")]
-        [OdinSerialize, PropertyOrder(3)] public bool UsingCoolTime { get; set; } = false;
-        [OdinSerialize, EnableIf("UsingCoolTime"), PropertyOrder(3)] public float CoolTime { get; set; }
-
         [Title("Usage")]
         [OdinSerialize, PropertyOrder(4)] public bool Usable { get; set; } = true;
         [OdinSerialize, PropertyOrder(4), EnableIf("Usable")] public bool Consumable { get; set; } = true;
         [SerializeField, PropertyOrder(5), EnableIf("Usable")] public List<GameSystem.Item.ItemUsingEffectBase> ItemUsingEffects = new List<GameSystem.Item.ItemUsingEffectBase>();
+
+        [Title("Cool Time")]
+        [OdinSerialize, PropertyOrder(6)] public bool UsingCoolTime { get; set; } = false;
+        [OdinSerialize, EnableIf("UsingCoolTime"), PropertyOrder(7)] public float CoolTime { get; set; }
     }
 }
