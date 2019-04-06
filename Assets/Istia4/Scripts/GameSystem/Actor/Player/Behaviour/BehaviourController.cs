@@ -18,6 +18,7 @@ namespace EllGames.Istia4.GameSystem.Actor.Player.Behaviour
         [Title("Required")]
         [OdinSerialize, Required] Transform m_Player;
         [OdinSerialize, Required] WayPointMove m_WayPointMove;
+        [OdinSerialize, Required] Loot m_Loot;
         //[OdinSerialize, Required] Die m_Die;
         //[OdinSerialize, Required] Ressurect m_Ressurect;
 
@@ -41,6 +42,16 @@ namespace EllGames.Istia4.GameSystem.Actor.Player.Behaviour
             if (position != null) m_Player.position = (Vector3)position;
             if (eulerAngles != null) m_Player.eulerAngles = (Vector3)eulerAngles;
             Stop();
+        }
+
+        public void EnableItemLooting()
+        {
+            m_Loot.gameObject.SetActive(true);
+        }
+
+        public void DisableItemLooting()
+        {
+            m_Loot.gameObject.SetActive(false);
         }
 
         [Title("Buttons")]

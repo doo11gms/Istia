@@ -12,7 +12,7 @@ namespace EllGames.Istia4.GameSystem.Prop
 {
     public class DropItem : SerializedMonoBehaviour
     {
-        [OdinSerialize] DB.Inventory.InventoryItemInfoBase InventoryItemInfo { get; set; }
+        [OdinSerialize] public DB.Inventory.InventoryItemInfoBase InventoryItemInfo { get; set; }
 
 
     }

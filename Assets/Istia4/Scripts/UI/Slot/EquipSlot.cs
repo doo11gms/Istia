@@ -90,7 +90,7 @@ namespace EllGames.Istia4.UI.Slot
         {
             if (!IsEmpty())
             {
-                Debug.Log("既に別の装備品を装備しているため、装備に失敗しました。");
+                Debug.Log("このスロットには既に別の装備品が装備されています。");
                 return false;
             }
 

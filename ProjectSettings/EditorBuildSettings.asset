@@ -24,6 +24,9 @@ EditorBuildSettings:
     path: Assets/Istia1/Scenes/Maps/SystemMap_MapLoad.unity
     guid: 6c663bad4f488e948a9059d638fa196a
   - enabled: 1
+    path: Assets/Istia4/Scenes/Title.unity
+    guid: ac42986e38747084b8b15ab8f01e0544
+  - enabled: 1
     path: Assets/Istia4/Scenes/Maps/SystemMap_Setup.unity
     guid: 0b5c2b0befe34904db82e352e4016081
   - enabled: 1

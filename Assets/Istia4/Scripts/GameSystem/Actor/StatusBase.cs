@@ -14,23 +14,34 @@ namespace EllGames.Istia4.GameSystem.Actor
     {
         void Save.ISavable.Save()
         {
+            Save.SaveHandler.Save(this, m_Name, nameof(m_Name));
+            Save.SaveHandler.Save(this, m_AvatorID, nameof(m_AvatorID));
         }
 
         void Save.ISavable.Load()
         {
+            Save.SaveHandler.Load(this, ref m_Name, nameof(m_Name));
+            Save.SaveHandler.Load(this, ref m_AvatorID, nameof(m_AvatorID));
         }
 
-        [TitleGroup("Required")]
-        [OdinSerialize, Required] protected DB.Status DefaultStatus { get; set; }
+        [TitleGroup("Basic")]
+        [OdinSerialize] protected DB.Status DefaultStatus { get; set; }
 
-        [Title("Basic")]
-        [OdinSerialize] public string Name { get; private set; }
+        [TitleGroup("Basic")]
+        [OdinSerialize] string m_Name;
+        public string Name
+        {
+            get { return m_Name; }
+        }
 
         [Title("Avator")]
-        [OdinSerialize] public DB.Avator Avator { get; private set; }
+        [OdinSerialize] string m_AvatorID;
+        public string AvatorID
+        {
+            get { return m_AvatorID; }
+        }
 
-        [Title("Spec")]
-        [OdinSerialize, InfoBox("These values will be automatically updated per frame, so you cannot change them by Inspector.")] public Dictionary<DB.Parameter, long> CurrentParameterValues { get; protected set; } = new Dictionary<DB.Parameter, long>();
+        [OdinSerialize, HideInEditorMode, InfoBox("These values will be automatically updated per frame, so your editing them by the inspector is no meaning.")] public Dictionary<DB.Parameter, long> CurrentParameterValues { get; protected set; } = new Dictionary<DB.Parameter, long>();
 
         protected virtual void Update()
         {

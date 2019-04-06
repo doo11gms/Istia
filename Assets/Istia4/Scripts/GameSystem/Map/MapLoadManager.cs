@@ -37,6 +37,9 @@ namespace EllGames.Istia4.GameSystem
         private void Start()
         {
             PlayerStatus = (GameSystem.Actor.Player.PlayerStatus)FindObjectOfType(typeof(GameSystem.Actor.Player.PlayerStatus));
+            if (PlayerStatus == null) throw new System.Exception("PlayerStatusの取得に失敗しました。");
+            if (PlayerStatus.StartLocation.scene == null) throw new System.Exception("遷移先に指定されているシーン名がnullであるため、マップを読み込めません。");
+
             StartCoroutine(LoadSceneAsyncCoroutine(PlayerStatus.StartLocation.scene));
         }
 

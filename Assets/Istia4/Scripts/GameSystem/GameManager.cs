@@ -47,6 +47,15 @@ namespace EllGames.Istia4.GameSystem
 
         private void Awake()
         {
+            try
+            {
+                FindObjectOfType<Save.SaveHandler>().Load();
+            }
+            catch
+            {
+                Debug.Log("セーブデータのロードに失敗したため、初期データで実行されます。");
+            }
+
             SceneManager.sceneLoaded += OnSceneLoaded;
             SceneManager.sceneUnloaded += OnSceneUnloaded;
 

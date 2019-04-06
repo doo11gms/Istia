@@ -7,12 +7,30 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
-using ISavable = EllGames.Istia4.Save.ISavable;
 
 namespace EllGames.Istia4.GameSystem.Actor.Player
 {
-    public class EquipHandler : SerializedMonoBehaviour
+    public class EquipHandler : SerializedMonoBehaviour, Save.ISavable
     {
+        /// <summary>
+        /// 装備品の情報をセーブします。
+        /// </summary>
+        [Button("Save")]
+        void Save.ISavable.Save()
+        {
+            EquipWindow.EquipSlots.ForEach(slot => ((Save.ISavable)slot).Save());
+        }
+
+        /// <summary>
+        /// 装備品の情報をロードします。
+        /// </summary>
+        [Button("Load")]
+        void Save.ISavable.Load()
+        {
+            EquipWindow.EquipSlots.ForEach(slot => ((Save.ISavable)slot).Load());
+            Refresh();
+        }
+
         [Title("Required")]
         [OdinSerialize, Required] PlayerStatus PlayerStatus { get; set; }
         [OdinSerialize, Required] UI.Window.EquipmentWindow EquipWindow { get; set; }
@@ -77,24 +95,6 @@ namespace EllGames.Istia4.GameSystem.Actor.Player
         public void UnequipAll()
         {
             EquipWindow.EquipSlots.ForEach(slot => slot.Emptimize());
-        }
-
-        /// <summary>
-        /// 装備品の情報をセーブします。
-        /// </summary>
-        [Button("Save")]
-        public void Save()
-        {
-            EquipWindow.EquipSlots.ForEach(slot => ((ISavable)slot).Save());
-        }
-
-        /// <summary>
-        /// 装備品の情報をロードします。
-        /// </summary>
-        [Button("Load")]
-        public void Load()
-        {
-            EquipWindow.EquipSlots.ForEach(slot => ((ISavable)slot).Load());
         }
 
         /// <summary>

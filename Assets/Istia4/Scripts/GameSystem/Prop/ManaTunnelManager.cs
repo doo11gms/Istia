@@ -14,13 +14,24 @@ namespace EllGames.Istia4.GameSystem.Prop
     {
         void Save.ISavable.Save()
         {
+            if (m_ActiveStates == null) return;
+            foreach (var key in m_ActiveStates.Keys)
+            {
+                Save.SaveHandler.Save(this, m_ActiveStates[key], key.name);
+            }
         }
 
         void Save.ISavable.Load()
         {
+            if (m_ActiveStates == null) return;
+            var keys = new List<DB.ManaTunnelInfo>(m_ActiveStates.Keys);
+            foreach(var key in keys)
+            {
+                m_ActiveStates[key] = Save.SaveHandler.Load<bool>(this, key.name);
+            }
         }
 
-        [OdinSerialize] Dictionary<DB.ManaTunnelInfo, bool> ActiveStates { get; set; } = new Dictionary<DB.ManaTunnelInfo, bool>();
+        [OdinSerialize] Dictionary<DB.ManaTunnelInfo, bool> m_ActiveStates = new Dictionary<DB.ManaTunnelInfo, bool>();
 
         /// <summary>
         /// マナトンネルが活性化されている場合はtrueを、活性化されていない場合はfalseを返します。
@@ -29,7 +40,7 @@ namespace EllGames.Istia4.GameSystem.Prop
         /// <returns></returns>
         public bool IsActive(DB.ManaTunnelInfo manaTunnelInfo)
         {
-            return ActiveStates[manaTunnelInfo];
+            return m_ActiveStates[manaTunnelInfo];
         }
 
         /// <summary>
@@ -37,7 +48,7 @@ namespace EllGames.Istia4.GameSystem.Prop
         /// </summary>
         public void Activate(DB.ManaTunnelInfo manaTunnelInfo)
         {
-            ActiveStates[manaTunnelInfo] = true;
+            m_ActiveStates[manaTunnelInfo] = true;
         }
 
         /// <summary>
@@ -45,7 +56,16 @@ namespace EllGames.Istia4.GameSystem.Prop
         /// </summary>
         public void Deactivate(DB.ManaTunnelInfo manaTunnelInfo)
         {
-            ActiveStates[manaTunnelInfo] = false;
+            m_ActiveStates[manaTunnelInfo] = false;
+        }
+
+        private void Update()
+        {
+            Debug.LogError("---------");
+            foreach(var key in m_ActiveStates.Keys)
+            {
+                Debug.LogError(m_ActiveStates[key]);
+            }
         }
     }
 }

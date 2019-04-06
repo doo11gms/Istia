@@ -9,15 +9,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06f263aef12b49b4a9647f87494b8de3, type: 3}
-  m_Name: SaveHandler
+  m_Script: {fileID: 11500000, guid: 333e986ca6ea4a64e9b2c9b28e26e469, type: 3}
+  m_Name: ExpTableFacade
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects: []
+    ReferencedUnityObjects:
+    - {fileID: 11400000, guid: 8435ff34be9f8a442a573a60f1d6b2f2, type: 2}
+    - {fileID: 11400000, guid: 776d9746f798caa4fbe80058176caaf6, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes: []
+    SerializationNodes:
+    - Name: ExpTableProvider
+      Entry: 10
+      Data: 0
+    - Name: ExpTableFactory
+      Entry: 10
+      Data: 1
+    - Name: MaxLevel
+      Entry: 3
+      Data: 150

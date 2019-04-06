@@ -10,10 +10,18 @@ using Sirenix.Serialization;
 
 namespace EllGames.Istia4.GameSystem.Actor.Player
 {
-    public class InventoryHandler : SerializedMonoBehaviour
+    public class InventoryHandler : SerializedMonoBehaviour, Save.ISavable
     {
-        // TODO: ItemInfo,Equipinfoを受け取るんじゃなくてInventoryItemBaseをキャストして使って下さい
-        // TODO:manage getTabID method
+        void Save.ISavable.Save()
+        {
+            InventoryWindow.Tabs.ForEach(tab => tab.Slots.ForEach(slot => ((Save.ISavable)slot).Save()));
+        }
+
+        void Save.ISavable.Load()
+        {
+            InventoryWindow.Tabs.ForEach(tab => tab.Slots.ForEach(slot => ((Save.ISavable)slot).Load()));
+            Refresh();
+        }
 
         [Title("Required")]
         [OdinSerialize, Required] UI.Window.InventoryWindow InventoryWindow;
@@ -34,6 +42,7 @@ namespace EllGames.Istia4.GameSystem.Actor.Player
             throw new System.Exception("該当するタブが見つかりません。");
         }
 
+        [Title("Buttons")]
         [Button("Push")]
         public bool Push(DB.Inventory.InventoryItemInfoBase inventoryItemInfo)
         {
@@ -105,18 +114,6 @@ namespace EllGames.Istia4.GameSystem.Actor.Player
         public void Sort()
         {
             Debug.Log("TODO");
-        }
-
-        [Button("Save")]
-        public void Save()
-        {
-            InventoryWindow.Tabs.ForEach(tab => tab.Slots.ForEach(slot => ((Save.ISavable)slot).Save()));
-        }
-
-        [Button("Load")]
-        public void Load()
-        {
-            InventoryWindow.Tabs.ForEach(tab => tab.Slots.ForEach(slot => ((Save.ISavable)slot).Load()));
         }
 
         [Button("Refresh")]

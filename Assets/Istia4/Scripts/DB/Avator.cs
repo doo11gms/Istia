@@ -13,6 +13,7 @@ namespace EllGames.Istia4.DB
     [CreateAssetMenu(menuName = "Istia4/DB/Avator", fileName = "Avator")]
     public class Avator : SerializedScriptableObject
     {
+        [OdinSerialize] public string ID { get; set; }
         [OdinSerialize] public string Name { get; set; }
         [OdinSerialize] public GameObject Model { get; set; }
     }
