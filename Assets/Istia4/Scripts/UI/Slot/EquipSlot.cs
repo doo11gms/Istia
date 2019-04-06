@@ -75,6 +75,11 @@ namespace EllGames.Istia4.UI.Slot
         [OdinSerialize] Image PressOverlay { get; set; }
         [OdinSerialize] Text EquipText { get; set; }
 
+        public bool IsEmpty()
+        {
+            return EquipmentInfo == null;
+        }
+
         public void Emptimize()
         {
             m_EquipmentInfoID = null;
@@ -84,6 +89,21 @@ namespace EllGames.Istia4.UI.Slot
             EquipText.gameObject.SetActive(false);
             HoverOverlay.gameObject.SetActive(false);
             PressOverlay.gameObject.SetActive(false);
+        }
+
+        public void Refresh()
+        {
+            if (string.IsNullOrEmpty(m_EquipmentInfoID))
+            {
+                Emptimize();
+                return;
+            }
+
+            var info = EquipmentInfoProvider.Provide(m_EquipmentInfoID);
+            if (info == null) throw new System.Exception("EquipmentInfoの取得に失敗しました。");
+
+            Emptimize();
+            if (!Equip(info)) throw new System.Exception("取得したEquipmentInfoを装備できません。");
         }
 
         public bool Equip(DB.Inventory.EquipmentInfo equipmentInfo)
@@ -116,26 +136,6 @@ namespace EllGames.Istia4.UI.Slot
             var buf = EquipmentInfo;
             Emptimize();
             return buf;
-        }
-
-        public bool IsEmpty()
-        {
-            return EquipmentInfo == null;
-        }
-
-        public void Refresh()
-        {
-            if (string.IsNullOrEmpty(m_EquipmentInfoID))
-            {
-                Emptimize();
-                return;
-            }
-
-            var info = EquipmentInfoProvider.Provide(m_EquipmentInfoID);
-            if (info == null) throw new System.Exception("EquipmentInfoの取得に失敗しました。");
-
-            Emptimize();
-            if (!Equip(info)) throw new System.Exception("取得したEquipmentInfoを装備できません。");
         }
     }
 }

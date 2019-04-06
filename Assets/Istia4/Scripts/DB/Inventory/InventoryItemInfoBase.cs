@@ -24,9 +24,9 @@ namespace EllGames.Istia4.DB.Inventory
         [PropertyOrder(12)]
         [OdinSerialize] public string Name { get; set; }
 
-        [Title("Disposal")]
+        [Title("Droppable")]
         [PropertyOrder(30)]
-        [OdinSerialize] public bool Disposable { get; private set; } = true;
+        [OdinSerialize] public bool Droppable { get; private set; } = true;
 
         [PropertyOrder(31)]
         [OdinSerialize, EnableIf("Disposable"), PreviewField] public GameObject Model { get; private set; }

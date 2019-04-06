@@ -26,20 +26,24 @@ namespace EllGames.Istia4.UI.Slot
         void IPointerDownHandler.OnPointerDown(PointerEventData eventData)
         {
             if (IsEmpty()) return;
+
             if (UnityEngine.Input.GetMouseButton(Config.KeyConfig.UseItemMouseButton))
             {
-                InventoryHandler.Use(this);
+                Use();
+                return;
+            }
+
+            if (ItemInfo.Droppable)
+            {
+                if (UnityEngine.Input.GetMouseButton(Config.KeyConfig.DisposeItemAllMouseButton) && UnityEngine.Input.GetKey(Config.KeyConfig.DisposeItemAllKey))
+                {
+                    DropAll();
+                    return;
+                }
             }
             else
             {
-                if (ItemInfo.Disposable)
-                {
-                    if (UnityEngine.Input.GetMouseButton(Config.KeyConfig.DisposeItemAllMouseButton) &&
-                        UnityEngine.Input.GetKey(Config.KeyConfig.DisposeItemAllKey))
-                    {
-                        InventoryHandler.DisposeAll(this);
-                    }
-                }
+                Debug.Log("このアイテムはドロップできません。");
             }
         }
 
@@ -61,9 +65,10 @@ namespace EllGames.Istia4.UI.Slot
         }
 
         [Title("Required")]
-        [OdinSerialize, Required] public DB.Inventory.ItemInfoProvider ItemInfoProvider { get; private set; }
-        [OdinSerialize, Required] public GameSystem.Actor.Player.InventoryHandler InventoryHandler { get; private set; }
-        [OdinSerialize, Required] public GameSystem.Item.ItemCoolDownHandler ItemCoolDownHandler { get; private set; }
+        [OdinSerialize, Required] DB.Inventory.ItemInfoProvider ItemInfoProvider { get; set; }
+        [OdinSerialize, Required] GameSystem.Actor.Player.InventoryHandler InventoryHandler { get; set; }
+        [OdinSerialize, Required] GameSystem.Item.ItemCoolDownHandler ItemCoolDownHandler { get; set; }
+        [OdinSerialize, Required] GameSystem.Prop.DropHandler DropHandler { get; set; }
 
         [TitleGroup("Meta")]
         [OdinSerialize] public DB.Inventory.ItemCategory ItemCategory { get; private set; }
@@ -92,14 +97,14 @@ namespace EllGames.Istia4.UI.Slot
         [OdinSerialize] Image PressOverlay { get; set; }
         [OdinSerialize] Text CountText { get; set; }
 
-        void SetCount(int count)
+        #region Overrides
+
+        public override bool IsEmpty()
         {
-            m_Count = count;
-            CountText.text = count.ToString();
-            CountText.gameObject.SetActive(count > 1);
+            return ItemInfo == null;
         }
 
-        public void Emptimize()
+        public override void Emptimize()
         {
             m_ItemInfoID = null;
             ItemInfo = null;
@@ -112,13 +117,39 @@ namespace EllGames.Istia4.UI.Slot
             SetCount(0);
         }
 
-        public bool IsEmpty()
+        public override void Dispose()
         {
-            return ItemInfo == null;
+            if (IsEmpty()) throw new System.Exception("スロットは既に空であるため、アイテムを破棄できません。");
+            SetCount(Count - 1);
+            if (Count == 0) Emptimize();
         }
 
-        public bool Push(DB.Inventory.ItemInfo itemInfo)
+        public override void DisposeAll()
         {
+            if (IsEmpty()) throw new System.Exception("スロットは既に空であるため、アイテムを破棄できません。");
+            Emptimize();
+        }
+
+        public override void Drop()
+        {
+            if (IsEmpty()) throw new System.Exception("スロットは既に空であるため、アイテムをドロップできません。");
+            DropHandler.Drop(InventoryHandler.transform.position, ItemInfo);
+            SetCount(Count - 1);
+            if (Count == 0) Emptimize();
+        }
+
+        public override void DropAll()
+        {
+            if (IsEmpty()) throw new System.Exception("スロットは既に空であるため、アイテムをドロップできません。");
+            DropHandler.Drop(InventoryHandler.transform.position, ItemInfo, Count);
+            Emptimize();
+        }
+
+        public override bool Push(DB.Inventory.InventoryItemInfoBase inventoryItemInfo)
+        {
+            if (!(inventoryItemInfo is DB.Inventory.ItemInfo)) return false;
+
+            var itemInfo = inventoryItemInfo as DB.Inventory.ItemInfo;
             if (itemInfo.ItemCategory != ItemCategory) return false;
             if (Count + 1 > itemInfo.MaxStackCount) return false;
             if (!IsEmpty() && itemInfo.ID != ItemInfo.ID) return false;
@@ -132,19 +163,30 @@ namespace EllGames.Istia4.UI.Slot
             return true;
         }
 
-        public bool Dispose()
+        public override void Refresh()
         {
-            if (IsEmpty()) return false;
-            SetCount(Count - 1);
-            if (Count == 0) Emptimize();
-            return true;
+            if (string.IsNullOrEmpty(ItemInfoID))
+            {
+                Emptimize();
+                return;
+            }
+
+            var info = ItemInfoProvider.Provide(ItemInfoID);
+            var cnt = Count;
+
+            Emptimize();
+
+            Push(info);
+            SetCount(cnt);
         }
 
-        public bool DisposeAll()
+        #endregion
+
+        void SetCount(int count)
         {
-            if (IsEmpty()) return false;
-            Emptimize();
-            return true;
+            m_Count = count;
+            CountText.text = count.ToString();
+            CountText.gameObject.SetActive(count > 1);
         }
 
         public bool Use()
@@ -171,26 +213,10 @@ namespace EllGames.Istia4.UI.Slot
                 }
             }
 
-            return Dispose();
+            Dispose();
+            return true;
         }
 
-        public void Refresh()
-        {
-            if (string.IsNullOrEmpty(ItemInfoID))
-            {
-                Emptimize();
-                return;
-            }
-
-            var info = ItemInfoProvider.Provide(ItemInfoID);
-            if (info == null) throw new System.Exception("ItemInfoIDに対応するItemInfoが見つかりません。");
-            var cnt = Count;
-
-            Emptimize();
-
-            Push(info);
-            SetCount(cnt);
-        }
 
         private void Update()
         {
