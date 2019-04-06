@@ -13,6 +13,6 @@ namespace EllGames.Istia4.UI.Slot
     public abstract class SlotBase : SerializedMonoBehaviour
     {
         [TitleGroup("Meta")]
-        [OdinSerialize] public int SlotID { get; private set; }
+        [OdinSerialize] public int SlotID { get; set; }
     }
 }

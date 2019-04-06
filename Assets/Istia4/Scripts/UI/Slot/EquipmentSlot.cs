@@ -64,9 +64,6 @@ namespace EllGames.Istia4.UI.Slot
         [OdinSerialize, Required] public GameSystem.Actor.Player.InventoryHandler InventoryHandler { get; private set; }
         [OdinSerialize, Required] public GameSystem.Actor.Player.EquipHandler EquipHandler { get; private set; }
 
-        [TitleGroup("Meta")]
-        [OdinSerialize] public DB.Inventory.EquipmentCategory EquipmentCategory { get; private set; }
-
         [TitleGroup("Content")]
         [OdinSerialize, ReadOnly] string m_EquipmentInfoID;
         public string EquipmentInfoID
@@ -100,7 +97,6 @@ namespace EllGames.Istia4.UI.Slot
         public bool Push(DB.Inventory.EquipmentInfo equipmentInfo)
         {
             if (!IsEmpty()) return false;
-            if (equipmentInfo.EquipmentCategory != EquipmentCategory) return false;
 
             m_EquipmentInfoID = equipmentInfo.ID;
             EquipmentInfo = equipmentInfo;
