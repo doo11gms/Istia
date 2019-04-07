@@ -12,5 +12,13 @@ namespace EllGames.Istia4.UI.Slot
 {
     public abstract class InventorySlotBase : SlotBase
     {
+        public abstract bool IsEmpty();
+        public abstract void Emptimize();
+        public abstract void Dispose();
+        public abstract void DisposeAll();
+        public abstract void Drop();
+        public abstract void DropAll();
+        public abstract bool Push(DB.Inventory.InventoryItemInfoBase inventoryInfoBase);
+        public abstract void Refresh();
     }
 }

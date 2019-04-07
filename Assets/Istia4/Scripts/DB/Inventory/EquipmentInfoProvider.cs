@@ -15,19 +15,21 @@ namespace EllGames.Istia4.DB.Inventory
     {
         [OdinSerialize] List<EquipmentInfo> Providables { get; set; } = new List<EquipmentInfo>();
 
-        EquipmentInfo Search(string equipmentID)
+        EquipmentInfo Search(string equipmentInfoID)
         {
             foreach (var found in Providables)
             {
-                if (found.ID == equipmentID) return found;
+                if (found.ID == equipmentInfoID) return found;
             }
 
             return null;
         }
 
-        public EquipmentInfo Provide(string equipmentID)
+        public EquipmentInfo Provide(string equipmentInfoID)
         {
-            return Search(equipmentID);
+            var found = Search(equipmentInfoID);
+            if (found == null) throw new System.Exception("EquipmentInfoIDに対応するEquipmentInfoが見つかりません。");
+            return found;
         }
     }
 }

@@ -34,6 +34,9 @@ MonoBehaviour:
     - Name: IconSprite
       Entry: 10
       Data: 0
+    - Name: Name
+      Entry: 1
+      Data: "\u30C6\u30B9\u30C8\u7528\u30BD\u30FC\u30C9B"
     - Name: ID
       Entry: 1
       Data: "\u30C6\u30B9\u30C8\u7528\u30BD\u30FC\u30C9B"

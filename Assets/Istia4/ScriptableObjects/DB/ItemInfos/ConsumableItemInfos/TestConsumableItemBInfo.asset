@@ -23,33 +23,27 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes:
-    - Name: Droppable
-      Entry: 5
-      Data: true
-    - Name: Model
-      Entry: 6
-      Data: 
     - Name: IconSprite
       Entry: 10
       Data: 0
     - Name: ID
       Entry: 1
       Data: "\u30C6\u30B9\u30C8\u7528\u6D88\u8CBB\u30A2\u30A4\u30C6\u30E0B"
+    - Name: Name
+      Entry: 1
+      Data: "\u30C6\u30B9\u30C8\u7528\u6D88\u8CBB\u30A2\u30A4\u30C6\u30E0B"
+    - Name: Disposable
+      Entry: 5
+      Data: false
+    - Name: Model
+      Entry: 6
+      Data: 
     - Name: ItemCategory
       Entry: 10
       Data: 1
-    - Name: ItemName
-      Entry: 1
-      Data: "\u30C6\u30B9\u30C8\u7528\u6D88\u8CBB\u30A2\u30A4\u30C6\u30E0B"
     - Name: MaxStackCount
       Entry: 3
       Data: 2
-    - Name: Usable
-      Entry: 5
-      Data: true
-    - Name: Consumable
-      Entry: 5
-      Data: true
     - Name: Sellable
       Entry: 5
       Data: true
@@ -59,15 +53,12 @@ MonoBehaviour:
     - Name: SellingPrice
       Entry: 3
       Data: 100
-    - Name: Disposable
+    - Name: Usable
       Entry: 5
-      Data: false
-    - Name: UsingHotKey
+      Data: true
+    - Name: Consumable
       Entry: 5
-      Data: false
-    - Name: HotKey
-      Entry: 3
-      Data: 0
+      Data: true
     - Name: UsingCoolTime
       Entry: 5
       Data: true
@@ -77,17 +68,4 @@ MonoBehaviour:
     - Name: m_Description
       Entry: 1
       Data: "\u3053\u308C\u306F\u30C6\u30B9\u30C8\u7528\u306E\u30A2\u30A4\u30C6\u30E0\u3067\u3059\u3002"
-    - Name: ItemUsingEffects
-      Entry: 7
-      Data: 0|System.Collections.Generic.List`1[[EllGames.Istia4.GameSystem.Item.ItemUsingEffectBase,
-        Assembly-CSharp]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
   ItemUsingEffects: []

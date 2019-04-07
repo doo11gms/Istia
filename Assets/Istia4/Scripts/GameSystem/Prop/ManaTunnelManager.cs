@@ -59,12 +59,22 @@ namespace EllGames.Istia4.GameSystem.Prop
             m_ActiveStates[manaTunnelInfo] = false;
         }
 
-        private void Update()
+        public void ActivateAll()
         {
-            Debug.LogError("---------");
-            foreach(var key in m_ActiveStates.Keys)
+            var keys = new List<DB.ManaTunnelInfo>(m_ActiveStates.Keys);
+            foreach (var key in keys)
             {
-                Debug.LogError(m_ActiveStates[key]);
+                Activate(key);
+                Debug.LogError(IsActive(key));
+            }
+        }
+
+        public void DeactivateAll()
+        {
+            var keys = new List<DB.ManaTunnelInfo>(m_ActiveStates.Keys);
+            foreach (var key in keys)
+            {
+                Deactivate(key);
             }
         }
     }

@@ -9,28 +9,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95283f1c5dd94594886720e6a9b4fe0a, type: 3}
-  m_Name: EquipmentCategoryProvider
+  m_Script: {fileID: 11500000, guid: 0ec86b41d2d07f349a7e672e89bad0bc, type: 3}
+  m_Name: DropHandler
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects: []
+    ReferencedUnityObjects:
+    - {fileID: 4928121565467004556, guid: 6024fbe8ab9d63e42a5036b5b2499ac6, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes:
-    - Name: Providables
-      Entry: 7
-      Data: 0|System.Collections.Generic.List`1[[EllGames.Istia4.DB.Inventory.EquipmentCategory,
-        Assembly-CSharp]], mscorlib
-    - Name: 
-      Entry: 12
+    - Name: DefaultModel
+      Entry: 10
       Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 

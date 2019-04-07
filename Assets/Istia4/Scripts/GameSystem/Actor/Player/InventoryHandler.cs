@@ -26,6 +26,7 @@ namespace EllGames.Istia4.GameSystem.Actor.Player
         [Title("Required")]
         [OdinSerialize, Required] UI.Window.InventoryWindow InventoryWindow;
         [OdinSerialize, Required] EquipHandler EquipHandler;
+        [OdinSerialize, Required] Prop.DropHandler DropHandler;
 
         int GetTabID(DB.Inventory.InventoryItemInfoBase inventoryItemInfo)
         {
@@ -43,6 +44,17 @@ namespace EllGames.Istia4.GameSystem.Actor.Player
         }
 
         [Title("Buttons")]
+        //[Button("Drop")]
+        //public bool Drop(int tabID, int slotID)
+        //{
+        //    var slot = InventoryWindow.SearchSlot(tabID, slotID);
+        //    if (slot == null) throw new System.Exception("対象のスロットが見つかりません。");
+        //    if (slot.IsEmpty()) throw new System.Exception("スロットが空であるため、ドロップできません。");
+        //    DropHandler.Drop(transform.position, slot.ItemInfo, slot.Count);
+        //    slot.DisposeAll();
+        //    return true;
+        //}
+
         [Button("Push")]
         public bool Push(DB.Inventory.InventoryItemInfoBase inventoryItemInfo)
         {
@@ -64,32 +76,32 @@ namespace EllGames.Istia4.GameSystem.Actor.Player
             return false;
         }
 
-        public bool Push(DB.Inventory.ItemInfo itemInfo, int tabID, int slotID)
-        {
-            var slot = InventoryWindow.SearchSlot(tabID, slotID);
-            if (slot == null) throw new System.Exception("対象のスロットが見つかりません。");
-            return slot.Push(itemInfo);
-        }
+        //public bool Push(DB.Inventory.ItemInfo itemInfo, int tabID, int slotID)
+        //{
+        //    var slot = InventoryWindow.SearchSlot(tabID, slotID);
+        //    if (slot == null) throw new System.Exception("対象のスロットが見つかりません。");
+        //    return slot.Push(itemInfo);
+        //}
 
-        [Button("Dispose")]
-        public bool Dispose(int tabID, int slotID)
-        {
-            var slot = InventoryWindow.SearchSlot(tabID, slotID);
-            if (slot == null) throw new System.Exception("対象のスロットが見つかりません。");
-            return slot.Dispose();
-        }
+        //[Button("Dispose")]
+        //public bool Dispose(int tabID, int slotID)
+        //{
+        //    var slot = InventoryWindow.SearchSlot(tabID, slotID);
+        //    if (slot == null) throw new System.Exception("対象のスロットが見つかりません。");
+        //    return slot.Dispose();
+        //}
 
-        public bool DisposeAll(UI.Slot.ItemSlot itemSlot)
-        {
-            return itemSlot.DisposeAll();
-        }
+        //public bool DisposeAll(UI.Slot.ItemSlot itemSlot)
+        //{
+        //    return itemSlot.DisposeAll();
+        //}
 
         [Button("Emptimize")]
         public void Emptimize()
         {
-            foreach(var tab in InventoryWindow.Tabs)
+            foreach (var tab in InventoryWindow.Tabs)
             {
-                foreach(var slot in tab.Slots)
+                foreach (var slot in tab.Slots)
                 {
                     if (slot is UI.Slot.ItemSlot) (slot as UI.Slot.ItemSlot).Emptimize();
                     if (slot is UI.Slot.EquipmentSlot) (slot as UI.Slot.EquipmentSlot).Emptimize();
@@ -97,18 +109,18 @@ namespace EllGames.Istia4.GameSystem.Actor.Player
             }
         }
 
-        public void Emptimize(int tabID, int slotID)
-        {
-            var slot = InventoryWindow.SearchSlot(tabID, slotID);
-            if (slot == null) throw new System.Exception("対象のスロットが見つかりません。");
-            slot.Emptimize();
-        }
+        //public void Emptimize(int tabID, int slotID)
+        //{
+        //    var slot = InventoryWindow.SearchSlot(tabID, slotID);
+        //    if (slot == null) throw new System.Exception("対象のスロットが見つかりません。");
+        //    slot.Emptimize();
+        //}
 
-        [Button("Use")]
-        public bool Use(UI.Slot.ItemSlot itemSlot)
-        {
-            return itemSlot.Use();
-        }
+        //[Button("Use")]
+        //public bool Use(UI.Slot.ItemSlot itemSlot)
+        //{
+        //    return itemSlot.Use();
+        //}
 
         [Button("Sort")]
         public void Sort()

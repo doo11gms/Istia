@@ -8,12 +8,15 @@ using UnityEngine.EventSystems;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 
-namespace EllGames.Istia4.GameSystem.Prop
+namespace EllGames.Istia4.Dev
 {
-    public class DropItem : SerializedMonoBehaviour
+    public class Debugger : SerializedMonoBehaviour
     {
-        [OdinSerialize] public DB.Inventory.InventoryItemInfoBase InventoryItemInfo { get; set; }
-
-
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.M))
+            {
+            }
+        }
     }
 }
