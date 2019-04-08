@@ -217,7 +217,6 @@ namespace EllGames.Istia4.UI.Slot
             return true;
         }
 
-
         private void Update()
         {
             if (IsEmpty()) return;

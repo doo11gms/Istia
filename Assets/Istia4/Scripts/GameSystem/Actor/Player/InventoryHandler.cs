@@ -128,6 +128,12 @@ namespace EllGames.Istia4.GameSystem.Actor.Player
             Debug.Log("TODO");
         }
 
+        public bool FindAndUse(DB.Inventory.ItemInfo itemInfo)
+        {
+            Debug.LogError("TODO");
+            return true;
+        }
+
         [Button("Refresh")]
         public void Refresh()
         {

@@ -27,6 +27,10 @@ namespace EllGames.Istia4.Config
         public static int EquipMouseButton = 1;
         public static KeyCode ItemLootingKey = KeyCode.Space;
 
+        [Title("Shortcut")]
+        public static int UseShortcutMouseButton = 0;
+        public static int UnassignShortcutMouseButton = 1;
+
         [Title("Player Move")]
         public static int PlayerMoveMouseButton = 0;
     }
