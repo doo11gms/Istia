@@ -8,9 +8,9 @@ using UnityEngine.EventSystems;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 
-namespace EllGames.Istia4.UI.Container
+namespace EllGames.Istia4.GameSystem.Shortcut
 {
-    public abstract class ContainerBase : SerializedMonoBehaviour
+    public class ShortcutInfo : SerializedMonoBehaviour
     {
 	    
     }
