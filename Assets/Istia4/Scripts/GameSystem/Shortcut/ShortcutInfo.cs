@@ -30,5 +30,11 @@ namespace EllGames.Istia4.GameSystem.Shortcut
             get { return m_ShortcutType; }
         }
 
+        public ShortcutInfo(Sprite iconSprite, string targetID, SHORTCUT_TYPE shortcutType)
+        {
+            m_IconSprite = iconSprite;
+            m_TargetID = targetID;
+            m_ShortcutType = shortcutType;
+        }
     }
 }
