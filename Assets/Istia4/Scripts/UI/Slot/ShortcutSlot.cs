@@ -26,28 +26,20 @@ namespace EllGames.Istia4.UI.Slot
 
         void IPointerDownHandler.OnPointerDown(PointerEventData eventData)
         {
-            if (IsEmpty()) return;
-            PressOverlay.gameObject.SetActive(true);
-
-            if (UnityEngine.Input.GetMouseButton(Config.KeyConfig.UseShortcutMouseButton))
+            if (UnityEngine.Input.GetMouseButton(0))
             {
-                switch (m_ShortcutType)
-                {
-                    case SHORTCUT_TYPE.None:
-                        return;
-                    case SHORTCUT_TYPE.UseItemShortcut:
-                        ShortcutHandler.UseItemShortcut(ItemInfo);
-                        return;
-                    case SHORTCUT_TYPE.UseSkillShortcut:
-                        ShortcutHandler.UseSkillShortcut(SkillInfo);
-                        return;
-                }
+                if (ShortcutInfoContainer.IsEmpty()) return;
+                Assign((GameSystem.Shortcut.ShortcutInfo)ShortcutInfoContainer.ShortcutInfo);
+                ShortcutInfoContainer.Unassign();
+                ShortcutInfoContainer.gameObject.SetActive(false);
             }
-
-            if (UnityEngine.Input.GetMouseButton(Config.KeyConfig.UnassignShortcutMouseButton))
+            else
             {
-                Unassign();
-                return;
+                if (!IsEmpty())
+                {
+                    Unassign();
+                    Refresh();
+                }
             }
         }
 
@@ -58,14 +50,14 @@ namespace EllGames.Istia4.UI.Slot
 
         void Save.ISavable.Save()
         {
+            Save.SaveHandler.Save(this, m_ContentID, nameof(m_ContentID));
             ES2.Save(m_ShortcutType, GetInstanceID() + nameof(m_ShortcutType));
-            Save.SaveHandler.Save(this, ContentID, nameof(ContentID));
         }
 
         void Save.ISavable.Load()
         {
+            Save.SaveHandler.Load(this, ref m_ContentID, nameof(m_ContentID));
             m_ShortcutType = ES2.Load<SHORTCUT_TYPE>(GetInstanceID() + nameof(m_ShortcutType));
-            Save.SaveHandler.Load(this, ref m_ContentID, nameof(ContentID));
             Refresh();
         }
 
@@ -73,20 +65,12 @@ namespace EllGames.Istia4.UI.Slot
         [OdinSerialize, Required] DB.Inventory.ItemInfoProvider ItemInfoProvider { get; set; }
         [OdinSerialize, Required] DB.SkillInfoProvider SkillInfoProvider { get; set; }
         [OdinSerialize, Required] GameSystem.Shortcut.ShortcutHandler ShortcutHandler { get; set; }
+        [OdinSerialize, Required] GameSystem.Item.ItemCoolDownHandler ItemCoolDownHandler { get; set; }
 
-        [Title("State")]
+        [Title("Loaded Data")]
         [OdinSerialize, ReadOnly] SHORTCUT_TYPE m_ShortcutType = SHORTCUT_TYPE.None;
-        public SHORTCUT_TYPE ShortcutType
-        {
-            get { return m_ShortcutType; }
-        }
-
-        [TitleGroup("Content")]
         [OdinSerialize, ReadOnly] string m_ContentID;
-        public string ContentID
-        {
-            get { return m_ContentID; }
-        }
+        [OdinSerialize, ReadOnly] Sprite m_IconSprite;
 
         [TitleGroup("Content")]
         [OdinSerialize, ReadOnly] DB.Inventory.ItemInfo ItemInfo { get; set; }
@@ -94,17 +78,22 @@ namespace EllGames.Istia4.UI.Slot
         [TitleGroup("Content")]
         [OdinSerialize, ReadOnly] DB.SkillInfo SkillInfo { get; set; }
 
+        [Title("Settings")]
+        [OdinSerialize] KeyCode ShortcutKey { get; set; } = KeyCode.None;
+
         [Title("UI Reference")]
+        [OdinSerialize] Container.ShortcutInfoContainer ShortcutInfoContainer { get; set; }
         [OdinSerialize] Image IconImage { get; set; }
         [OdinSerialize] Image HoverOverlay { get; set; }
         [OdinSerialize] Image PressOverlay { get; set; }
+        [OdinSerialize] Image CoolDownOverlay { get; set; }
 
         bool IsEmpty()
         {
             return ItemInfo == null && SkillInfo == null;
         }
 
-        void UpdateIcon()
+        void IconRefresh()
         {
             IconImage.sprite = null;
             switch (m_ShortcutType)
@@ -119,22 +108,30 @@ namespace EllGames.Istia4.UI.Slot
             IconImage.gameObject.SetActive(IconImage.sprite != null);
         }
 
-        public void Assign(DB.Inventory.ItemInfo itemInfo)
+        void InfoRefresh()
         {
-            Unassign();
-            m_ShortcutType = SHORTCUT_TYPE.UseItemShortcut;
-            m_ContentID = itemInfo.ID;
-            ItemInfo = itemInfo;
-            UpdateIcon();
+            ItemInfo = null;
+            SkillInfo = null;
+            switch (m_ShortcutType)
+            {
+                case SHORTCUT_TYPE.None:
+                    break;
+                case SHORTCUT_TYPE.UseItemShortcut:
+                    ItemInfo = ItemInfoProvider.Provide(m_ContentID);
+                    break;
+                case SHORTCUT_TYPE.UseSkillShortcut:
+                    SkillInfo = SkillInfoProvider.Provide(m_ContentID);
+                    break;
+            }
         }
 
-        public void Assign(DB.SkillInfo skillInfo)
+        public void Assign(GameSystem.Shortcut.ShortcutInfo shortcutInfo)
         {
             Unassign();
-            m_ShortcutType = SHORTCUT_TYPE.UseSkillShortcut;
-            m_ContentID = skillInfo.ID;
-            SkillInfo = skillInfo;
-            UpdateIcon();
+            m_ShortcutType = shortcutInfo.ShortcutType;
+            m_ContentID = shortcutInfo.TargetID;
+            m_IconSprite = shortcutInfo.IconSprite;
+            Refresh();
         }
 
         public void Unassign()
@@ -143,29 +140,60 @@ namespace EllGames.Istia4.UI.Slot
             m_ContentID = null;
             ItemInfo = null;
             SkillInfo = null;
-            UpdateIcon();
+            HoverOverlay.gameObject.SetActive(false);
+            PressOverlay.gameObject.SetActive(false);
         }
 
         public void Refresh()
         {
-            Unassign();
+            InfoRefresh();
+            IconRefresh();
+        }
 
-            if (m_ContentID != null)
+        void UpdateCoolDownOverlay()
+        {
+            switch (m_ShortcutType)
+            {
+                case SHORTCUT_TYPE.None:
+                    CoolDownOverlay.fillAmount = 0f;
+                    CoolDownOverlay.gameObject.SetActive(false);
+                    break;
+                case SHORTCUT_TYPE.UseItemShortcut:
+                    if (ItemInfo.UsingCoolTime)
+                    {
+                        CoolDownOverlay.fillAmount = ItemCoolDownHandler.CoolTimeRemain(ItemInfo) / ItemInfo.CoolTime;
+                        CoolDownOverlay.gameObject.SetActive(true);
+                    }
+                    else
+                    {
+                        CoolDownOverlay.fillAmount = 0f;
+                        CoolDownOverlay.gameObject.SetActive(false);
+                    }
+                    break;
+                case SHORTCUT_TYPE.UseSkillShortcut:
+                    Debug.LogError("TODO");
+                    break;
+            }
+        }
+
+        private void Update()
+        {
+            UpdateCoolDownOverlay();
+            if (IsEmpty()) return;
+            if (UnityEngine.Input.GetKeyDown(ShortcutKey))
             {
                 switch (m_ShortcutType)
                 {
                     case SHORTCUT_TYPE.None:
                         break;
                     case SHORTCUT_TYPE.UseItemShortcut:
-                        ItemInfo = ItemInfoProvider.Provide(m_ContentID);
+                        ShortcutHandler.UseItemShortcut(ItemInfo);
                         break;
                     case SHORTCUT_TYPE.UseSkillShortcut:
-                        SkillInfo = SkillInfoProvider.Provide(m_ContentID);
+                        ShortcutHandler.UseSkillShortcut(SkillInfo);
                         break;
                 }
             }
-
-            UpdateIcon();
         }
     }
 }

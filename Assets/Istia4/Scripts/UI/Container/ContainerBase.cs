@@ -12,6 +12,6 @@ namespace EllGames.Istia4.UI.Container
 {
     public abstract class ContainerBase : SerializedMonoBehaviour
     {
-	
+	    
     }
 }
