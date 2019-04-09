@@ -26,33 +26,14 @@ namespace EllGames.Istia4.UI.Slot
 
         void IPointerDownHandler.OnPointerDown(PointerEventData eventData)
         {
-            if (UnityEngine.Input.GetMouseButton(1))
+            if (UnityEngine.Input.GetMouseButton(0))
             {
                 if (!IsEmpty()) Unassign();
-                var container = FindObjectOfType<Container.ShortcutInfoContainer>();
-                if (container != null) Assign(container.TakeOut());
-                return;
-            }
-            else
-            {
-                if (IsEmpty()) return;
-
-                if (UnityEngine.Input.GetMouseButton(0))
+                if (!ShortcutInfoContainer.IsEmpty()) return;
                 {
-                    switch (m_ShortcutType)
-                    {
-                        case SHORTCUT_TYPE.None:
-                            break;
-                        case SHORTCUT_TYPE.UseItemShortcut:
-                            PressOverlay.gameObject.SetActive(true);
-                            ShortcutHandler.UseItemShortcut(ItemInfo);
-                            break;
-                        case SHORTCUT_TYPE.UseSkillShortcut:
-                            PressOverlay.gameObject.SetActive(true);
-                            ShortcutHandler.UseSkillShortcut(SkillInfo);
-                            break;
-                    }
-                    return;
+                    Assign(ShortcutInfoContainer.ShortcutInfo);
+                    ShortcutInfoContainer.Unassign();
+                    ShortcutInfoContainer.gameObject.SetActive(false);
                 }
             }
         }
@@ -93,7 +74,11 @@ namespace EllGames.Istia4.UI.Slot
         [TitleGroup("Content")]
         [OdinSerialize, ReadOnly] DB.SkillInfo SkillInfo { get; set; }
 
+        [Title("Settings")]
+        [OdinSerialize] KeyCode ShortcutKey { get; set; } = KeyCode.None;
+
         [Title("UI Reference")]
+        [OdinSerialize] Container.ShortcutInfoContainer ShortcutInfoContainer { get; set; }
         [OdinSerialize] Image IconImage { get; set; }
         [OdinSerialize] Image HoverOverlay { get; set; }
         [OdinSerialize] Image PressOverlay { get; set; }
@@ -154,9 +139,27 @@ namespace EllGames.Istia4.UI.Slot
 
         public void Refresh()
         {
-            Unassign();
-            IconRefresh();
             InfoRefresh();
+            IconRefresh();
+        }
+
+        private void Update()
+        {
+            if (IsEmpty()) return;
+            if (UnityEngine.Input.GetKeyDown(ShortcutKey))
+            {
+                switch (m_ShortcutType)
+                {
+                    case SHORTCUT_TYPE.None:
+                        break;
+                    case SHORTCUT_TYPE.UseItemShortcut:
+                        ShortcutHandler.UseItemShortcut(ItemInfo);
+                        break;
+                    case SHORTCUT_TYPE.UseSkillShortcut:
+                        ShortcutHandler.UseSkillShortcut(SkillInfo);
+                        break;
+                }
+            }
         }
     }
 }

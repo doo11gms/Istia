@@ -20,14 +20,11 @@ namespace EllGames.Istia4.UI.Container
 
         bool m_IsOnEnableFrame = false;
 
-        public ShortcutInfoContainer(GameSystem.Shortcut.ShortcutInfo shortcutInfo)
-        {
-            ShortcutInfo = shortcutInfo;
-        }
+        public bool IsEmpty() => ShortcutInfo == null;
 
         public void Assign(GameSystem.Shortcut.ShortcutInfo shortcutInfo)
         {
-            ShortcutInfo = shortcutInfo;
+            ShortcutInfo = new GameSystem.Shortcut.ShortcutInfo(shortcutInfo.IconSprite, shortcutInfo.TargetID, shortcutInfo.ShortcutType);
             Image.sprite = shortcutInfo.IconSprite;
         }
 
@@ -35,14 +32,6 @@ namespace EllGames.Istia4.UI.Container
         {
             ShortcutInfo = null;
             Image.sprite = null;
-        }
-
-        public GameSystem.Shortcut.ShortcutInfo TakeOut()
-        {
-            var buf = ShortcutInfo;
-            Unassign();
-            if (buf == null) throw new System.Exception("参照が消えています。");
-            return buf;
         }
 
         void MouseTrack()
@@ -57,8 +46,8 @@ namespace EllGames.Istia4.UI.Container
 
         private void OnEnable()
         {
-            MouseTrack();
             m_IsOnEnableFrame = true;
+            MouseTrack();
         }
 
         private void Update()
@@ -69,7 +58,6 @@ namespace EllGames.Istia4.UI.Container
         private void LateUpdate()
         {
             if (Input.GetMouseButtonDown(1) && !m_IsOnEnableFrame) gameObject.SetActive(false);
-
             m_IsOnEnableFrame = false;
         }
     }
