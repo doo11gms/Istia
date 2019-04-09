@@ -67,6 +67,7 @@ namespace EllGames.Istia4.UI.Slot
         [OdinSerialize, Required] DB.Inventory.ItemInfoProvider ItemInfoProvider { get; set; }
         [OdinSerialize, Required] DB.SkillInfoProvider SkillInfoProvider { get; set; }
         [OdinSerialize, Required] GameSystem.Shortcut.ShortcutHandler ShortcutHandler { get; set; }
+        [OdinSerialize, Required] GameSystem.Item.ItemCoolDownHandler ItemCoolDownHandler { get; set; }
 
         [Title("Loaded Data")]
         [OdinSerialize, ReadOnly] SHORTCUT_TYPE m_ShortcutType = SHORTCUT_TYPE.None;
@@ -87,6 +88,7 @@ namespace EllGames.Istia4.UI.Slot
         [OdinSerialize] Image IconImage { get; set; }
         [OdinSerialize] Image HoverOverlay { get; set; }
         [OdinSerialize] Image PressOverlay { get; set; }
+        [OdinSerialize] Image CoolDownOverlay { get; set; }
 
         bool IsEmpty()
         {
@@ -150,8 +152,35 @@ namespace EllGames.Istia4.UI.Slot
             IconRefresh();
         }
 
+        void UpdateCoolDownOverlay()
+        {
+            switch (m_ShortcutType)
+            {
+                case SHORTCUT_TYPE.None:
+                    CoolDownOverlay.fillAmount = 0f;
+                    CoolDownOverlay.gameObject.SetActive(false);
+                    break;
+                case SHORTCUT_TYPE.UseItemShortcut:
+                    if (ItemInfo.UsingCoolTime)
+                    {
+                        CoolDownOverlay.fillAmount = ItemCoolDownHandler.CoolTimeRemain(ItemInfo) / ItemInfo.CoolTime;
+                        CoolDownOverlay.gameObject.SetActive(true);
+                    }
+                    else
+                    {
+                        CoolDownOverlay.fillAmount = 0f;
+                        CoolDownOverlay.gameObject.SetActive(false);
+                    }
+                    break;
+                case SHORTCUT_TYPE.UseSkillShortcut:
+                    Debug.LogError("TODO");
+                    break;
+            }
+        }
+
         private void Update()
         {
+            UpdateCoolDownOverlay();
             if (IsEmpty()) return;
             if (UnityEngine.Input.GetKeyDown(ShortcutKey))
             {
