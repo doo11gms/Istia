@@ -10,21 +10,8 @@ using Sirenix.Serialization;
 
 namespace EllGames.Istia4.GameSystem.Shortcut
 {
-    public class ShortcutInfo : SerializedMonoBehaviour, Save.ISavable
+    public class ShortcutInfo : SerializedMonoBehaviour
     {
-        void Save.ISavable.Save()
-        {
-            Save.SaveHandler.Save(this, m_TargetID, nameof(m_TargetID));
-            ES2.Save(m_IconSprite, GetInstanceID() + nameof(m_IconSprite));
-            ES2.Save(m_ShortcutType, GetInstanceID() + nameof(m_ShortcutType));
-        }
-
-        void Save.ISavable.Load()
-        {
-            Save.SaveHandler.Load(this, ref m_TargetID, nameof(m_TargetID));
-            m_IconSprite = ES2.Load<Sprite>(GetInstanceID() + nameof(m_IconSprite));
-            m_ShortcutType = ES2.Load<SHORTCUT_TYPE>(GetInstanceID() + nameof(m_ShortcutType));
-        }
 
         [OdinSerialize] Sprite m_IconSprite;
         public Sprite IconSprite

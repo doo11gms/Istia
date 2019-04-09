@@ -26,28 +26,34 @@ namespace EllGames.Istia4.UI.Slot
 
         void IPointerDownHandler.OnPointerDown(PointerEventData eventData)
         {
-            if (IsEmpty()) return;
-            PressOverlay.gameObject.SetActive(true);
-
-            if (UnityEngine.Input.GetMouseButton(Config.KeyConfig.UseShortcutMouseButton))
+            if (UnityEngine.Input.GetMouseButton(1))
             {
-                switch (m_ShortcutType)
-                {
-                    case SHORTCUT_TYPE.None:
-                        return;
-                    case SHORTCUT_TYPE.UseItemShortcut:
-                        ShortcutHandler.UseItemShortcut(ItemInfo);
-                        return;
-                    case SHORTCUT_TYPE.UseSkillShortcut:
-                        ShortcutHandler.UseSkillShortcut(SkillInfo);
-                        return;
-                }
-            }
-
-            if (UnityEngine.Input.GetMouseButton(Config.KeyConfig.UnassignShortcutMouseButton))
-            {
-                Unassign();
+                if (!IsEmpty()) Unassign();
+                var container = FindObjectOfType<Container.ShortcutInfoContainer>();
+                if (container != null) Assign(container.TakeOut());
                 return;
+            }
+            else
+            {
+                if (IsEmpty()) return;
+
+                if (UnityEngine.Input.GetMouseButton(0))
+                {
+                    switch (m_ShortcutType)
+                    {
+                        case SHORTCUT_TYPE.None:
+                            break;
+                        case SHORTCUT_TYPE.UseItemShortcut:
+                            PressOverlay.gameObject.SetActive(true);
+                            ShortcutHandler.UseItemShortcut(ItemInfo);
+                            break;
+                        case SHORTCUT_TYPE.UseSkillShortcut:
+                            PressOverlay.gameObject.SetActive(true);
+                            ShortcutHandler.UseSkillShortcut(SkillInfo);
+                            break;
+                    }
+                    return;
+                }
             }
         }
 
@@ -58,14 +64,16 @@ namespace EllGames.Istia4.UI.Slot
 
         void Save.ISavable.Save()
         {
+            Save.SaveHandler.Save(this, m_ContentID, nameof(m_ContentID));
+            ES2.Save(m_IconSprite, GetInstanceID() + nameof(m_IconSprite));
             ES2.Save(m_ShortcutType, GetInstanceID() + nameof(m_ShortcutType));
-            Save.SaveHandler.Save(this, ContentID, nameof(ContentID));
         }
 
         void Save.ISavable.Load()
         {
+            Save.SaveHandler.Load(this, ref m_ContentID, nameof(m_ContentID));
+            m_IconSprite = ES2.Load<Sprite>(GetInstanceID() + nameof(m_IconSprite));
             m_ShortcutType = ES2.Load<SHORTCUT_TYPE>(GetInstanceID() + nameof(m_ShortcutType));
-            Save.SaveHandler.Load(this, ref m_ContentID, nameof(ContentID));
             Refresh();
         }
 
@@ -74,19 +82,10 @@ namespace EllGames.Istia4.UI.Slot
         [OdinSerialize, Required] DB.SkillInfoProvider SkillInfoProvider { get; set; }
         [OdinSerialize, Required] GameSystem.Shortcut.ShortcutHandler ShortcutHandler { get; set; }
 
-        [Title("State")]
+        [Title("Loaded Data")]
         [OdinSerialize, ReadOnly] SHORTCUT_TYPE m_ShortcutType = SHORTCUT_TYPE.None;
-        public SHORTCUT_TYPE ShortcutType
-        {
-            get { return m_ShortcutType; }
-        }
-
-        [TitleGroup("Content")]
         [OdinSerialize, ReadOnly] string m_ContentID;
-        public string ContentID
-        {
-            get { return m_ContentID; }
-        }
+        [OdinSerialize, ReadOnly] Sprite m_IconSprite;
 
         [TitleGroup("Content")]
         [OdinSerialize, ReadOnly] DB.Inventory.ItemInfo ItemInfo { get; set; }
@@ -104,7 +103,7 @@ namespace EllGames.Istia4.UI.Slot
             return ItemInfo == null && SkillInfo == null;
         }
 
-        void UpdateIcon()
+        void IconRefresh()
         {
             IconImage.sprite = null;
             switch (m_ShortcutType)
@@ -119,22 +118,30 @@ namespace EllGames.Istia4.UI.Slot
             IconImage.gameObject.SetActive(IconImage.sprite != null);
         }
 
-        public void Assign(DB.Inventory.ItemInfo itemInfo)
+        void InfoRefresh()
         {
-            Unassign();
-            m_ShortcutType = SHORTCUT_TYPE.UseItemShortcut;
-            m_ContentID = itemInfo.ID;
-            ItemInfo = itemInfo;
-            UpdateIcon();
+            ItemInfo = null;
+            SkillInfo = null;
+            switch (m_ShortcutType)
+            {
+                case SHORTCUT_TYPE.None:
+                    break;
+                case SHORTCUT_TYPE.UseItemShortcut:
+                    ItemInfo = ItemInfoProvider.Provide(m_ContentID);
+                    break;
+                case SHORTCUT_TYPE.UseSkillShortcut:
+                    SkillInfo = SkillInfoProvider.Provide(m_ContentID);
+                    break;
+            }
         }
 
-        public void Assign(DB.SkillInfo skillInfo)
+        public void Assign(GameSystem.Shortcut.ShortcutInfo shortcutInfo)
         {
             Unassign();
-            m_ShortcutType = SHORTCUT_TYPE.UseSkillShortcut;
-            m_ContentID = skillInfo.ID;
-            SkillInfo = skillInfo;
-            UpdateIcon();
+            m_ShortcutType = shortcutInfo.ShortcutType;
+            m_ContentID = shortcutInfo.TargetID;
+            m_IconSprite = shortcutInfo.IconSprite;
+            Refresh();
         }
 
         public void Unassign()
@@ -143,29 +150,13 @@ namespace EllGames.Istia4.UI.Slot
             m_ContentID = null;
             ItemInfo = null;
             SkillInfo = null;
-            UpdateIcon();
         }
 
         public void Refresh()
         {
             Unassign();
-
-            if (m_ContentID != null)
-            {
-                switch (m_ShortcutType)
-                {
-                    case SHORTCUT_TYPE.None:
-                        break;
-                    case SHORTCUT_TYPE.UseItemShortcut:
-                        ItemInfo = ItemInfoProvider.Provide(m_ContentID);
-                        break;
-                    case SHORTCUT_TYPE.UseSkillShortcut:
-                        SkillInfo = SkillInfoProvider.Provide(m_ContentID);
-                        break;
-                }
-            }
-
-            UpdateIcon();
+            IconRefresh();
+            InfoRefresh();
         }
     }
 }

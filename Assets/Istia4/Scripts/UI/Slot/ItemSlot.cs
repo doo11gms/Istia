@@ -27,23 +27,33 @@ namespace EllGames.Istia4.UI.Slot
         {
             if (IsEmpty()) return;
 
+            PressOverlay.gameObject.SetActive(true);
+
             if (UnityEngine.Input.GetMouseButton(Config.KeyConfig.UseItemMouseButton))
             {
                 Use();
                 return;
             }
 
-            if (ItemInfo.Droppable)
+            if (UnityEngine.Input.GetMouseButton(Config.KeyConfig.DisposeItemAllMouseButton) && UnityEngine.Input.GetKey(Config.KeyConfig.DisposeItemAllKey))
             {
-                if (UnityEngine.Input.GetMouseButton(Config.KeyConfig.DisposeItemAllMouseButton) && UnityEngine.Input.GetKey(Config.KeyConfig.DisposeItemAllKey))
+                if (ItemInfo.Droppable)
                 {
                     DropAll();
-                    return;
                 }
+                else
+                {
+                    Debug.Log("このアイテムはドロップできません。");
+                }
+                return;
             }
-            else
+
+            if (UnityEngine.Input.GetMouseButton(1))
             {
-                Debug.Log("このアイテムはドロップできません。");
+                if (!ItemInfo.Usable) return;
+                ShortcutInfoContainer.Assign(new GameSystem.Shortcut.ShortcutInfo(ItemInfo.IconSprite, ItemInfo.ID, GameSystem.Shortcut.SHORTCUT_TYPE.UseItemShortcut));
+                ShortcutInfoContainer.gameObject.SetActive(true);
+                return;
             }
         }
 
@@ -91,6 +101,7 @@ namespace EllGames.Istia4.UI.Slot
         }
 
         [Title("UI Reference")]
+        [OdinSerialize] Container.ShortcutInfoContainer ShortcutInfoContainer { get; set; }
         [OdinSerialize] Image IconImage { get; set; }
         [OdinSerialize] Image CoolDownOverlay { get; set; }
         [OdinSerialize] Image HoverOverlay { get; set; }
