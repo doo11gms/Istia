@@ -130,8 +130,16 @@ namespace EllGames.Istia4.GameSystem.Actor.Player
 
         public bool FindAndUse(DB.Inventory.ItemInfo itemInfo)
         {
-            Debug.LogError("TODO");
-            return true;
+            foreach(var slot in InventoryWindow.SearchTab(GetTabID(itemInfo)).Slots)
+            {
+                var itemSlot = slot as UI.Slot.ItemSlot;
+                if (itemSlot.ItemInfoID == itemInfo.ID)
+                {
+                    return itemSlot.Use();
+                }
+            }
+            Debug.Log("対象のアイテムがインベントリに存在しません。");
+            return false;
         }
 
         [Button("Refresh")]
