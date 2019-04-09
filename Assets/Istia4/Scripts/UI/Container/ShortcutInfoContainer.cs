@@ -15,8 +15,7 @@ namespace EllGames.Istia4.UI.Container
         [Title("Required")]
         [OdinSerialize, Required] Image Image { get; set; }
 
-        [Title("Content")]
-        [OdinSerialize, ReadOnly] public GameSystem.Shortcut.ShortcutInfo ShortcutInfo { get; private set; }
+        public GameSystem.Shortcut.ShortcutInfo? ShortcutInfo { get; private set; }
 
         bool m_IsOnEnableFrame = false;
 
@@ -24,7 +23,7 @@ namespace EllGames.Istia4.UI.Container
 
         public void Assign(GameSystem.Shortcut.ShortcutInfo shortcutInfo)
         {
-            ShortcutInfo = new GameSystem.Shortcut.ShortcutInfo(shortcutInfo.IconSprite, shortcutInfo.TargetID, shortcutInfo.ShortcutType);
+            ShortcutInfo = shortcutInfo;
             Image.sprite = shortcutInfo.IconSprite;
         }
 

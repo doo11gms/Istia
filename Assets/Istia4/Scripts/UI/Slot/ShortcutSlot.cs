@@ -28,12 +28,17 @@ namespace EllGames.Istia4.UI.Slot
         {
             if (UnityEngine.Input.GetMouseButton(0))
             {
-                if (!IsEmpty()) Unassign();
-                if (!ShortcutInfoContainer.IsEmpty()) return;
+                if (ShortcutInfoContainer.IsEmpty()) return;
+                Assign((GameSystem.Shortcut.ShortcutInfo)ShortcutInfoContainer.ShortcutInfo);
+                ShortcutInfoContainer.Unassign();
+                ShortcutInfoContainer.gameObject.SetActive(false);
+            }
+            else
+            {
+                if (!IsEmpty())
                 {
-                    Assign(ShortcutInfoContainer.ShortcutInfo);
-                    ShortcutInfoContainer.Unassign();
-                    ShortcutInfoContainer.gameObject.SetActive(false);
+                    Unassign();
+                    Refresh();
                 }
             }
         }
@@ -135,6 +140,8 @@ namespace EllGames.Istia4.UI.Slot
             m_ContentID = null;
             ItemInfo = null;
             SkillInfo = null;
+            HoverOverlay.gameObject.SetActive(false);
+            PressOverlay.gameObject.SetActive(false);
         }
 
         public void Refresh()

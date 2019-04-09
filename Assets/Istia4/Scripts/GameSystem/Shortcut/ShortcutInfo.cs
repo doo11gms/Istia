@@ -10,32 +10,17 @@ using Sirenix.Serialization;
 
 namespace EllGames.Istia4.GameSystem.Shortcut
 {
-    public class ShortcutInfo : SerializedMonoBehaviour
+    public struct ShortcutInfo
     {
-
-        [OdinSerialize] Sprite m_IconSprite;
-        public Sprite IconSprite
-        {
-            get { return m_IconSprite; }
-        }
-
-        [OdinSerialize] string m_TargetID;
-        public string TargetID
-        {
-            get { return m_TargetID; }
-        }
-
-        [OdinSerialize] SHORTCUT_TYPE m_ShortcutType;
-        public SHORTCUT_TYPE ShortcutType
-        {
-            get { return m_ShortcutType; }
-        }
+        public Sprite IconSprite { get; set; }
+        public string TargetID { get; set; }
+        public SHORTCUT_TYPE ShortcutType { get; set; }
 
         public ShortcutInfo(Sprite iconSprite, string targetID, SHORTCUT_TYPE shortcutType)
         {
-            m_IconSprite = iconSprite;
-            m_TargetID = targetID;
-            m_ShortcutType = shortcutType;
+            IconSprite = iconSprite;
+            TargetID = targetID;
+            ShortcutType = shortcutType;
         }
     }
 }
