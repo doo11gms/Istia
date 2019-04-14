@@ -16,6 +16,9 @@ namespace EllGames.Istia4.GameSystem.Actor.Player
 
         void Save.ISavable.Save()
         {
+            Save.SaveHandler.Save(this, m_Name, nameof(m_Name));
+            Save.SaveHandler.Save(this, m_AvatorID, nameof(m_AvatorID));
+
             ES2.Save(m_AccExp, GetInstanceID() + nameof(m_AccExp));
 
             m_StartLocation = new Meta.Location(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name, transform.position, transform.eulerAngles);
@@ -31,6 +34,9 @@ namespace EllGames.Istia4.GameSystem.Actor.Player
 
         void Save.ISavable.Load()
         {
+            Save.SaveHandler.Load(this, ref m_Name, nameof(m_Name));
+            Save.SaveHandler.Load(this, ref m_AvatorID, nameof(m_AvatorID));
+
             m_AccExp = ES2.Load<long>(GetInstanceID() + nameof(m_AccExp));
 
             var startLocation = new Meta.Location();
@@ -47,6 +53,20 @@ namespace EllGames.Istia4.GameSystem.Actor.Player
         }
 
         #endregion
+
+        [TitleGroup("Basic")]
+        [OdinSerialize] string m_Name;
+        public string Name
+        {
+            get { return m_Name; }
+        }
+
+        [Title("Avator")]
+        [OdinSerialize] string m_AvatorID;
+        public string AvatorID
+        {
+            get { return m_AvatorID; }
+        }
 
         [TitleGroup("Required")]
         [OdinSerialize, Required, PropertyOrder(0)] EquipHandler EquipHandler { get; set; }

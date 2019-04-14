@@ -87,7 +87,6 @@ namespace EllGames.Istia4.Save
             Debug.Log("Saved.");
         }
 
-        [Button("Load")]
         public void Load()
         {
             if (ISavables == null) return;

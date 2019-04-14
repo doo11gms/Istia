@@ -13,11 +13,11 @@ namespace EllGames.Istia4.DB
     [CreateAssetMenu(fileName = "Parameter", menuName = "Istia4/DB/Parameter")]
     public class Parameter : SerializedScriptableObject
     {
-        [Title("Basic")]
-        [OdinSerialize] public string Name { get; set; }
-        [OdinSerialize] public string Abbreviation { get; set; }
+        [Title("Meta")]
+        [OdinSerialize] public string ID { get; set; }
 
-        [Title("Advanced")]
+        [Title("Settings")]
+        [OdinSerialize] public string Name { get; set; }
         [OdinSerialize] public bool UsingPercentage { get; set; } = false;
     }
 }
