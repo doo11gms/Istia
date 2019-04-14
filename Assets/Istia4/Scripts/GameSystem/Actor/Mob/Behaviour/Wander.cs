@@ -30,7 +30,7 @@ namespace EllGames.Istia4.GameSystem.Actor.Mob.Behaviour
         [Title("State")]
         [OdinSerialize] STATE State { get; set; } = STATE.Idle;
 
-        const float DESTINATION_DISTANCE = 10f;
+        const float DESTINATION_DISTANCE = 1f;
         Vector3 Direction { get; set; }
 
         Vector3 RandomDirection()
