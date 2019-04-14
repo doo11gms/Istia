@@ -27,6 +27,12 @@ namespace EllGames.Istia4.GameSystem.Actor.Mob.Behaviour
             NavMeshAgent.destination = NavMeshAgent.transform.position;
         }
 
+        private void Awake()
+        {
+            Target = FindObjectOfType<Player.PlayerStatus>().transform;
+            if (Target == null) throw new System.Exception("プレイヤーが見つかりません。");
+        }
+
         private void Update()
         {
             if (Target == null)

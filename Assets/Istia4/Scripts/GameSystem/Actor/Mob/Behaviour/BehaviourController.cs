@@ -22,20 +22,32 @@ namespace EllGames.Istia4.GameSystem.Actor.Mob.Behaviour
         //[OdinSerialize, Required] Die m_Die;
         //[OdinSerialize, Required] Ressurect m_Ressurect;
 
+        public void LookAt(Vector3 target)
+        {
+            Mob.transform.LookAt(target);
+        }
+
         public void Stop()
         {
             Chase.Stop();
             Wander.Stop();
         }
 
-        public void AllowMove()
+        public void AllowChase()
         {
+            Stop();
             Chase.gameObject.SetActive(true);
+        }
+
+        public void AllowWander()
+        {
+            Stop();
             Wander.gameObject.SetActive(true);
         }
 
         public void DisallowMove()
         {
+            Stop();
             Chase.gameObject.SetActive(false);
             Wander.gameObject.SetActive(false);
         }
