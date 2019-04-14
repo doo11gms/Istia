@@ -12,10 +12,18 @@ namespace EllGames.Istia4.GameSystem.Actor.Mob.Behaviour
 {
     public class Wander : SerializedMonoBehaviour
     {
-        [OdinSerialize, Required] public NavMeshAgent NavMeshAgent { get; set; }
+        [OdinSerialize, Required] NavMeshAgent NavMeshAgent { get; set; }
+        [OdinSerialize] float Interval { get; set; } = 3f;
+        [OdinSerialize, ReadOnly] Vector3 Destination { get; set; }
 
         public void Stop()
         {
+
+        }
+
+        IEnumerator DestinationUpdateCoroutine()
+        {
+            yield return new WaitForSeconds(Interval);
 
         }
     }
