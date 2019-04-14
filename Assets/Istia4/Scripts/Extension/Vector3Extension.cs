@@ -12,7 +12,5 @@ namespace EllGames.Istia4.Extension
 {
     public static class Vector3Extension
     {
-        public static Vector3 RandomDirection(this Vector3 self) =>
-            new Vector3(UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f)).normalized;
     }
 }

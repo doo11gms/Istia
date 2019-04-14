@@ -2110,14 +2110,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   serializationData:
-    SerializedFormat: 0
+    SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects: []
+    ReferencedUnityObjects:
+    - {fileID: 1508134776}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes: []
+    SerializationNodes:
+    - Name: NavMeshAgent
+      Entry: 10
+      Data: 0
 --- !u!1 &1076128549
 GameObject:
   m_ObjectHideFlags: 0
@@ -2325,7 +2329,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1334877547
 Transform:
   m_ObjectHideFlags: 0
@@ -2353,14 +2357,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   serializationData:
-    SerializedFormat: 0
+    SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects: []
+    ReferencedUnityObjects:
+    - {fileID: 2515070286923801043}
+    - {fileID: 1508134776}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes: []
+    SerializationNodes:
+    - Name: Animator
+      Entry: 10
+      Data: 0
+    - Name: NavMeshAgent
+      Entry: 10
+      Data: 1
+    - Name: Interval
+      Entry: 4
+      Data: 3
+    - Name: AnimationName
+      Entry: 1
+      Data: Walk
 --- !u!1 &1425971835
 GameObject:
   m_ObjectHideFlags: 0
@@ -2698,14 +2716,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   serializationData:
-    SerializedFormat: 0
+    SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects: []
+    ReferencedUnityObjects:
+    - {fileID: 1508134774}
+    - {fileID: 1060238780}
+    - {fileID: 1334877548}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes: []
+    SerializationNodes:
+    - Name: Mob
+      Entry: 10
+      Data: 0
+    - Name: Chase
+      Entry: 10
+      Data: 1
+    - Name: Wander
+      Entry: 10
+      Data: 2
 --- !u!1 &1768972904
 GameObject:
   m_ObjectHideFlags: 0
