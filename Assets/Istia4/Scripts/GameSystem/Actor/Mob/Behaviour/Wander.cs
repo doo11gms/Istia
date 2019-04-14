@@ -13,6 +13,12 @@ namespace EllGames.Istia4.GameSystem.Actor.Mob.Behaviour
 {
     public class Wander : SerializedMonoBehaviour
     {
+        enum STATE
+        {
+            Idle,
+            Wandering
+        }
+
         [Title("Required")]
         [OdinSerialize, Required] Animator Animator { get; set; }
         [OdinSerialize, Required] NavMeshAgent NavMeshAgent { get; set; }
@@ -21,7 +27,11 @@ namespace EllGames.Istia4.GameSystem.Actor.Mob.Behaviour
         [OdinSerialize] float Interval { get; set; } = 3f;
         [OdinSerialize] string AnimationName { get; set; } = "Walk";
 
-        const float DESTINATION_DISTANCE = 1000f;
+        [Title("State")]
+        [OdinSerialize] STATE State { get; set; } = STATE.Idle;
+
+        const float DESTINATION_DISTANCE = 10f;
+        Vector3 Direction { get; set; }
 
         Vector3 RandomDirection()
         {
@@ -30,42 +40,70 @@ namespace EllGames.Istia4.GameSystem.Actor.Mob.Behaviour
             return new Vector3(x, 0f, z).normalized;
         }
 
+        Vector3 Destination()
+        {
+            switch (State)
+            {
+                case STATE.Idle:
+                    return NavMeshAgent.transform.position;
+                case STATE.Wandering:
+                    return NavMeshAgent.transform.position + Direction * DESTINATION_DISTANCE;
+            }
+
+            throw new System.Exception("Destination is undefined.");
+        }
+
+        void DestinationUpdate()
+        {
+            NavMeshAgent.destination = Destination();
+        }
+
+        void AnimationUpdate()
+        {
+            switch (State)
+            {
+                case STATE.Idle:
+                    Animator.SetBool(AnimationName, false);
+                    break;
+                case STATE.Wandering:
+                    Animator.SetBool(AnimationName, true);
+                    break;
+            }
+        }
+
         public void Stop()
         {
-            NavMeshAgent.destination = NavMeshAgent.transform.position;
             Animator.SetBool(AnimationName, false);
+            State = STATE.Idle;
         }
 
         private void OnEnable()
         {
-            StartCoroutine(DestinationUpdateCoroutine());
+            StartCoroutine(StateUpdateCoroutine());
         }
 
         private void OnDisable()
         {
             Stop();
-            StopCoroutine(DestinationUpdateCoroutine());
+            StopCoroutine(StateUpdateCoroutine());
         }
 
         private void Update()
         {
+            AnimationUpdate();
+            DestinationUpdate();
         }
 
-        IEnumerator DestinationUpdateCoroutine()
+        IEnumerator StateUpdateCoroutine()
         {
             while (true)
             {
-                NavMeshAgent.destination = NavMeshAgent.transform.position;
-                Animator.SetBool(AnimationName, false);
+                State = STATE.Idle;
 
                 yield return new WaitForSeconds(Interval);
 
-                var destination = NavMeshAgent.transform.position;
-                destination += (RandomDirection() * DESTINATION_DISTANCE);
-                NavMeshAgent.destination = destination;
-                Animator.SetBool(AnimationName, true);
-
-                Debug.Log(NavMeshAgent.destination);
+                State = STATE.Wandering;
+                Direction = RandomDirection();
 
                 yield return new WaitForSeconds(Interval);
             }
