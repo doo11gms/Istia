@@ -8,10 +8,9 @@ using UnityEngine.EventSystems;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 
-namespace EllGames
+namespace EllGames.Istia4.GameSystem.Actor.Mob
 {
-    public class MobStatus : SerializedMonoBehaviour
+    public class MobStatus : StatusBase
     {
-	
     }
 }
