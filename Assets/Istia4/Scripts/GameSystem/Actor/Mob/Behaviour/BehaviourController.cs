@@ -35,13 +35,11 @@ namespace EllGames.Istia4.GameSystem.Actor.Mob.Behaviour
 
         public void AllowChase()
         {
-            Stop();
             Chase.gameObject.SetActive(true);
         }
 
         public void AllowWander()
         {
-            Stop();
             Wander.gameObject.SetActive(true);
         }
 

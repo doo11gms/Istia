@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9877bb5f201e9d4ab95f532b68bedc5, type: 3}
+  m_Name: ParameterProvider
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 11400000, guid: 868bf170a3591344897c20135ba42628, type: 2}
+    - {fileID: 11400000, guid: 3d011b374b1b5694ba78c389c21dc162, type: 2}
+    - {fileID: 11400000, guid: 213d2453f51407044b788baa61d1ce75, type: 2}
+    - {fileID: 11400000, guid: 2a0bbabc3d3242443b8d192069ab5d82, type: 2}
+    - {fileID: 11400000, guid: afed3c1378920314d8a92abad22b23c3, type: 2}
+    - {fileID: 11400000, guid: 8953096cf2a456a48bec111760ab2c38, type: 2}
+    - {fileID: 11400000, guid: a51cb0f36df06e54e9062bb909340e00, type: 2}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: Providables
+      Entry: 7
+      Data: 0|System.Collections.Generic.List`1[[EllGames.Istia4.DB.Parameter, Assembly-CSharp]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 7
+    - Name: 
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 10
+      Data: 1
+    - Name: 
+      Entry: 10
+      Data: 2
+    - Name: 
+      Entry: 10
+      Data: 3
+    - Name: 
+      Entry: 10
+      Data: 4
+    - Name: 
+      Entry: 10
+      Data: 5
+    - Name: 
+      Entry: 10
+      Data: 6
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 

@@ -34,9 +34,6 @@ namespace EllGames.Istia4.GameSystem.Actor.Player
 
         void Save.ISavable.Load()
         {
-            Save.SaveHandler.Load(this, ref m_Name, nameof(m_Name));
-            Save.SaveHandler.Load(this, ref m_AvatorID, nameof(m_AvatorID));
-
             m_AccExp = ES2.Load<long>(GetInstanceID() + nameof(m_AccExp));
 
             var startLocation = new Meta.Location();
@@ -50,6 +47,9 @@ namespace EllGames.Istia4.GameSystem.Actor.Player
             Save.SaveHandler.Load(this, ref ressurectionLocation.position, nameof(m_RessurectionLocation) + nameof(m_RessurectionLocation.position));
             Save.SaveHandler.Load(this, ref ressurectionLocation.eulerAngles, nameof(m_RessurectionLocation) + nameof(m_RessurectionLocation.eulerAngles));
             m_RessurectionLocation = ressurectionLocation;
+
+            Save.SaveHandler.Load(this, ref m_Name, nameof(m_Name));
+            Save.SaveHandler.Load(this, ref m_AvatorID, nameof(m_AvatorID));
         }
 
         #endregion

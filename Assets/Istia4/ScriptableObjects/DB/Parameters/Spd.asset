@@ -21,10 +21,10 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes:
-    - Name: Name
+    - Name: ID
       Entry: 1
       Data: "\u79FB\u52D5\u901F\u5EA6"
-    - Name: Abbreviation
+    - Name: Name
       Entry: 1
       Data: "\u79FB\u52D5\u901F\u5EA6"
     - Name: UsingPercentage
